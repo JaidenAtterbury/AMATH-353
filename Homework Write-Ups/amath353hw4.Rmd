@@ -1,0 +1,390 @@
+---
+title: "AMATH 353 Homework 4"
+author: "Jaiden Atterbury"
+date: "2023-07-25"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Component Skills Practice
+
+## Exercise 1. Skill 4.1.
+
+**Exercise 8.2** in Knobel.
+
+Exercise 8.2 in Knobel states: Use direct substitution to verify that the function $u(x,t)=\cos(t)\sin(x)$ is a solution of $u_{tt}=u_{xx}$. According to the general form (8.1) for solutions of the wave equation, it must then be possible to write $u(x,t)$ as $u(x,t)=F(x-t)+G(x+t)$. What are the left and right moving waves in this case? 
+
+We will start by verifying the function $u(x,t)=\cos(t)\sin(x)$ is a solution of $u_{tt}=u_{xx}$ using direct substitution. First off, we need to calculate the partial derivatives, we can see that these are $u_t=-\sin(t)\sin(x)$, $u_{tt}=-\cos(t)\sin(x)$, $u_x=\cos(t)\cos(x)$, and lastly, $u_{xx}=-\cos(t)\sin(x)$. Thus substituting $u_{tt}$ and $u_{xx}$ into the wave equation $u_{tt}=u_{xx}$, we obtain $-\cos(t)\sin(x)=-\cos(t)\sin(x)$. Therefore we can see that,  $u(x,t)=\cos(t)\sin(x)$ is a solution of $u_{tt}=u_{xx}$.
+
+Next we will find the left and right moving waves of the solution $u(x,t)=\cos(t)\sin(x)$ by rewriting it in the form of $u(x,t)=F(x-t)+G(x+t)$. Using the product-to-sum identity $\cos(\alpha)\sin(\beta)=\frac{1}{2}\left[\sin(\alpha+\beta)-\sin(\alpha-\beta)\right]$, and the fact that $\sin(x)$ is an odd function, which implies $\sin(-x)=-\sin(x)$, we can rewrite $u(x,t)$ as $u(x,t)=\frac{1}{2}[\sin(t+x)-\sin(t-x)]=\frac{1}{2}[\sin(x+t)+\sin(x-t)]=\frac{1}{2}\sin(x+t)+\frac{1}{2}\sin(x-t)$. Thus the right moving wave is $F(x-t)=\frac{1}{2}\sin(x-t)$, and the left moving wave is $G(x+t)=\frac{1}{2}\sin(x+t)$.
+
+## Exercise 2. Skill 4.2.
+
+Consider the following initial value problem:
+\begin{align*}
+\begin{cases} u_{tt} = u_{xx} \\
+u(x,0) = \frac{4}{1+x^2} \\
+u_t(x,0) \equiv 0
+\end{cases}.
+\end{align*}
+
+  a. Use d'Alembert's formula to find $u(x,t)$ for $t\geq0$.
+  
+In order to find $u(x,t)$ for $t\geq0$ of the above initial value problem, we must use d'Alembert's formula which states that $u(x,t)=\frac{1}{2}(\phi(x-ct)+\phi(x+ct))+\frac{1}{2c}\int\limits^{x+ct}_{x-ct}\psi(s)ds$, where $u(x,0)=\phi(x)$ and $u_t(x,0)=\psi(x)$. In our case $c=1$, and if we let $\phi(x)=\frac{4}{1+x^2}$, and $\psi(x)\equiv0$, then d'Alembert's formula gives us the following:
+\begin{align*}
+u(x,t) &= \frac{1}{2}(\phi(x-ct)+\phi(x+ct))+\frac{1}{2c}\int\limits^{x+ct}_{x-ct}\psi(s)ds \\
+&= \frac{1}{2}\left(\frac{4}{1+(x-t)^2}+\frac{4}{1+(x+t)^2}\right)+\frac{1}{2}\int\limits^{x+t}_{x-t}0ds \\
+&= \frac{2}{1+(x-t)^2}+\frac{2}{1+(x+t)^2}
+\end{align*}
+Thus, the solution to the initial value problem using d'Alembert's formula is $u(x,t)=\frac{2}{1+(x-t)^2}+\frac{2}{1+(x+t)^2}$.
+
+  b. Suppose instead $u_t(x,0)=8sech(x)\tanh(x)$. If the initial conditions for $u(x,0)$ remains the same, what is $u(x,t)$ in this case?
+  
+If $u_t(x,0)$ is instead $u_t(x,0)=8sech(x)\tanh(x)$, and $u(x,0)$ remains the same, then we can again use d'Alembert's formula to find $u(x,t)$ for $t\geq0$. In our case $c=1$, and if we let $\phi(x)=\frac{4}{1+x^2}$, and $\psi(x)=8sech(x)\tanh(x)$, then d'Alembert's formula gives us the following:
+\begin{align*}
+u(x,t) &= \frac{1}{2}(\phi(x-ct)+\phi(x+ct))+\frac{1}{2c}\int\limits^{x+ct}_{x-ct}\psi(s)ds \\
+&= \frac{1}{2}\left(\frac{4}{1+(x-t)^2}+ \frac{4}{1+(x+t)^2}\right)+\frac{1}{2}\int\limits^{x+t}_{x-t}8sech(s)\tanh(s)ds \\
+&= \frac{2}{1+(x-t)^2}+\frac{2}{1+(x+t)^2}+4\int\limits^{x+t}_{x-t}sech(s)\tanh(s)ds \\
+&= \frac{2}{1+(x-t)^2}+\frac{2}{1+(x+t)^2}+4\left[-sech(s)\right]^{x+t}_{x-t} \\
+&= \frac{2}{1+(x-t)^2}+\frac{2}{1+(x+t)^2}-4sech(x+t)+4sech(x-t)
+\end{align*}
+Thus, the solution to the new initial value problem using d'Alembert's formula is $u(x,t)=\frac{2}{1+(x-t)^2}+\frac{2}{1+(x+t)^2}-4sech(x+t)+4sech(x-t)$.
+
+## Exercise 3. Skill 4.3.
+
+Consider an infinitely long guitar string (purchased at your friendly neighborhood theoretical music store). Let $u=u(x,t)$ represent the displacement of the guitar string relative to its flat, unplucked equilibrium. Suppose the string is initially plucked so that 
+\begin{align*}
+u(x,0) &= 
+  \begin{cases} 1 & -1 < x < 0 \\
+-1 & 0 <x <1 \\
+0 & |x|>1
+  \end{cases}
+\end{align*}
+\begin{align*}
+u_t(x,0) &=
+  \begin{cases} 1 & |x|<1 \\
+0 & |x|>1
+  \end{cases}.
+\end{align*}
+Suppose the evolution of the string is modeled by the wave equation
+\begin{align*}
+u_{tt} &= u_{xx}.
+\end{align*}
+
+  a. If we wish to know the value of $u$ at $(x=3,t=5)$, what interval of initial conditions must we consider?
+  
+In order to know what interval of initial conditions we must consider if we wish to know the value of $u$ at $(x=3,t=5)$, we must find the domain of dependence of the point $(\tilde{x},\tilde{t})=(3,5)$. The domain of dependence of a point $(\tilde{x},\tilde{t})$ is the interval $\left[\tilde{x}-c\tilde{t},\tilde{x}+c\tilde{t}\right]$ such that the value of $u(\tilde{x},\tilde{t})$ only depends on $\phi(x_0)$ and $\psi(x_0)$ for $x_0$ in the aforementioned interval.
+
+Thus in our given scenario, $c=1$ and $(\tilde{x},\tilde{t})=(3,5)$. Hence the domain of dependence of $(\tilde{x},\tilde{t})=(3,5)$ is $\left[\tilde{x}-c\tilde{t},\tilde{x}+c\tilde{t}\right]=[3-5,3+5]=[-2,8]$. Therefore we must consider initial conditions $\phi(x_0)$ and $\psi(x_0)$ for $x_0\in[-2,8]$ if we wish to know the value of $u$ at $(x=3,t=5)$.
+
+  b. Does the initial condition at $x_0=0$ influence the value of $u$ at $(x=3,t=5)$?
+  
+Since $x_0=0$ is in the interval of dependence of $(\tilde{x},\tilde{t})=(3,5)$, namely $x_0\in[-2,8]$, the initial conditions at $x_0=0$, $\phi(0)$ and $\psi(0)$, will influence the value of $u$ at $(x=3,t=5)$.
+
+  c. Does the interval of initial conditions $-1<x_0<1$ influence the value of $u$ at $(x=3,t=5)$?
+  
+Since the interval of initial conditions we are looking at is $x_0\in[-1,1]$, which is a subset of the interval of dependence of $(\tilde{x},\tilde{t})=(3,5)$, namely $x_0\in[-1,1]\subset[-2,8]$, all of the initial conditions $\phi(x_0)$ and $\psi(x_0)$ for $x_0\in[-1,1]$ will influence the value of $u$ at $(x=3,t=5)$.
+
+  d. When does the initial disturbance, i.e. the initial conditions along $-1<x_0<1$, first arrive at $\tilde{x}=3$?
+  
+Since characteristic lines of the domain of influence start at a $t$ value of $0$, we are only looking at rightward propagating lines, which are lines with positive slope. In particular, these lines take the form $t=\frac{1}{c}(x-\tilde{x})+\tilde{t}$, which in our case reduces to $t=(x-\tilde{x})+\tilde{t}$ since $c=1$. The left-most characteristic line, which has an x-intercept of $x_0=-1$, has an equation $t=x+1$, hence it arrives at $\tilde{x}=3$ at $t=4$. Furthermore, the right-most characteristic line, which has an x-intercept of $x_0=1$, has an equation $t=x-1$, hence it arrives at $\tilde{x}=3$ at $t=2$. Therefore the disturbance $-1<x_0<1$ arrives at $\tilde{x}=3$ at times $2\leq t\leq4$. Thus the initial disturbance first arrives at $\tilde{x}=3$ at a time of $t=2$.
+
+## Exercise 4. Skill 4.4.
+
+Use the characteristic diagram to obtain a graphical solution to the initial value problem presented in \textbf{Exercise 3}:
+\begin{align*}
+\begin{cases} u_{tt} = u_{xx} \\
+u(x,0) =
+\begin{cases} 1 & -1 < x < 0 \\
+-1 & 0 < x < 1 \\
+0 & |x|>1
+  \end{cases} \\
+u_t(x,0) =
+ \begin{cases} 1 & |x|<1 \\
+0 & |x|>1
+  \end{cases}
+\end{cases}.
+\end{align*} 
+Use Example 4.4.3 from the Lecture Notes as a template.
+
+In order to create a characteristic diagram, we need to compute the domains of influence of the intervals $x_0<-1$, $-1<x_0<0$, $0<x_0<1$, and $x_0>1$. These intervals correspond to the four cases over which $u(x_0,0)$ is defined.
+
+To find the domain of influence of the interval $x_0<-1$, we must find the outward propagating characteristic at the point $x_0=-1$. This characteristic must be $t=x+1$, since this line passes through $x=-1$ and has slope $1/c = 1$ (since $c=1$). The region bounded by the x-axis and to the left of $t=x+1$ is the domain of influence of the interval $x_0<-1$.
+
+To find the domain of influence of the interval $-1<x_0<0$, we must find the outward propagating characteristics at the points $x_0=-1$ and $x_0=0$. The outward propagating characteristic at $x_0=-1$ is $t=-x-1$, since this line passes through $x=-1$ with slope $-1/c = -1$ (since $c=1$). The outward propagating characteristic at the point $x_0=0$ is $t=x$, since this line passes through the origin and has slope $1/c = 1$ (since $c=1$). The region bounded between the x-axis, the line $t=-x-1$, and the line $t=x$ is the domain of influence of the interval $-1<x_0<0$.
+
+To find the domain of influence of the interval $0<x_0<1$, we must find the outward propagating characteristics at the points $x_0=0$ and $x_0=1$. The outward propagating characteristic at $x_0=0$ is $t=-x$, since this line passes through the origin with slope $-1/c = -1$ (since $c=1$). The outward propagating characteristic at the point $x_0=1$ is $t=x-1$, since this line passes through $x=1$ and has slope $1/c = 1$ (since $c=1$). The region bounded between the x-axis, the line $t=x-1$, and the line $t=-x$ is the domain of influence of the interval $0<x_0<1$.
+
+To find the domain of influence of the interval $x_0>1$, we must find the outward propagating characteristic at the point $x_0=1$. This characteristic must be $t=-x+1$, since this line passes through $x=1$ and has slope $-1/c = -1$ (since $c=1$). The region bounded by the x-axis and to the right of $t=-x+1$ is the domain of influence of the interval $x_0>1$.
+
+Plotting each of the outward propagating characteristics in the $xt$-plane gives us the
+characteristic diagram below.
+
+```{r echo=F, out.width = "90%", fig.align = "center"}
+knitr::include_graphics("charplot.png")
+```
+
+To obtain a graphical solution to the initial value problem presented in \textbf{Exercise 3}, we will now determine the value of $u$ in each region.
+
+  - **Region 1.**
+  
+Let $(\tilde{x},\tilde{t})$ be a point in this region. d'Alembert's formula tells us
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-\tilde{t})+\phi(\tilde{x}+\tilde{t})\right)+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}\psi(x)dx.
+\end{align*}
+In this region, $\tilde{x}\pm\tilde{t}<-1$. We have $\phi(x_0)\equiv0$ and $\psi(x_0)\equiv0$ for $x_0<-1$. Therefore,
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-\tilde{t})+\phi(\tilde{x}+\tilde{t})\right)+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}\psi(x)dx \\
+&= \frac{1}{2}[(0)+(0)]+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}(0)dx \\
+&= 0.
+\end{align*}
+For any $(\tilde{x},\tilde{t})$ in this region, we have $u(\tilde{x},\tilde{t})\equiv0$.
+
+  - **Region 2.**
+  
+Let $(\tilde{x},\tilde{t})$ be a point in this region. d'Alembert's formula tells us
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-\tilde{t})+\phi(\tilde{x}+\tilde{t})\right)+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}\psi(x)dx.
+\end{align*}
+In this region, $\tilde{x}-\tilde{t}<-1$ and $-1<\tilde{x}+\tilde{t}<0$. We have $\phi(x_0)\equiv0$ and $\psi(x_0)\equiv0$ for $x_0<-1$, and $\phi(x_0)\equiv1$ and $\psi(x_0)\equiv1$ for $-1<x_0<0$. Therefore,
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-\tilde{t})+\phi(\tilde{x}+\tilde{t})\right)+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}\psi(x)dx \\
+&= \frac{1}{2}[(0)+(1)]+\frac{1}{2}\int\limits^{-1}_{\tilde{x}-\tilde{t}}(0)dx+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{-1}(1)dx \\
+&= \frac{1}{2}+\frac{1}{2}(\tilde{x}+\tilde{t}+1) \\
+&= \frac{1}{2}(\tilde{x}+\tilde{t})+1.
+\end{align*}
+For any $(\tilde{x},\tilde{t})$ in this region, we have $u(\tilde{x},\tilde{t})=\frac{1}{2}(\tilde{x}+\tilde{t})+1$.
+
+  - **Region 3.**
+  
+Let $(\tilde{x},\tilde{t})$ be a point in this region. d'Alembert's formula tells us
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-\tilde{t})+\phi(\tilde{x}+\tilde{t})\right)+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}\psi(x)dx.
+\end{align*}
+In this region, $-1<\tilde{x}\pm\tilde{t}<0$. We have $\phi(x_0)\equiv1$ and $\psi(x_0)\equiv1$ for $-1<x_0<0$. Therefore,
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-\tilde{t})+\phi(\tilde{x}+\tilde{t})\right)+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}\psi(x)dx \\
+&= \frac{1}{2}[(1)+(1)]+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}(1)dx \\
+&= 1+\frac{1}{2}(\tilde{x}+\tilde{t}-\tilde{x}+\tilde{t}) \\
+&= \tilde{t}+1 \\
+\end{align*}
+For any $(\tilde{x},\tilde{t})$ in this region, we have $u(\tilde{x},\tilde{t})=\tilde{t}+1$.
+
+  - **Region 4.**
+  
+Let $(\tilde{x},\tilde{t})$ be a point in this region. d'Alembert's formula tells us
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-\tilde{t})+\phi(\tilde{x}+\tilde{t})\right)+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}\psi(x)dx.
+\end{align*}
+In this region, $\tilde{x}-\tilde{t}<-1$ and $0<\tilde{x}+\tilde{t}<1$. We have $\phi(x_0)\equiv0$ and $\psi(x_0)\equiv0$ for $x_0<-1$, and $\phi(x_0)\equiv-1$ and $\psi(x_0)\equiv1$ for $0<x_0<1$. Therefore,
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-\tilde{t})+\phi(\tilde{x}+\tilde{t})\right)+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}\psi(x)dx \\
+&= \frac{1}{2}[(0)+(-1)]+\frac{1}{2}\int\limits^{-1}_{\tilde{x}-\tilde{t}}(0)dx+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{-1}(1)dx \\
+&= \frac{-1}{2}+\frac{1}{2}(\tilde{x}+\tilde{t}+1) \\
+&= \frac{1}{2}(\tilde{x}+\tilde{t}).
+\end{align*}
+For any $(\tilde{x},\tilde{t})$ in this region, we have $u(\tilde{x},\tilde{t})=\frac{1}{2}(\tilde{x}+\tilde{t})$.
+
+  - **Region 5.**
+  
+Let $(\tilde{x},\tilde{t})$ be a point in this region. d'Alembert's formula tells us
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-\tilde{t})+\phi(\tilde{x}+\tilde{t})\right)+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}\psi(x)dx.
+\end{align*}
+In this region, $-1<\tilde{x}-\tilde{t}<0$ and $0<\tilde{x}+\tilde{t}<1$. We have $\phi(x_0)\equiv1$ and $\psi(x_0)\equiv1$ for $-1<x_0<0$, and $\phi(x_0)\equiv-1$ and $\psi(x_0)\equiv1$ for $0<x_0<1$. Therefore,
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-\tilde{t})+\phi(\tilde{x}+\tilde{t})\right)+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}\psi(x)dx \\
+&= \frac{1}{2}[(1)+(-1)]+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}(1)dx \\
+&= \frac{1}{2}(\tilde{x}+\tilde{t}-\tilde{x}+\tilde{t}) \\
+&= \tilde{t}.
+\end{align*}
+For any $(\tilde{x},\tilde{t})$ in this region, we have $u(\tilde{x},\tilde{t})=\tilde{t}$.
+
+  - **Region 6.**
+  
+Let $(\tilde{x},\tilde{t})$ be a point in this region. d'Alembert's formula tells us
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-\tilde{t})+\phi(\tilde{x}+\tilde{t})\right)+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}\psi(x)dx.
+\end{align*}
+In this region, $0<\tilde{x}\pm\tilde{t}<1$. We have $\phi(x_0)\equiv-1$ and $\psi(x_0)\equiv1$ for $0<x_0<1$. Therefore,
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-\tilde{t})+\phi(\tilde{x}+\tilde{t})\right)+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}\psi(x)dx \\
+&= \frac{1}{2}[(-1)+(-1)]+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}(1)dx \\
+&= -1+\frac{1}{2}(\tilde{x}+\tilde{t}-\tilde{x}+\tilde{t}) \\
+&= \tilde{t}-1 \\
+\end{align*}
+For any $(\tilde{x},\tilde{t})$ in this region, we have $u(\tilde{x},\tilde{t})=\tilde{t}-1$.
+
+  - **Region 7.**
+  
+Let $(\tilde{x},\tilde{t})$ be a point in this region. d'Alembert's formula tells us
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-\tilde{t})+\phi(\tilde{x}+\tilde{t})\right)+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}\psi(x)dx.
+\end{align*}
+In this region, $-1<\tilde{x}-\tilde{t}<0$ and $\tilde{x}+\tilde{t}>1$. We have $\phi(x_0)\equiv1$ and $\psi(x_0)\equiv1$ for $-1<x_0<0$, and $\phi(x_0)\equiv0$ and $\psi(x_0)\equiv0$ for $x_0>1$. Therefore,
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-\tilde{t})+\phi(\tilde{x}+\tilde{t})\right)+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}\psi(x)dx \\
+&= \frac{1}{2}[(1)+(0)]+\frac{1}{2}\int\limits^{1}_{\tilde{x}-\tilde{t}}(1)dx+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{1}(0)dx \\
+&= \frac{1}{2}+\frac{1}{2}(1-\tilde{x}+\tilde{t}) \\
+&= \frac{1}{2}(\tilde{t}-\tilde{x})+1.
+\end{align*}
+For any $(\tilde{x},\tilde{t})$ in this region, we have $u(\tilde{x},\tilde{t})=\frac{1}{2}(\tilde{t}-\tilde{x})+1$.
+
+  - **Region 8.**
+  
+Let $(\tilde{x},\tilde{t})$ be a point in this region. d'Alembert's formula tells us
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-\tilde{t})+\phi(\tilde{x}+\tilde{t})\right)+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}\psi(x)dx.
+\end{align*}
+In this region, $0<\tilde{x}-\tilde{t}<1$ and $\tilde{x}+\tilde{t}>1$. We have $\phi(x_0)\equiv-1$ and $\psi(x_0)\equiv1$ for $0<x_0<1$, and $\phi(x_0)\equiv0$ and $\psi(x_0)\equiv0$ for $x_0>0$. Therefore,
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-\tilde{t})+\phi(\tilde{x}+\tilde{t})\right)+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}\psi(x)dx \\
+&= \frac{1}{2}[(-1)+(0)]+\frac{1}{2}\int\limits^{1}_{\tilde{x}-\tilde{t}}(1)dx+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{1}(0)dx \\
+&= \frac{-1}{2}+\frac{1}{2}(1-\tilde{x}+\tilde{t}) \\
+&= \frac{1}{2}(\tilde{t}-\tilde{x}).
+\end{align*}
+For any $(\tilde{x},\tilde{t})$ in this region, we have $u(\tilde{x},\tilde{t})=\frac{1}{2}(\tilde{t}-\tilde{x})$.
+
+  - **Region 9.**
+  
+Let $(\tilde{x},\tilde{t})$ be a point in this region. d'Alembert's formula tells us
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-\tilde{t})+\phi(\tilde{x}+\tilde{t})\right)+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}\psi(x)dx.
+\end{align*}
+In this region, $\tilde{x}\pm\tilde{t}>1$. We have $\phi(x_0)\equiv0$ and $\psi(x_0)\equiv0$ for $x_0>1$. Therefore,
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-\tilde{t})+\phi(\tilde{x}+\tilde{t})\right)+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}\psi(x)dx \\
+&= \frac{1}{2}[(0)+(0)]+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}(0)dx \\
+&= 0.
+\end{align*}
+For any $(\tilde{x},\tilde{t})$ in this region, we have $u(\tilde{x},\tilde{t})\equiv0$.
+
+  - **Region 10.**
+  
+Let $(\tilde{x},\tilde{t})$ be a point in this region. d'Alembert's formula tells us
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-\tilde{t})+\phi(\tilde{x}+\tilde{t})\right)+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}\psi(x)dx.
+\end{align*}
+In this region, $\tilde{x}-\tilde{t}<-1$ and $\tilde{x}+\tilde{t}>1$. We have $\phi(x_0)\equiv0$ and $\psi(x_0)\equiv0$ for $x_0<-1$, and $\phi(x_0)\equiv0$ and $\psi(x_0)\equiv0$ for $x_0>0$. However, we also have $\phi(x_0)\equiv1$ and $\psi(x_0)\equiv1$ for $-1<x_0<1$ Therefore,
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-\tilde{t})+\phi(\tilde{x}+\tilde{t})\right)+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}\psi(x)dx \\
+&= \frac{1}{2}[(0)+(0)]+\frac{1}{2}\int\limits^{-1}_{\tilde{x}-\tilde{t}}(0)dx+\frac{1}{2}\int\limits^{1}_{-1}(1)dx+\frac{1}{2}\int\limits^{\tilde{x}+\tilde{t}}_{1}(0)dx \\
+&= \frac{1}{2}(1+1) \\
+&= 1.
+\end{align*}
+For any $(\tilde{x},\tilde{t})$ in this region, we have $u(\tilde{x},\tilde{t})\equiv1$.
+
+Combining our analysis of each region above, the characteristic diagram becomes the graphical solution to the initial value problem as shown below.
+
+```{r echo=F, out.width = "90%", fig.align = "center"}
+knitr::include_graphics("charsol.png")
+```
+
+# Multi-Step Problem
+
+This problem extends the methods we learned for the wave equation to other types of PDE's. For instance, consider the PDE given by 
+\begin{align} \label{1}
+u_{tt} + 2u_{xt} - 3u_{xx} &= 0.
+\end{align}
+
+(\textbf{S4.1}) Recall in lecture that we factored the wave equation as $(\partial_t -c\partial_x)(\partial_t + c\partial_x) u = 0$. Perform a similar operation on \eqref{1}. 
+
+In lecture we factored the wave equation as $(\partial_t -c\partial_x)(\partial_t + c\partial_x) u = 0$. In our case notice that $u_{tt} + 2u_{xt} - 3u_{xx}$ reminds us of the polynomial $t^2+2xt-3x^2$ which factors as $(t+3x)(t-x)$. Using this same logic but with partial derivative operators we obtain $(\partial_t+3\partial_x)(\partial_t-\partial_x) u = 0$.
+
+(\textbf{S4.1}) From its factored form, we see that the wave equation is nothing but two coupled advection equations, $u_t - cu_x = w$ and $w_t + cw_x =0$. This motivated us to use the change of variables $\hat{x} = x - ct$ and $\hat{t} = x + ct$ on the wave equation. By similar arguments, what would the appropriate change of variables be for \eqref{1}? (There are two possible answers; either is correct.)
+
+Originally, I tried the change of variables $\hat{x}=x-t$ and $\hat{t}=x+3t$, however this didn't work due to me not understanding the point of the change of variables we were doing in the first place, but after some help/inspiration on Piazza I realized that all I needed to do was flip my signs on the $t$ variable in each expression to acquire the change of variable that solves the following problems: $\hat{x}=x+t$ and $\hat{t}=x-3t$. However, this wasn't rigorous and more of a lucky guess, so Kai Poffenbarger and I came up with a way to come up with both change of variables only assuming the basic form of the change of variables and the end result we were looking for.
+
+In the previous part we found the factored PDE in terms of partial derivative operators; $(\partial_t+3\partial_x)(\partial_t-\partial_x)u = 0$. From here if we let $w=(\partial_t-\partial_x)u\implies w=u_t-u_x$. Thus plugging in $w$ for $(\partial_t-\partial_x)u$ we obtain another equation; $(\partial_t+3\partial_x)w =0\implies w_t+3w_x=0$. We know from the wave equation that we are looking for a change of variables of the form $\hat{x}=x+c_1t$ and $\hat{t}=x+c_2t$. From this change of variables we can see that
+\begin{align*}
+u_t &= c_1u_{\hat{x}}+c_2u_{\hat{t}} \\
+u_x &= u_{\hat{x}}+u_{\hat{t}}
+\end{align*}
+plugging into the first equation we see that
+\begin{align*}
+w &= c_1u_{\hat{x}}+c_2u_{\hat{t}} - u_{\hat{x}} - u_{\hat{t}} \\
+&= (c_1 - 1)u_{\hat{x}}+(c_2 - 1)u_{\hat{t}}
+\end{align*}
+
+With these expression we can now calculate $w_t$ and $w_x$. We will start by finding $w_t$.
+\begin{align*}
+w_t &= (c_1-1)\left[\frac{\partial u_{\hat{x}}}{\partial \hat{x}}\frac{\partial \hat{x}}{\partial t}+\frac{\partial u_{\hat{x}}}{\partial \hat{t}}\frac{\partial \hat{t}}{\partial t}\right]+(c_2-1)\left[\frac{\partial u_{\hat{t}}}{\partial \hat{x}}\frac{\partial \hat{x}}{\partial t}+\frac{\partial u_{\hat{t}}}{\partial \hat{t}}\frac{\partial \hat{t}}{\partial t}\right] \\
+&= (c_1-1)(u_{\hat{x}\hat{x}}(c_1)+u_{\hat{x}\hat{t}}(c_2))+(c_2-1)(u_{\hat{x}\hat{t}}(c_1)+u_{\hat{t}\hat{t}}(c_2)) \\
+&= (c_1-1)(c_1u_{\hat{x}\hat{x}}+c_2u_{\hat{x}\hat{t}}+(c_2-1)(c_1u_{\hat{x}\hat{t}}+c_2u_{\hat{t}\hat{t}} \\
+&= c^2_1 u_{\hat{x}\hat{x}} - c_1 u_{\hat{x}\hat{x}} + c_1 c_2 u_{\hat{x}\hat{t}} - c_2 u_{\hat{x}\hat{t}} + c_1 c_2 u_{\hat{x}\hat{t}} - c_1 u_{\hat{x}\hat{t}} + c^2_2 u_{\hat{t}\hat{t}} - c_2 u_{\hat{t}\hat{t}} \\
+&= (c^2_1 - c_1)u_{\hat{x}\hat{x}} + (2 c_1 c_2 - c_1 - c_2)u_{\hat{x}\hat{t}} + (c^2_2 - c_2)u_{\hat{t}\hat{t}}
+\end{align*}
+
+Similarly we can find an expression for $w_x$.
+\begin{align*}
+w_x &= (c_1-1)\left[\frac{\partial u_{\hat{x}}}{\partial \hat{x}}\frac{\partial \hat{x}}{\partial x}+\frac{\partial u_{\hat{x}}}{\partial \hat{t}}\frac{\partial \hat{t}}{\partial x}\right]+(c_2-1)\left[\frac{\partial u_{\hat{t}}}{\partial \hat{x}}\frac{\partial \hat{x}}{\partial x}+\frac{\partial u_{\hat{t}}}{\partial \hat{t}}\frac{\partial \hat{t}}{\partial x}\right] \\
+&= (c_1-1)(u_{\hat{x}\hat{x}}(1)+u_{\hat{x}\hat{t}}(1))+(c_2-1)(u_{\hat{x}\hat{t}}(1)+u_{\hat{t}\hat{t}}(1)) \\
+&= (c_1-1)u_{\hat{x}\hat{x}} + (c_2-1)u_{\hat{t}\hat{t}} + (c_1 + c_2 - 2)u_{\hat{x}\hat{t}}
+\end{align*}
+
+Plugging these expressions into the second equation we see that
+\begin{align*}
+(c^2_1 - c_1)u_{\hat{x}\hat{x}} + (2 c_1 c_2 - c_1 - c_2)u_{\hat{x}\hat{t}} + (c^2_2 - c_2)u_{\hat{t}\hat{t}} + 3((c_1-1)u_{\hat{x}\hat{x}} + (c_2-1)u_{\hat{t}\hat{t}} + (c_1 + c_2 - 2)u_{\hat{x}\hat{t}}) &= 0 \\
+(c^2_1 - c_1)u_{\hat{x}\hat{x}} + (2 c_1 c_2 - c_1 - c_2)u_{\hat{x}\hat{t}} + (c^2_2 - c_2)u_{\hat{t}\hat{t}} + 3(c_1-1)u_{\hat{x}\hat{x}} + 3(c_2-1)u_{\hat{t}\hat{t}} + 3(c_1 + c_2 - 2)u_{\hat{x}\hat{t}} &= 0 \\
+(c^2_1 - c_1 + 3c_1 - 3)u_{\hat{x}\hat{x}} + (2 c_1 c_2 - c_1 - c_2 + 3c_1 +3c_2 - 6)u_{\hat{x}\hat{t}} + (c^2_2 - c_2 + 3c_2 - 3)u_{\hat{t}\hat{t}} &= 0 
+\end{align*}
+
+Based on the next problem we are looking to reduce the equation to $u_{\hat{x}\hat{t}}=0$, thus we can set the coefficients of $u_{\hat{x}\hat{x}}$ and $u_{\hat{t}\hat{t}}$ to zero and solve for $c_1$ and $c_2$. This process is done below.
+\begin{align*}
+c^2_1 + 2c_1 - 3 &= 0 \implies c_1 = -3, 1 \\
+c^2_2 + 2c_2 - 3 &= 0 \implies c_2 = -3, 1
+\end{align*}
+Hence the two possible change of variables are $\hat{x}=x+t$, $\hat{t}=x-3t$ and $\hat{x}=x-3t$, $\hat{t}=x+t$. For the remaining problems we will use the change of variables $\hat{x}=x+t$ and $\hat{t}=x-3t$ as stated in the beginning of the problem.
+
+(\textbf{S2.1}) Carry out the appropriate change of variables on \eqref{1}. You should find that $u_{\hat{x} \hat{t}} = 0$. 
+
+In this problem we will use the change of variables prescribed above, $\hat{x}=x+t$ and $\hat{t}=x-3t$, to show that the PDE $u_{tt} + 2u_{xt} - 3u_{xx} = 0$ results in $u_{\hat{x}\hat{t}}=0$ after the change of variables. We will start off by finding $u_t$ using the multivariate chain rule.
+\begin{align*}
+u_t(x,t) &= \frac{\partial}{\partial t} u(x,t) \\
+&= \frac{\partial u}{\partial \hat{x}}\frac{\partial \hat{x}}{\partial t}+\frac{\partial u}{\partial \hat{t}}\frac{\partial \hat{t}}{\partial t} \\
+&= u_{\hat{x}}(1)+u_{\hat{t}}(-3) \\
+&= u_{\hat{x}}-3u_{\hat{t}}
+\end{align*}
+As seen above, $u_t(x,t)=u_{\hat{x}}(x,t)-3u_{\hat{t}}(x,t)$. We will now use the multivariate chain rule to find $u_x$.
+\begin{align*}
+u_x(x,t) &= \frac{\partial}{\partial x} u(x,t) \\
+&= \frac{\partial u}{\partial \hat{x}}\frac{\partial \hat{x}}{\partial x}+\frac{\partial u}{\partial \hat{t}}\frac{\partial \hat{t}}{\partial x} \\
+&= u_{\hat{x}}(1)+u_{\hat{t}}(1) \\
+&= u_{\hat{x}}+u_{\hat{t}}
+\end{align*}
+As seen above, $u_x(x,t)=u_{\hat{x}}(x,t)+u_{\hat{t}}(x,t)$. We will now use the multivariate chain rule to find $u_{tt}$.
+\begin{align*}
+u_{tt}(x,t) &= \frac{\partial}{\partial t} \left(u_{\hat{x}}-3u_{\hat{t}}\right) \\
+&= \left(\frac{\partial}{\partial\hat{x}}u_{\hat{x}}\frac{\partial\hat{x}}{\partial t}+\frac{\partial}{\partial\hat{t}}u_{\hat{x}}\frac{\partial\hat{t}}{\partial t}\right)-3\left(\frac{\partial}{\partial\hat{x}}u_{\hat{t}}\frac{\partial\hat{x}}{\partial t}+\frac{\partial}{\partial\hat{t}}u_{\hat{t}}\frac{\partial\hat{t}}{\partial t}\right) \\
+&= \left(u_{\hat{x}\hat{x}}(1)+u_{\hat{x}\hat{t}}(-3)\right)-3\left(u_{\hat{x}\hat{t}}(1)+u_{\hat{t}\hat{t}}(-3\right)) \\
+&= u_{\hat{x}\hat{x}}-6u_{\hat{x}\hat{t}}+9u_{\hat{t}\hat{t}}
+\end{align*}
+As seen above, $u_{tt}=u_{\hat{x}\hat{x}}(x,t)-6u_{\hat{x}\hat{t}}(x,t)+9u_{\hat{t}\hat{t}}(x,t)$. We will now use the multivariate chain rule to find $u_{xx}$.
+\begin{align*}
+u_{xx}(x,t) &= \frac{\partial}{\partial x} \left(u_{\hat{x}}+u_{\hat{t}}\right) \\
+&= \left(\frac{\partial}{\partial\hat{x}}u_{\hat{x}}\frac{\partial\hat{x}}{\partial x}+\frac{\partial}{\partial\hat{t}}u_{\hat{x}}\frac{\partial\hat{t}}{\partial x}\right)+\left(\frac{\partial}{\partial\hat{x}}u_{\hat{t}}\frac{\partial\hat{x}}{\partial x}+\frac{\partial}{\partial\hat{t}}u_{\hat{t}}\frac{\partial\hat{t}}{\partial x}\right) \\
+&= \left(u_{\hat{x}\hat{x}}(1)+u_{\hat{x}\hat{t}}(1)\right)+\left(u_{\hat{x}\hat{t}}(1)+u_{\hat{t}\hat{t}}(1)\right) \\
+&= u_{\hat{x}\hat{x}}+2u_{\hat{x}\hat{t}}+u_{\hat{t}\hat{t}}
+\end{align*}
+As seen above, $u_{xx}=u_{\hat{x}\hat{x}}(x,t)+2u_{\hat{x}\hat{t}}(x,t)+u_{\hat{t}\hat{t}}(x,t)$. Our last derivative calculation will be using the multivariate chain rule to find $u_{xt}$.
+\begin{align*}
+u_{xt}(x,t) &= \frac{\partial}{\partial x} \left(u_{\hat{x}}-3u_{\hat{t}}\right) \\
+&= \left(\frac{\partial}{\partial\hat{x}}u_{\hat{x}}\frac{\partial\hat{x}}{\partial x}+\frac{\partial}{\partial\hat{t}}u_{\hat{x}}\frac{\partial\hat{t}}{\partial x}\right)+-3\left(\frac{\partial}{\partial\hat{x}}u_{\hat{t}}\frac{\partial\hat{x}}{\partial x}+\frac{\partial}{\partial\hat{t}}u_{\hat{t}}\frac{\partial\hat{t}}{\partial x}\right) \\
+&= \left(u_{\hat{x}\hat{x}}(1)+u_{\hat{x}\hat{t}}(1)\right)-3\left(u_{\hat{x}\hat{t}}(1)+u_{\hat{t}\hat{t}}(1)\right) \\
+&= u_{\hat{x}\hat{x}}-2u_{\hat{x}\hat{t}}-3u_{\hat{t}\hat{t}}
+\end{align*}
+As seen above, $u_{xt}=u_{\hat{x}\hat{x}}(x,t)-2u_{\hat{x}\hat{t}}(x,t)-3u_{\hat{t}\hat{t}}(x,t)$. We will now plug these expressions into our PDE and simplify.
+\begin{align*}
+u_{\hat{x}\hat{x}}-6u_{\hat{x}\hat{t}}+9u_{\hat{t}\hat{t}} +2(u_{\hat{x}\hat{x}}-2u_{\hat{x}\hat{t}}-3u_{\hat{t}\hat{t}})-3(u_{\hat{x}\hat{x}}+2u_{\hat{x}\hat{t}}+u_{\hat{t}\hat{t}}) &= 0 \\
+u_{\hat{x}\hat{x}}-6u_{\hat{x}\hat{t}}+9u_{\hat{t}\hat{t}} +2u_{\hat{x}\hat{x}}-4u_{\hat{x}\hat{t}}-6u_{\hat{t}\hat{t}}-3u_{\hat{x}\hat{x}}-6u_{\hat{x}\hat{t}}-3u_{\hat{t}\hat{t}} &= 0 \\
+-16u_{\hat{x}\hat{t}} &= 0 \\
+u_{\hat{x}\hat{t}} &= 0
+\end{align*}
+Thus we have shown that the change of variables $\hat{x}=x+t$ and $\hat{t}=x-3t$ results in $u_{\hat{x}\hat{t}}=0$ once plugged into the PDE.
+
+(\textbf{S4.1}) Solve $u_{\hat{x} \hat{t}}=0$, and then transform back to unhatted variables. What is the general solution of \eqref{1}?
+
+As shown above, using the change of variables $\hat{x}=x+t$ and $\hat{t}=x-3t$ results in $u_{\hat{x}\hat{t}}=0$ once plugged into the PDE. This is important, because we can solve this directly. Integrating with respect to $\hat{t}$, we see $u_{\hat{x}}=\int\partial_{\hat{t}}(u_{\hat{x}})\partial_{\hat{t}}=\int0\partial_{\hat{t}}=\tilde{F}(\hat{x})$. Then, we integrate with respect to $\hat{x}$ and get that $u(\hat{x},\hat{t})=\int\partial_{\hat{x}}(u)\partial_{\hat{x}}=\int\tilde{F}(\hat{x})\partial_{\hat{x}}=F(\hat{x})+G(\hat{t})$. Changing back to our original coordinates, our general solution is given by $u(x,t)=F(x+t)+G(x-3t)$, for arbitrary functions $F$ and $G$.

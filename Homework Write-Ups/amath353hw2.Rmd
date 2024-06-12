@@ -1,0 +1,335 @@
+---
+title: "AMATH 353 Homework 2"
+author: "Jaiden Atterbury"
+date: "2023-07-10"
+header-includes:
+    - \usepackage{amsmath}
+    - \usepackage{amsthm}
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Component Skills Practice
+
+**Exercise 1. Skill 2.1.**
+
+Consider the following change-of-variables problems.
+
+  a. Review your notes and write down in your own words what the method of changing
+variables does, and how it aims to do that (in a sentence or two).
+
+The method of changing variables aims to simplify a PDE into an equation that is easier to solve when compared with the PDE in terms of the original variables. The method of changing variables aims to do this by "shifting" into a frame/coordinate system that simplifies the equation. The method relies on the change of variable formulas that replace the original variables with new variables that are functions of the original variables as well as the use of the multivariate chain rule.
+
+  b. Recall the advection equation is
+\begin{align*}
+u_t + cu_x &= 0
+\end{align*}
+where $c \neq 0$. In all the in-class examples, we chose $c=1$. Actually, we can always find a new coordinate system such that $c=1$ by introducing the change of variables $\hat{x}=Ax$, where $A$ is a constant to be determined, and $\hat{t}=t$. What does the PDE for $u$ look like in these new coordinates? Is there a specific choice of $A$ that might eliminate the $c$ in front of the $\hat{x}$ derivative term?
+
+In this problem, we will use the change of variables $\hat{x}=Ax$ and $\hat{t}=t$ in order to simplify the advection equation and find the choice for the constant $A$ that eliminates the constant $c$ in the $\hat{x}$ derivative term. In particular, we want to know what equation $u\left(\hat{x}(x,t),\hat{t}(x,t)\right)=u(x,t)$ solves the PDE if $u(x,t)$ solves $u_t+cu_x=0$, and we have $\hat{x}(x,t)=Ax$ and $\hat{t}(x,t)=t$. We will first use the multivariate chain rule to find $u_t$.
+\begin{align*}
+u_t(x,t) &= \frac{\partial}{\partial t} u(x,t) \\
+&= \frac{\partial u}{\partial \hat{x}}\frac{\partial \hat{x}}{\partial t}+\frac{\partial u}{\partial \hat{t}}\frac{\partial \hat{t}}{\partial t} \\
+&= u_{\hat{x}}(0)+u_{\hat{t}}(1) \\
+&= u_{\hat{t}}
+\end{align*}
+As seen above, $u_t(x,t)=u_{\hat{t}}(x,t)$. We will now use the multivariate chain rule to find $u_x$.
+\begin{align*}
+u_x(x,t) &= \frac{\partial}{\partial x} u(x,t) \\
+&= \frac{\partial u}{ \partial \hat{x}}\frac{\partial \hat{x}}{\partial x}+\frac{\partial u}{\partial \hat{t}}\frac{\partial \hat{t}}{\partial x} \\
+&= u_{\hat{x}}(A)+u_{\hat{t}}(0) \\
+&= Au_{\hat{x}}
+\end{align*}
+As seen above, $u_x(x,t)=Au_{\hat{x}}(x,t)$. We will now plug these new values of $u_t$ and $u_x$ into our PDE and simplify. Thus our new PDE in terms of our new variables is $u_{\hat{t}}+cAu_{\hat{x}}=0$. As mentioned in the problem description, we want to find the value of $A$ such that $cA=1$, hence this value of $A$ is $A=\frac{1}{c}$. More formally, the change of variable $\hat{x}=\frac{1}{c}x$ and $\hat{t}=t$ will turn the advection equation into $u_{\hat{t}}+u_{\hat{x}}=0$.
+
+  c. Consider the following PDE:
+\begin{align*}
+u_t+cu_x &= \beta u_{xxx}
+\end{align*}
+where $c$ and $\beta$ are nonzero constants. Following the ideas from Example 2.1.2 in the lecture notes, find a change of variables where $u_{\hat{t}}=u_{\hat{x}\hat{x}\hat{x}}$, where $\hat{x}=Ax+Bt$ and $\hat{t}=Cx+Dt$.
+
+Note: Below we will interchange partial derivatives as needed.
+
+In this problem, we will use the change of variables $\hat{x}=Ax+Bt$ and $\hat{t}=Cx+Dt$ in order to find the values of the constants $A$, $B$, $C$, and $D$ such that the PDE simplifies to $u_{\hat{t}}=u_{\hat{x}\hat{x}\hat{x}}$. We will first use the multivariate chain rule to find $u_t$.
+\begin{align*}
+u_t(x,t) &= \frac{\partial}{\partial t} u(x,t) \\
+&= \frac{\partial u}{\partial \hat{x}}\frac{\partial \hat{x}}{\partial t}+\frac{\partial u}{\partial \hat{t}}\frac{\partial \hat{t}}{\partial t} \\
+&= u_{\hat{x}}(B)+u_{\hat{t}}(D) \\
+&= Bu_{\hat{x}}+Du_{\hat{t}}
+\end{align*}
+As seen above, $u_t(x,t)=Bu_{\hat{x}}(x,t)+Du_{\hat{t}}(x,t)$. We will now use the multivariate chain rule to find $u_x$.
+\begin{align*}
+u_x(x,t) &= \frac{\partial}{\partial x} u(x,t) \\
+&= \frac{\partial u}{\partial \hat{x}}\frac{\partial \hat{x}}{\partial x}+\frac{\partial u}{\partial \hat{t}}\frac{\partial \hat{t}}{\partial x} \\
+&= u_{\hat{x}}(A)+u_{\hat{t}}(C) \\
+&= Au_{\hat{x}}+Cu_{\hat{t}}
+\end{align*}
+As seen above, $u_x(x,t)=Au_{\hat{x}}(x,t)+Cu_{\hat{t}}(x,t)$. We will now use the multivariate chain rule to find $u_{xx}$.
+\begin{align*}
+u_{xx}(x,t) &= \frac{\partial}{\partial x} u_x(x,t) \\
+&= \frac{\partial}{\partial x} \left(Au_{\hat{x}}+Cu_{\hat{t}}\right) \\
+&= A\left(\frac{\partial}{\partial\hat{x}}u_{\hat{x}}\frac{\partial\hat{x}}{\partial x}+\frac{\partial}{\partial\hat{t}}u_{\hat{x}}\frac{\partial\hat{t}}{\partial x}\right)+C\left(\frac{\partial}{\partial\hat{x}}u_{\hat{t}}\frac{\partial\hat{x}}{\partial x}+\frac{\partial}{\partial\hat{t}}u_{\hat{t}}\frac{\partial\hat{t}}{\partial x}\right) \\
+&= Au_{\hat{x}\hat{x}}(A)+Au_{\hat{t}\hat{x}}(C)+Cu_{\hat{x}\hat{t}}(A)+Cu_{\hat{t}\hat{t}}(C) \\
+&= A^2u_{\hat{x}\hat{x}}+2ACu_{\hat{t}\hat{x}}+C^2u_{\hat{t}\hat{t}}
+\end{align*}
+As seen above, $u_{xx}(x,t)=A^2u_{\hat{x}\hat{x}}(x,t)+2ACu_{\hat{t}\hat{x}}(x,t)+C^2u_{\hat{t}\hat{t}}(x,t)$. We will now use the multivariate chain rule to find $u_{xxx}$.
+\begin{align*}
+u_{xxx}(x,t) &= \frac{\partial}{\partial x} u_{xx}(x,t) \\
+&= \frac{\partial}{\partial x} \left(A^2u_{\hat{x}\hat{x}}+2ACu_{\hat{t}\hat{x}}+C^2u_{\hat{t}\hat{t}}\right) \\
+&= A^2\left(\frac{\partial}{\partial\hat{x}}u_{\hat{x}\hat{x}}\frac{\partial\hat{x}}{\partial x}+\frac{\partial}{\partial\hat{t}}u_{\hat{x}\hat{x}}\frac{\partial\hat{t}}{\partial x}\right)+2CA\left(\frac{\partial}{\partial\hat{x}}u_{\hat{t}\hat{x}}\frac{\partial\hat{x}}{\partial x}+\frac{\partial}{\partial\hat{t}}u_{\hat{t}\hat{x}}\frac{\partial\hat{t}}{\partial x}\right)+C^2\left(\frac{\partial}{\partial\hat{x}}u_{\hat{t}\hat{t}}\frac{\partial\hat{x}}{\partial x}+\frac{\partial}{\partial\hat{t}}u_{\hat{t}\hat{t}}\frac{\partial\hat{t}}{\partial x}\right) \\
+&= A^2u_{\hat{x}\hat{x}\hat{x}}(A)+A^2u_{\hat{t}\hat{x}\hat{x}}(C)+2CAu_{\hat{x}\hat{t}\hat{x}}(A)+2CAu_{\hat{t}\hat{t}\hat{x}}(C)+C^2u_{\hat{x}\hat{t}\hat{t}}(A)+C^2u_{\hat{t}\hat{t}\hat{t}}(C) \\
+&= A^3u_{\hat{x}\hat{x}\hat{x}}+CA^2u_{\hat{t}\hat{x}\hat{x}}+2CA^2u_{\hat{x}\hat{t}\hat{x}}+2C^2Au_{\hat{t}\hat{t}\hat{x}}+C^2Au_{\hat{x}\hat{t}\hat{t}}+C^3u_{\hat{t}\hat{t}\hat{t}} \\
+&= A^3u_{\hat{x}\hat{x}\hat{x}}+3CA^2u_{\hat{t}\hat{x}\hat{x}}+3C^2Au_{\hat{t}\hat{t}\hat{x}}+C^3u_{\hat{t}\hat{t}\hat{t}}
+\end{align*}
+As seen above, $u_{xxx}(x,t)=A^3u_{\hat{x}\hat{x}\hat{x}}(x,t)+3CA^2u_{\hat{t}\hat{x}\hat{x}}(x,t)+3C^2Au_{\hat{t}\hat{t}\hat{x}}(x,t)+C^3u_{\hat{t}\hat{t}\hat{t}}(x,t)$. We will plug these results into the PDE and simplify. Plugging in these new partial derivative values we obtain the following PDE
+\begin{align*}
+Bu_{\hat{x}}+Du_{\hat{t}}+cAu_{\hat{x}}+cCu_{\hat{t}} &= \beta A^3 u_{\hat{x}\hat{x}\hat{x}} + 3\beta CA^2u_{\hat{t}\hat{x}\hat{x}} + 3\beta C^2Au_{\hat{t}\hat{t}\hat{x}} +\beta C^3 u_{\hat{t}\hat{t}\hat{t}} \\
+(B+cA)u_{\hat{x}}+(D+cC)u_{\hat{t}} &= (\beta A^3)u_{\hat{x}\hat{x}\hat{x}}+(3\beta CA^2)u_{\hat{t}\hat{x}\hat{x}}+(3\beta C^2 A)u_{\hat{t}\hat{t}\hat{x}}+(\beta C^3)u_{\hat{t}\hat{t}\hat{t}}
+\end{align*}
+Hence, in order to have a PDE of the form $u_{\hat{t}}=u_{\hat{x}\hat{x}\hat{x}}$, we must find $A$, $B$, $C$, and $D$ that satisfy the following equations.
+\begin{align*}
+B+cA &= 0 \\
+D+cC &= 1 \\
+\beta A^3 &= 1 \\
+3\beta CA^2 &= 0 \\
+3\beta C^2 A &= 0 \\
+\beta C^3 &= 0
+\end{align*}
+With a little bit of simple algebraic manipulation it can be seen that $A=\frac{1}{\sqrt[3]{\beta}}$, $B=\frac{-c}{\sqrt[3]{\beta}}$, $C=0$, and $D=1$. Thus the change of variables that turns the PDE into the form $u_{\hat{t}}=u_{\hat{x}\hat{x}\hat{x}}$ is $\hat{x}=\frac{1}{\sqrt[3]{\beta}}x-\frac{c}{\sqrt[3]{\beta}}t$ and $\hat{t}=t$.
+
+  d. The wave equation is
+\begin{align*}
+u_{tt} &= c^2u_{xx},
+\end{align*}
+where $c$ is a nonzero constant. It describes the motion of many types of waves, including small-amplitude surface water waves, as well as the motion of a wave through a shaken string. Introduce the change of variables $\hat{x}=x-ct$ and $\hat{t}=x+ct$. Show that the resulting equation is $u_{\hat{x}\hat{t}}=0$.
+
+*Hint:* You are allowed to interchange partial derivatives as needed.
+
+In this problem we will use the change of variables $\hat{x}=x-ct$ and $\hat{t}=x+ct$, to show that the PDE $u_{tt}=c^2u_{xx}$ results in $u_{\hat{x}\hat{t}}=0$ after the change of variables. We will start off by finding $u_t$ using the multivariate chain rule.
+\begin{align*}
+u_t(x,t) &= \frac{\partial}{\partial t} u(x,t) \\
+&= \frac{\partial u}{\partial \hat{x}}\frac{\partial \hat{x}}{\partial t}+\frac{\partial u}{\partial \hat{t}}\frac{\partial \hat{t}}{\partial t} \\
+&= u_{\hat{x}}(-c)+u_{\hat{t}}(c) \\
+&= -cu_{\hat{x}}+cu_{\hat{t}}
+\end{align*}
+As seen above, $u_t(x,t)=-cu_{\hat{x}}(x,t)+cu_{\hat{t}}(x,t)$. We will now use the multivariate chain rule to find $u_x$.
+\begin{align*}
+u_x(x,t) &= \frac{\partial}{\partial x} u(x,t) \\
+&= \frac{\partial u}{\partial \hat{x}}\frac{\partial \hat{x}}{\partial x}+\frac{\partial u}{\partial \hat{t}}\frac{\partial \hat{t}}{\partial x} \\
+&= u_{\hat{x}}(1)+u_{\hat{t}}(1) \\
+&= u_{\hat{x}}+u_{\hat{t}}
+\end{align*}
+As seen above, $u_x(x,t)=Au_{\hat{x}}(x,t)+Cu_{\hat{t}}(x,t)$. We will now use the multivariate chain rule to find $u_{tt}$.
+\begin{align*}
+u_{tt}(x,t) &= \frac{\partial}{\partial t} \left(-cu_{\hat{x}}+cu_{\hat{t}}\right) \\
+&= -c\left(\frac{\partial}{\partial\hat{x}}u_{\hat{x}}\frac{\partial\hat{x}}{\partial t}+\frac{\partial}{\partial\hat{t}}u_{\hat{x}}\frac{\partial\hat{t}}{\partial t}\right)+c\left(\frac{\partial}{\partial\hat{x}}u_{\hat{t}}\frac{\partial\hat{x}}{\partial t}+\frac{\partial}{\partial\hat{t}}u_{\hat{t}}\frac{\partial\hat{t}}{\partial t}\right) \\
+&= -c\left(u_{\hat{x}\hat{x}}(-c)+u_{\hat{x}\hat{t}}(c)\right)+c\left(u_{\hat{x}\hat{t}}(-c)+u_{\hat{t}\hat{t}}(c)\right) \\
+&= c^2u_{\hat{x}\hat{x}}-2c^2u_{\hat{x}\hat{t}}+c^2u_{\hat{t}\hat{t}}
+\end{align*}
+As seen above, $u_{tt}=c^2u_{\hat{x}\hat{x}}(x,t)-2c^2u_{\hat{x}\hat{t}}(x,t)+c^2u_{\hat{t}\hat{t}}(x,t)$. We will now use the multivariate chain rule to find $u_{xx}$.
+\begin{align*}
+u_{xx}(x,t) &= \frac{\partial}{\partial x} \left(u_{\hat{x}}+u_{\hat{t}}\right) \\
+&= \left(\frac{\partial}{\partial\hat{x}}u_{\hat{x}}\frac{\partial\hat{x}}{\partial x}+\frac{\partial}{\partial\hat{t}}u_{\hat{x}}\frac{\partial\hat{t}}{\partial x}\right)+c\left(\frac{\partial}{\partial\hat{x}}u_{\hat{t}}\frac{\partial\hat{x}}{\partial x}+\frac{\partial}{\partial\hat{t}}u_{\hat{t}}\frac{\partial\hat{t}}{\partial x}\right) \\
+&= \left(u_{\hat{x}\hat{x}}(1)+u_{\hat{x}\hat{t}}(1)\right)+\left(u_{\hat{x}\hat{t}}(1)+u_{\hat{t}\hat{t}}(1)\right) \\
+&= u_{\hat{x}\hat{x}}+2u_{\hat{x}\hat{t}}+u_{\hat{t}\hat{t}}
+\end{align*}
+As seen above, $u_{xx}=u_{\hat{x}\hat{x}}(x,t)+2u_{\hat{x}\hat{t}}(x,t)+u_{\hat{t}\hat{t}}(x,t)$. We will now plug these expressions into our PDE and simplify.
+\begin{align*}
+c^2u_{\hat{x}\hat{x}}-2c^2u_{\hat{x}\hat{t}}+c^2u_{\hat{t}\hat{t}} &= c^2u_{\hat{x}\hat{x}}+2c^2u_{\hat{x}\hat{t}}+c^2u_{\hat{t}\hat{t}} \\
+-4c^2u_{\hat{x}\hat{t}} &= 0 \\
+u_{\hat{x}\hat{t}} &= 0 \\
+\end{align*}
+Thus we have shown that the change of variables $\hat{x}=x-ct$ and $\hat{t}=x+ct$ results in $u_{\hat{x}\hat{t}}=0$ once plugged into the PDE.
+
+**Exercise 2. Skills 2.2-2.3.**
+
+Solve the advection equation
+\begin{align*}
+u_t + 5u_x &= 0
+\end{align*}
+subject to each of the initial conditions below. Your solutions will be traveling wave solutions. Categorize each solution as a pulse, front, or periodic wavetrain.
+
+  a. $u(x,0)=\frac{x^3}{x^4+1}$
+  
+Our general solution for this advection equation is $u(x,t)=f(x-5t)$ which implies that $u(x,0)=f(x)$. However, we also know $u(x,0)=\frac{x^3}{x^4+1}$, thus $f(x)=\frac{x^3}{x^4+1}$. Plugging in $x-5t$ into $f$, we obtain our solution of $u(x,t)=\frac{(x-5t)^3}{(x-5t)^4+1}$.
+
+Furthermore, if we let $z=x-5t$ we obtain $f(z)=\frac{z^3}{z^4+1}$. Based on simple infinite limit laws, since the power in the denominator is greater than the power in the numerator it follows that $\lim_{z\to-\infty} f(z)=\lim_{z\to\infty} f(z)=0$. Since the limits on both sides are equal, this traveling wave is a pulse.
+
+
+  b. $u(1,t)=\tanh^3(4t-5)$
+  
+Our general solution for this advection equation is $u(x,t)=f(x-5t)$ which implies that $u(1,t)=f(1-5t)$. However, we also know $u(1,t)=\tanh^3(4t-5)$. Thus $f(1-5t)=\tanh^3(4t-5)$. If we let $\psi=1-5t$ this implies that $t=\frac{1}{5}-\frac{1}{5}\psi$. Hence we can see that
+\begin{align*}
+f(\psi) &= u\left(1,\frac{1}{5}-\frac{1}{5}\psi\right) \\
+&= \tanh^3\left(4\left(\frac{1}{5}-\frac{1}{5}\psi\right)-5\right) \\
+&= \tanh^3\left(-\frac{4}{5}\psi-\frac{21}{5}\right)
+\end{align*}
+Replacing $\psi$ with $x-5t$ we see
+\begin{align*}
+u(x,t) &= f(x-5t)  \\
+&= \tanh^3\left(-\frac{4}{5}\left(x-5t\right)-\frac{21}{5}\right) \\
+&= \tanh^3\left(-\frac{4}{5}x+4t-\frac{21}{5}\right)
+\end{align*}
+Thus our solution is $u(x,t)=\tanh^3\left(-\frac{4}{5}x+4t-\frac{21}{5}\right)$.
+
+Furthermore, we know that if we let $z=x-5t$ we obtain $f(z)=\tanh^3(z)$. We already know for Lecture 1 and Lecture 4 that $\lim_{z\to-\infty} \tanh(z)=-1$ and $\lim_{z\to\infty} \tanh(z)=1$. Hence cubing this function won't change this behavior as $|z| \to \infty$. Thus we get $\lim_{z\to-\infty} f(z)=-1$ and $\lim_{z\to\infty} f(z)=1$. Therefore since the limits both exist but are not equal, the traveling wave solution is a front. We will show the behavior of $f(z)$ descirbed above through the use of a Desmos plot shown below.
+
+```{r echo=F, out.width = "90%", fig.align = "center"}
+knitr::include_graphics("plot.png")
+```
+
+  c. $u\left(3t,\frac{t}{5}\right)=sech^2(3t-5)$
+  
+Our general solution for this advection equation is $u(x,t)=f(x-5t)$ which implies that $u\left(3t,\frac{t}{5}\right)=f(3t-t)=f(2t)$. However, we also know $u\left(3t,\frac{t}{5}\right)=sech^2(3t-5)$. Thus $f(2t)=sech^2(3t-5)$. If we let $\psi=2t$ this implies that $t=\frac{1}{2}\psi$. Hence we can see that $f(\psi)=sech^2\left(\frac{3}{2}\psi-5\right)$. Replacing $\psi$ with $x-5t$ we see
+\begin{align*}
+u(x,t) &= f(x-5t) \\
+&= sech^2\left(\frac{3}{2}(x-5t)-5\right) \\
+&= sech^2\left(\frac{3}{2}x-\frac{15}{2}t-5\right)
+\end{align*}
+Thus our solution is $u(x,t)=sech^2\left(\frac{3}{2}x-\frac{15}{2}t-5\right)$.
+
+Furthermore, we know that if we let $z=x-5t$ we obtain $f(z)=sech^2(z)$. We proved in the multi-step problem of Homework 1 that $\lim_{z\to-\infty}f(z)=\lim_{z\to\infty} f(z)=0$. Since the limits on both sides are equal, this traveling wave is a pulse.
+
+  d. $u\left(x,\frac{\pi}{3}\right)=\sin(x)e^{\cos(x/2)}$
+  
+Our general solution for this advection equation is $u(x,t)=f(x-5t)$ which implies that $u\left(x,\frac{\pi}{3}\right)=f\left(x-\frac{5\pi}{3}\right)$. However, we also know $u\left(x,\frac{\pi}{3}\right)=\sin(x)e^{\cos(x/2)}$, thus $f\left(x-\frac{5\pi}{3}\right)=\sin(x)e^{\cos(x/2)}$. If we let $\psi=x-\frac{5\pi}{3}$, this implies that $x=\psi+\frac{5\pi}{3}$. Hence we can see that $f(\psi)=\sin\left(\psi+\frac{5\pi}{3}\right)e^{\cos\left(\frac{\psi}{2}+\frac{5\pi}{6}\right)}$. Replacing $\psi$ with $x-5t$ we obtain our solution of $u(x,t)=\sin\left(x-5t+\frac{5\pi}{3}\right)e^{\cos\left(\frac{x}{2}-\frac{5}{2}t+\frac{5\pi}{6}\right)}$.
+
+Furthermore, our solution is a periodic wavetrain. In particular, it has a period of $4\pi$. This is because $\sin(x)e^{\cos(x/2)}=\sin(x+4\pi)e^{\cos(x+2\pi)}$. Hence, since $f(z)=f(z+p)$, where $p=4\pi$, we can see that the solution is a periodic wavetrain. The plot of this function is shown below, its period is evident when seen over a larger range of $x$ values.
+
+```{r echo=F, out.width = "90%", fig.align = "center"}
+knitr::include_graphics("plot2.png")
+```
+
+**Exercise 3. Skill 2.4.**
+
+Consider the modified KdV (or mKdV, for short) equation:
+\begin{align}
+u_t+u^2u_x+u_{xxx}=0.
+\end{align}
+This equation appears in electric circuit theory and multicomponent plasmas. Like the KdV equation, the mKdV equation is also one of the few PDEs for which we can solve its IVP on the whole real line. In this exercise, we find the solution of this PDE.
+
+  a. Letting $u(x,t)=f(x-ct)=f(z)$, obtain a first-order ODE satisfied by $f$. Importantly, since we are finding the soliton solution, you may assume
+$$\lim_{|z|\to\infty} f = \lim_{|z|\to\infty} f' = \lim_{|z|\to\infty} f''=0.$$
+
+If we let $u(x,t)=f(x-ct)=f(z)$, and assume that $\lim_{|z|\to\infty} f = \lim_{|z|\to\infty} f' = \lim_{|z|\to\infty} f''=0$, then we can find a first-order ODE satisfied by $f$. To start off we will calculate the necessary partial derivatives. Notice that: $u_x=f'(z)$, $u_{xxx}=f'''(z)$, and $u_{t}=-cf'(z)$ plugging these into the mKdV, we obtain
+\begin{align*}
+0 &= -cf'+f^2f'+f''' \\
+&= -cf'+\left(\frac{f^3}{3}\right)'+f''' \quad \text{Since $f^2f'=\left(\frac{f^3}{3}\right)'$} \\
+&= \frac{d}{dz}\left(-cf+\frac{f^3}{3}+f''\right) \\ 
+A &= -cf+\frac{f^3}{3}+f''
+\end{align*}
+Since we assumed $\lim_{|z|\to\infty} f = \lim_{|z|\to\infty} f' = \lim_{|z|\to\infty} f''=0$, it follows that as $|z|\to\infty \implies -c(0)+\frac{(0)^3}{3}+0=A\implies A=0$. Hence we can see that
+\begin{align*}
+0 &= -cf+\frac{f^3}{3}+f'' \\
+&= -cff'+\frac{1}{3}f^3f'+f''f' \quad \text{(Multiplying both sides by $f'$)} \\
+&= -c\left(\frac{f^2}{2}\right)'+\frac{1}{3}\left(\frac{f^4}{4} \right)'+\left(\frac{(f')^2}{2}\right)' \quad \text{Since $f^nf'=\left(\frac{f^{n+1}}{n+1}\right)'$ and $f''f' = \left(\frac{(f')^2}{2}\right)'$} \\
+&= \frac{d}{dz}\left(\frac{-cf^2}{2}+\frac{f^4}{12}+\frac{(f')^2}{2}\right) \\
+B &= \frac{-cf^2}{2}+\frac{f^4}{12}+\frac{(f')^2}{2}
+\end{align*}
+Again, since we assumed $\lim_{|z|\to\infty} f = \lim_{|z|\to\infty} f' = \lim_{|z|\to\infty} f''=0$, it follows that as $|z|\to\infty \implies \frac{0}{2}+\frac{0^4}{12}+\frac{0^2}{2}=B\implies B=0$. Hence we can see that
+\begin{align*}
+0 &= \frac{-cf^2}{2}+\frac{f^4}{12}+\frac{(f')^2}{2} \\
+\frac{(f')^2}{2} &= \frac{cf^2}{2}-\frac{f^4}{12} \\
+6(f')^2 &= 6cf^2-f^4 \\
+6(f')^2 &= f^2(6c-f^2)
+\end{align*}
+Hence our first-order ODE is $6(f')^2 = f^2(6c-f^2)$.
+
+  b. You should obtain the ODE
+\begin{align}
+6f'^2 &= f^2(6c-f^2)
+\end{align}
+from (a). This is a nasty ODE to solve (but it can be done by separation of variables in much the same way as was shown in lecture for the KdV soliton). Instead of solving the ODE, verify (by directly plugging into the ODE) that
+\begin{align}
+f(z) &= \pm\sqrt{6c}sech(\sqrt{c}z+D)
+\end{align}
+is a solution, where $D$ is an arbitrary constant.
+
+*Hint:* Recall that $1-\tanh^2(s)=sech^2(s)$.
+
+In this problem we will show that $f(z) = \pm\sqrt{6c}sech(\sqrt{c}z+D)$ is a solution of $6f'^2 = f^2(6c-f^2)$ through the use of direct substitution. We will first find the derivative of $f(z)$.
+\begin{align*}
+f'(z) &= \pm\sqrt{6c}sech(\sqrt{c}z+D)\tanh(\sqrt{c}z+D)\cdot(-\sqrt{c}) \\
+&= \mp c\sqrt{6}sech(\sqrt{c}z+D)\tanh(\sqrt{c}z+D)
+\end{align*}
+Hence as computed above, $f'(z)=\mp c\sqrt{6}sech(\sqrt{c}z+D)\tanh(\sqrt{c}z+D)$. We will now let $s=\sqrt{c}z+D$ for simplicity. Furthermore, after plugging the following expressions into the ODE we obtain the following
+\begin{align*}
+6\left(\mp c\sqrt{6}sech(s)\tanh(s)\right)^2 &= \left(\pm\sqrt{6c}sech(s)\right)^2\left(6c-\left(\pm\sqrt{6c}sech(s)\right)^2\right) \\
+6^2c^2sech^2(s)\tanh^2(s) &= 6csech^2(s)(6c-6csech^2(s)) \\
+&= 6^2c^2sech^2(s)(1-sech^2(s)) \\
+&= 6^2c^2sech^2(s)\tanh^2(s)
+\end{align*}
+Hence, since $6^2 c^2 sech^2(s) \tanh^2(s) = 6^2c^2 sech^2(s) \tanh^2(s)$ we have shown that $f(z) = \pm\sqrt{6c}sech(\sqrt{c}z+D)$ is a solution to the ODE.
+
+  c. Based on (b), what is the soliton solution of the mKdV equation? Can these solitons ever travel to the left?
+  
+*Remark:* Like the KdV soliton, the mKdV soltion has an amplitude that depends on the wave speed. This is because the mKdV equation, like th KdV, is nonlinear. Also, this problem was copied from Ryan Creedon's version of the class in 2021, being the main generalization of our work in class which isn't overly cumbersome to put on a homework assignment.
+
+To find the soliton solution of the mKdV equation, we will take the solution of the ODE from (b) and plug in $x-ct$ for $z$. Thus we see that the soliton solution of the mKdV equation is $u(x,t)=f(x-ct)=\pm\sqrt{6c}sech(\sqrt{c}(x-ct)+D)$.
+
+Furthermore, in order for $f$ to be real for all $x$ and $t$, $c \geq 0$. This is a consequence of the terms including $c$ under a radical, namely $\sqrt{c}$ and $\sqrt{6c}$. Since $c \nless 0$, these solitons can never travel to the left.
+
+# Multi-Step Problem
+
+Consider the following advection-like equation:
+\begin{align}
+u_t+cu_x &= -2tu,
+\end{align}
+where $c>0$.
+
+(**S2.1**) Transform (4) into the traveling reference frame $\hat{x}=x-ct$ and $\hat{t}=t$. Show that (4) reduces to
+\begin{align*}
+u_{\hat{t}} &= -2\hat{t}u.
+\end{align*}
+(*Hint*: To transform independent variables in our equation into the traveling reference frame, try writing $t$ and $x$ as functions of $\hat{x}$ and $\hat{t}$). Note that this new PDE is essentially an ODE since no partial derivatives in $\hat{x}$ appear. Solve this ODE. Show the the general solution of the original PDE (4) is
+\begin{align*}
+u(x,t) &= f(x-ct)e^{-t^2},
+\end{align*}
+where $f$ is an arbitrary function.
+
+Using the traveling reference frame of $\hat{x}=x-ct$ and $\hat{t}=t$, we will transform the PDE $u_t+cu_x=-2tu$ into $u_{\hat{t}}=-2\hat{t}u$. We will first use the multivariate chain rule to find $u_t$.
+\begin{align*}
+u_t(x,t) &= \frac{\partial}{\partial t} u(x,t) \\
+&= \frac{\partial u}{\partial \hat{x}}\frac{\partial \hat{x}}{\partial t}+\frac{\partial u}{\partial \hat{t}}\frac{\partial \hat{t}}{\partial t} \\
+&= u_{\hat{x}}(-c)+u_{\hat{t}}(1) \\
+&= -cu_{\hat{x}}+u_{\hat{t}}
+\end{align*}
+As seen above, $u_t(x,t)=-cu_{\hat{x}}(x,t)+u_{\hat{t}}(x,t)$. We will now use the multivariate chain rule to find $u_x$.
+\begin{align*}
+u_x(x,t) &= \frac{\partial}{\partial x} u(x,t) \\
+&= \frac{\partial u}{ \partial \hat{x}}\frac{\partial \hat{x}}{\partial x}+\frac{\partial u}{\partial \hat{t}}\frac{\partial \hat{t}}{\partial x} \\
+&= u_{\hat{x}}(1)+u_{\hat{t}}(0) \\
+&= u_{\hat{x}}
+\end{align*}
+As seen above, $u_x(x,t)=u_{\hat{x}}(x,t)$. We will now plug these new values of $u_t$ and $u_x$ into our PDE and simplify. Thus our new PDE in terms of our new variables is $u_{\hat{t}}-cu_{\hat{x}}+cu_{\hat{x}}=-2\hat{t}u \implies u_{\hat{t}}=-2\hat{t}u$.
+
+Now that we have found a simpler form of the advection-like PDE, we can now solve the PDE like an ODE but instead of having an arbitrary constant, we'll have an arbitrary function. In particular we are looking for the general solution of the form $u(x,t) = f(x-ct)e^{-t^2}$.
+\begin{align*}
+u_{\hat{t}} &= -2\hat{t}u \\
+\int\frac{1}{u}u_{\hat{t}} d\hat{t} &= -2\int\hat{t}d\hat{t}, \ u\neq0 \\ \int\frac{1}{u} du &= -2\int\hat{t}d\hat{t} \\
+\ln|u| &=-\hat{t}^2+g(\hat{x}) \\
+|u| &= e^{-\hat{t}^2}e^{g(\hat{x})}
+\end{align*}
+If we let $g(\hat{x}) = \ln|f(\hat{x})|$ then we see that our equation becomes $|u| = |f(\hat{x})|e^{-\hat{t}^2} \implies u = f(\hat{x})e^{-\hat{t}^2}$. Plugging in our values of $\hat{x}$ and $\hat{t}$ we get our general solution of $u(x,t) = f(x-ct)e^{-t^2}$.
+
+(**S2.2**) Using the general solution found in the previous subexercise, find the solution of the initial value problem:
+\begin{align*}
+u_t+cu_x &= -2tu \\
+u(x,0) &= 3e^{-4x^2}
+\end{align*}
+Let $c=1$. Make snapshot plots of this solution for $t=0$, $1$, and $2$.
+
+Our general solution for this advection-like equation is $u(x,t)=f(x-ct)e^{-t^2}$ which implies that $u(x,0)=f(x)$. However, we also know $u(x,0)=3e^{-4x^2}$, thus $f(x)=3e^{-4x^2}$. Plugging in $x-ct$ into $f$, we obtain $f(x-ct)=3e^{-4(x-ct)^2}$. Hence our solution to the initial value problem is $u(x,t)=3e^{-4(x-ct)^2}e^{-t^2}$. In particular, for $c=1$, we get $u(x,t)=3e^{-4(x-t)^2}e^{-t^2}$.
+
+We will now make snapshot plots of $u(x,t)=3e^{-4(x-t)^2}e^{-t^2}$ for $t=0$, $t=1$, and $t=2$ in Desmos as shown below.
+
+```{r echo=F, out.width = "90%", fig.align = "center"}
+knitr::include_graphics("snapshot.png")
+```
+
+(**S2.3**) Is your solution to the initial value problem in the previous subexercise a traveling wave solution? Briefly justify why or why not.
+
+As can be seen by the above snapshot plots, the above solution to the initial value problem is a bounded function. However, if we write our solution in an equivalent form, namely $u(x,t)=e^{-4\left(x^2-2xt+\frac{5}{4}t^2\right)}$, we can see that there is no way to write $u(x,t)$ in the form $f(x-ct)$, thus the solution of the initial value problem of the advection-like PDE is not a traveling wave. Another reason why this wave isn't a traveling wave is because our advection-like equation is not autonomous because of the $-2tu$ term, thus our theory for traveling wave solutions doesn't hold for this PDE. 

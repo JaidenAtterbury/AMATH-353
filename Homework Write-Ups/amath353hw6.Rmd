@@ -1,0 +1,385 @@
+---
+title: "AMATH 353 Homework 6"
+author: "Jaiden Atterbury"
+date: "2023-08-07"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Component Skills Practice
+
+## Exercise 1. Skill 5.5.
+
+Determine the Fourier series representation of $f(x) = |x|$ on $[-\pi,\pi]$ Problem taken from Ryan Creedon's 2021 class.
+
+In order to determine the Fourier series representation of $f(x) = |x|$ on $[-\pi,\pi]$, we must solve for the coefficients $a_0$, $a_n$, and $b_n$ of the Fourier series representation of $f(x)$ on $[-L, L]$ defined as $f(x)=\frac{a_0}{2}+\sum\limits^{\infty}_{n=1}a_n\cos\left(\frac{n\pi}{L}x\right)+b_n\sin\left(\frac{n\pi}{L}x\right)$. The formulas for these coefficients are defined as,
+$a_0=\frac{1}{L}\int^{L}_{-L}f(x)dx$, $a_n=\frac{1}{L}\int^{L}_{-L}f(x)\cos\left(\frac{n\pi}{L}x\right)dx$, and  $b_n=\frac{1}{L}\int^{L}_{-L}f(x)\sin\left(\frac{n\pi}{L}x\right)dx$. $\\$
+
+**Step 1:** Solve for $a_0$: $\\$
+Since in our case $L=\pi$, $f(x)=|x|$ and $a_0=\frac{1}{L}\int^{L}_{-L}f(x)dx$, we have $a_0=\frac{1}{\pi}\int^{\pi}_{-\pi}|x|dx$. Hence we must solve $\frac{-1}{\pi}\int^{\pi}_{-\pi}xdx+\frac{1}{\pi}\int^{\pi}_{-\pi}xdx$. Alternatively, since $|x|$ is an even function we can instead solve $\frac{2}{\pi}\int^{\pi}_{0}xdx$. This calculation is simple and hence $a_0=\frac{2}{\pi}\left[\frac{1}{2}x^2\right]^{\pi}_{0}=\pi$. $\\$
+
+**Step 2:** Solve for $a_n$: $\\$
+Since in our case $L=\pi$, $f(x)=|x|$ and $a_n=\frac{1}{L}\int^{L}_{-L}f(x)\cos\left(\frac{n\pi}{L}x\right)dx$, we have $a_n=\frac{1}{\pi}\int^{\pi}_{-\pi}|x|\cos\left(nx\right)dx$. Hence we must solve $\frac{-1}{\pi}\int^{0}_{-\pi}x\cos\left(nx\right)dx+\frac{1}{\pi}\int^{\pi}_{0}x\cos\left(nx\right)dx$. Alternatively, since $|x|$ and $\cos(nx)$ are even functions, their product is even and we can instead solve $\frac{2}{\pi}\int^{\pi}_{0}x\cos(nx)dx$. Using integration by parts, we can see that $\int x\cos(nx)dx=\frac{x\sin(nx)}{n}+\frac{\cos(nx)}{n^2}$. Hence in our case $\frac{2}{\pi}\int^{\pi}_{0}x\cos(nx)dx = \frac{2}{\pi}\left[\frac{x\sin(nx)}{n}+\frac{\cos(nx)}{n^2}\right]^{\pi}_{0}=\frac{2\cos(n\pi)}{n^2\pi}-\frac{2}{n^2\pi}$. Since $\cos(n\pi)=(-1)^n$, it follows that $a_n=\frac{2(-1)^n-2}{n^2\pi}$. $\\$
+
+**Step 3:** Solve for $b_n$: $\\$
+Since in our case $L=\pi$, $f(x)=|x|$ and $b_n=\frac{1}{L}\int^{L}_{-L}f(x)\sin\left(\frac{n\pi}{L}x\right)dx$, we have $b_n=\frac{1}{\pi}\int^{\pi}_{-\pi}|x|\sin\left(nx\right)dx$. Hence we must solve $\frac{-1}{\pi}\int^{0}_{-\pi}x\sin\left(nx\right)dx+\frac{1}{\pi}\int^{\pi}_{0}x\sin\left(nx\right)dx$. Furthermore, since $|x|$ is an even function, and $\sin(nx)$ is an odd function, it follows that their product is an odd function. With that said, since the integral over a symmetric interval of an odd function equals zero, we can see that $b_n=\frac{1}{\pi}\int^{\pi}_{-\pi}|x|\sin\left(nx\right)dx=0 \implies b_n = 0$. $\\$
+
+Replacing the Fourier series form of $f(x)$ with our values of $a_0$, $a_n$ and $b_n$, we can see that the Fourier series representation of $f(x) = |x|$ on $[-\pi,\pi]$ is $f(x)=\frac{\pi}{2}+\sum\limits^{\infty}_{n=1}\frac{2(-1)^n-2}{n^2\pi}\cos\left(nx\right)$. Furthermore, since all of the even numbers in this summation equal $0$, we can "rename" and replace $n$ as $2n+1$ in our summation to only account for the odd numbers. Doing this leads to an equivalent result of $f(x)=\frac{\pi}{2}+\sum\limits^{\infty}_{n=0}\frac{-4}{(2n+1)^2\pi}\cos\left((2n+1)x\right)$.
+
+## Exercise 2. Skill 5.5.
+
+Consider the function $f(x) = x-1$ over the interval $[0,1]$.
+
+  a. Obtain the Fourier sine series of $f(x)$. 
+  
+Since the function we are looking at is on a non-symmetric interval, we must extend $f(x)$, so that it is on a symmetric interval. In particular, since we are looking for the Fourier sine series of $f(x)$, it turns out that we are looking at the odd extension of $f$, which in our case is defined as
+\begin{align*}
+f_{odd}(x) =
+\begin{cases}
+f(x) & x \in \left(0,1\right) \\
+-f(-x) & x \in \left(-1,0\right)
+\end{cases}
+\end{align*}
+We can now proceed in finding the Fourier series of $f_{odd}(x)$. By definition, $f_{odd}(x)$ is an odd function, hence it follows that $a_n=0 \: \forall n$. Thus all we have to find is $b_n$. Since in our case $L=1$, $f(x)=f_{odd}(x)$ and $b_n=\frac{1}{L}\int^{L}_{-L}f(x)\sin\left(\frac{n\pi}{L}x\right)dx$, we have $b_n=\int^{1}_{-1}f_{odd}(x)\sin\left(n\pi x\right)dx$. Hence we must solve $\int^{0}_{-1}(x+1)\sin\left(n\pi x\right)dx+\int^{1}_{0}(x-1)\sin\left(n\pi x\right)dx$. Since $f_{odd}(x)$ is an odd function, and $\sin(n\pi x)$ is an odd function, this integral simplifies to $2\int^{1}_{0}(x-1)\sin(n\pi x)dx$. Which further simplifies to $2\int^{1}_{0}x\sin(n\pi x)dx-2\int^{1}_{0}\sin(n\pi x)dx$. Using integration by parts, we can see that $\int x\sin(n\pi x)dx=\frac{\sin(n\pi x)}{n^2\pi^2}-\frac{x\cos(n\pi x)}{n\pi}$. This integral is solved below.
+\begin{align*}
+b_n &= 2\int^{1}_{0}x\sin(n\pi x)dx-2\int^{1}_{0}\sin(n\pi x)dx \\
+&= 2\left[\frac{\sin(n\pi x)}{n^2\pi^2}-\frac{x\cos(n\pi x)}{n\pi}\right]^{1}_{0}+\frac{2}{n\pi}\left[\cos(n\pi x)\right]^{1}_{0} \\
+&= \frac{-2\cos(n\pi)}{n\pi}+\frac{2\cos(n\pi)}{n\pi}-\frac{2}{n\pi}
+\end{align*}
+Since $b_n=\frac{-2}{n\pi}$ and $a_n=0 \: \forall n$, the Fourier sine series of $f(x)=x-1$ is $f(x)=\sum\limits^{\infty}_{n=1}\frac{-2}{n\pi}\sin(n\pi x)$.
+
+  b. Obtain the Fourier cosine series of $f(x)$. 
+  
+Since the function we are looking at is on a non-symmetric interval, we must extend $f(x)$, so that it is on a symmetric interval. In particular, since we are looking for the Fourier cosine series of $f(x)$, it turns out that we are looking at the even extension of $f$, which in our case is defined as
+\begin{align*}
+f_{even}(x) =
+\begin{cases}
+f(x) & x \in \left(0,1\right) \\
+f(-x) & x \in \left(-1,0\right)
+\end{cases}
+\end{align*}
+We can now proceed in finding the Fourier series of $f_{even}(x)$. By definition, $f_{even}(x)$ is an even function, hence it follows that $b_n=0 \: \forall n$. Thus all we have to find is $a_n$ and $a_0$. $\\$
+
+**Step 1:** Solve for $a_0$: $\\$
+Since in our case $L=1$, $f(x)=f_{even}(x)$ and $a_0=\frac{1}{L}\int^{L}_{-L}f(x)dx$, we have $a_0=\int^{1}_{0}f_{even}(x)dx$. Since $f_{even}(x)$ is an even function, we must solve $2\int^{1}_{0}x-1dx=2\left[\frac{1}{2}x^2-x\right]^{1}_{0}=-1$. Hence we can see that $a_0=-1$.
+
+**Step 2:** Solve for $a_n$: $\\$
+Since in our case $L=1$, $f(x)=f_{even}(x)$ and $a_n=\frac{1}{L}\int^{L}_{-L}f(x)\cos\left(\frac{n\pi}{L}x\right)dx$, we have $a_n=\int^{1}_{-1}f_{even}(x)\cos\left(n\pi x\right)dx$. Hence we must solve $\int^{0}_{-1}(-x-1)\cos\left(n\pi x\right)dx+\int^{1}_{0}(x-1)\cos\left(n\pi x\right)dx$. Since $f_{even}(x)$ is an even function, and $\cos(n\pi x)$ is an even function, it follows that their product is an even function function, hence we can simplify the integral to $2\int^{1}_{0}(x-1)\cos\left(n\pi x\right)dx$. Which further simplifies to $2\int^{1}_{0}x\cos(n\pi x)dx-2\int^{1}_{0}\cos(n\pi x)dx$. Using integration by parts, we can see that $\int x\cos(n\pi x)dx=\frac{x\sin(n\pi x)}{n\pi}+\frac{\cos(n\pi x)}{n^2\pi^2}$. This integral is solved below.
+\begin{align*}
+a_n &= 2\int^{1}_{0}x\cos(n\pi x)dx-2\int^{1}_{0}\cos(n\pi x)dx \\
+&= 2\left[\frac{x\sin(n\pi x)}{n\pi}+\frac{\cos(n\pi x)}{n^2\pi^2}\right]^{1}_{0}-\frac{2}{n\pi}\left[\sin(n\pi x)\right]^{1}_{0} \\
+&= \frac{2\cos(n\pi)}{n^2\pi^2}-\frac{2}{n^2\pi^2} \\
+&= \frac{2\cos(n\pi)-2}{n^2\pi^2} \\
+&= \frac{2(-1)^n-2}{n^2\pi^2}
+\end{align*}
+Since $a_0=-1$, $a_n=\frac{2(-1)^n-2}{n^2\pi^2}$ and $b_n=0 \: \forall n$, the Fourier cosine series of $f(x)=x-1$ is $f(x)=\frac{-1}{2}+\sum\limits^{\infty}_{n=1}\frac{2(-1)^n-2}{n^2\pi^2}\cos(n\pi x)$. Furthermore, since all of the even numbers in this summation equal $0$, we can "rename" and replace $n$ as $2n+1$ in our summation to only account for the odd numbers. Doing this leads to an equivalent result of $f(x)=\frac{-1}{2}+\sum\limits^{\infty}_{n=0}\frac{-4}{(2n+1)^2\pi^2}\cos((2n+1)\pi x)$.
+  
+  c. Which series expansion would you expect to converge to $f(x)$ faster? Give a brief justification of your answer.
+
+Since Fourier series don't converge at jump discontinuities, which are present in the Fourier sine series due to the definition of $f_{odd}(x)$, but not the Fourier cosine series, it follows that the Fourier cosine series of $f(x)$ should converge to $f(x)$ faster.
+
+## Exercise 3. Skill 5.6.
+
+Last week, you found the standing wave solutions to the boundary value problem 
+\begin{align*}
+\begin{cases} u_t = u_{xx} & x \in [0,L] \\
+u_x(0,t) = u_x(L,t) = 0 \end{cases}.
+\end{align*}
+Using your previous results, find the solution to the initial boundary value problem
+\begin{align*}
+\begin{cases} u_t = u_{xx} & x \in [0,L] \\
+u_x(0,t) = u_x(L,t) = 0 \\\\ u(x,0) = \begin{cases} 1 & x \in \left[0,\frac{L}{2} \right] \\ 0 & x \in \left(\frac{L}{2},L \right] \end{cases} \end{cases}.
+\end{align*}
+Note that the solution to this problem represents the temperature distribution in a rod with insulated edges (no heat flowing out of the edges) that is initially hot near the left boundary and cold near the right boundary. Problem taken from Ryan Creedon's 2021 class.
+
+As found in Exercise 3 from Homework 5, the standing wave solutions to the boundary value problem
+\begin{align*}
+\begin{cases} u_t = u_{xx} & x \in [0,L] \\
+u_x(0,t) = u_x(L,t) = 0 \end{cases}.
+\end{align*}
+are formed by the functions $X_n(x)=A_n \cos\left(\frac{n\pi}{L}x\right)$ and $T_n(t)=G_n e^{\frac{-n^2\pi^2}{L^2}t}$ as well as $X_0(x)=D_0$ and $T_0(t)=H_0$. Hence we can see that we get a countably infinite number of nonzero standing wave solutions $u_n(x,t)=I_ne^{\frac{-n^2\pi^2}{L^2}t}\cos\left(\frac{n\pi}{L}x\right)$ where $I_n=A_nG_n$ and $n\in\mathbb{N}$, as well as $u_0(x,t)=\frac{1}{2}J_0$ where $\frac{1}{2}J_0=D_0H_0$. Since the PDE is linear and homogeneous it has a superposition principle thus any linear combination of these above solutions is also a solution. Hence we can write the above solutions into one, thus $u(x,t)=\frac{1}{2}J_0+\sum\limits^{\infty}_{n=1}I_n e^{\frac{-n^2\pi^2}{L^2}t}\cos\left(\frac{n\pi}{L}x\right)$. 
+
+**Step 1:** Show new solution satisfies boundary conditions: $\\$
+The derivative of $u(x,t)$ from above is $u_x(x,t)=\sum\limits^{\infty}_{n=1}\frac{-L}{n\pi}I_n e^{\frac{-n^2\pi^2}{L^2}t}\sin\left(\frac{n\pi}{L}x\right)$. Hence since $\sin(0)=\sin(n\pi)=0$, it follows that $u_x(0,t)=u_x(L,t)=0$, therefore the new $u(x,t)$ satisfies the boundary conditions.
+
+**Step 2:** Apply the initial condition: $\\$
+The initial condition for this problem is
+\begin{align*}
+u(x,0) &= \begin{cases} 1 & x \in \left[0,\frac{L}{2} \right] \\ 0 & x \in
+\left(\frac{L}{2},L \right] \end{cases}
+\end{align*}
+For now we will call this function $f(x)$. Applying the initial condition to $u(x,t)$, we can see that
+\begin{align*}
+u(x,0) &= \frac{1}{2}J_0+\sum\limits^{\infty}_{n=1}I_n e^{\frac{-n^2\pi^2}{L^2}\cdot 0}\cos\left(\frac{n\pi}{L}x\right) \\
+&= \frac{1}{2}J_0+\sum\limits^{\infty}_{n=1}I_n\cos\left(\frac{n\pi}{L}x\right) \\
+\end{align*}
+This above solution form to the IBVP implies that the coefficients $J_0$ and $I_n$ are that of a Fourier cosine series. Since the function we are looking at is on a non-symmetric interval, we must extend $f(x)$, so that it is on a symmetric interval. In particular, since we are looking for the Fourier cosine series of $f(x)$, it turns out that we are looking at the even extension of $f$, which in our case is defined as
+\begin{align*}
+f_{even}(x) =
+\begin{cases}
+f(x) & x \in \left(0,1\right) \\
+f(-x) & x \in \left(-1,0\right)
+\end{cases}
+\end{align*}
+We can now proceed in finding the Fourier series of $f_{even}(x)$. $\\$
+
+**Step 2(i):** Solve for $J_0$: $\\$
+Since in our case $L=L$, $f(x)=f_{even}(x)$ and $a_0=\frac{1}{L}\int^{L}_{-L}f(x)dx$, we have $J_0=\frac{1}{L}\int^{L}_{-L}f_{even}(x)dx$. Since $f_{even}(x)$ is an even function, we must solve $\frac{2}{L}\int^{L}_{0}f(x)dx$. Splitting up the integral to obey the multipart definition of $f(x)=u(x,0)$, we see that our integral becomes $\frac{2}{L}\int^{L/2}_{0}dx+\frac{2}{L}\int^{L}_{L/2}(0)dx=1$ Hence we can see that $J_0=1$. $\\$
+
+**Step 2(ii):** Solve for $I_n$: $\\$
+Since in our case $L=L$, $f(x)=f_{even}(x)$ and $I_n=\frac{1}{L}\int^{L}_{-L}g(x)\cos\left(\frac{n\pi}{L}x\right)dx$, we have $I_n=\frac{1}{L}\int^{L}_{-L}f_{even}(x)\cos\left(\frac{n\pi}{L}x\right)dx$. Since $f_{even}(x)$ is an even function, and $\cos(n\pi x)$ is an even function, it follows that their product is an even function function, hence we can simplify the integral to $\frac{2}{L}\int^{L}_{0}f(x)\cos\left(\frac{n\pi}{L} x\right)dx$. Splitting up the integral to obey the multipart definition of $f(x)=u(x,0)$, we see that our integral becomes $\frac{2}{L}\int^{L/2}_{0}\cos\left(\frac{n\pi}{L} x\right)dx+\frac{2}{L}\int^{L}_{0}0\cdot\cos\left(\frac{n\pi}{L} x\right)dx$. This integral is solved below.
+\begin{align*}
+I_n &= \frac{2}{L}\int^{L/2}_{0}\cos\left(\frac{n\pi}{L} x\right)dx+\frac{2}{L}\int^{L}_{0}0\cdot\cos\left(\frac{n\pi}{L} x\right)dx \\
+&= \frac{2}{L}\int^{L/2}_{0}\cos\left(\frac{n\pi}{L} x\right)dx \\
+&= \frac{2}{L}\cdot\frac{L}{n\pi}\left[\sin\left(\frac{n\pi}{L} x\right)\right]^{L/2}_{0} \\
+&= \frac{2}{n\pi}\sin\left(\frac{n\pi}{2}\right)
+\end{align*}
+Since $J_0=1$, $I_n=\frac{2}{n\pi}\sin\left(\frac{n\pi}{2}\right)$, the solution to the IBVP is $u(x,t)=\frac{1}{2}+\sum\limits^{\infty}_{n=1}\frac{2}{n\pi}\sin\left(\frac{n\pi}{2}\right)\cos\left(\frac{n\pi}{L}x\right)e^{\frac{-n^2\pi^2}{L^2}t}$. Furthermore, since all of the even numbers in this summation equal $0$, we can "rename" and replace $n$ as $2n+1$ in our summation to only account for the odd numbers. Doing this leads to an equivalent result of $u(x,t)=\frac{1}{2}+\sum\limits^{\infty}_{n=0}\frac{2}{(2n+1)\pi}\sin\left(\frac{(2n+1)\pi}{2}\right)\cos\left(\frac{(2n+1)\pi}{L}x\right)e^{\frac{-(2n+1)^2\pi^2}{L^2}t}$.
+
+## Exercise 4. Skill 5.6.
+
+\textbf{Exercise 14.6(a)} in Knobel. Instead of animating your results, make snapshot plots of the solution from $t=0$ to $t=1$ in increments of $0.2$. To do this, truncate your series representation of the solution to $100$ terms, and plot this truncated solution. 
+
+The problem description in Knobel states: Consider the displacement of a vibrating string with fixed ends given by
+\begin{align*}
+u_{tt} &= u_{xx}, \quad 0<x<1, t>0, \\
+u(0,t) &= 0, \\
+u(1,t) &= 0.
+\end{align*}
+Use the Fourier sine series expansions found in Exercise 14.2 to write down the series solution of the vibrating string with the following initial conditions:
+\begin{align*}
+u(x,0)&=x(1-x), \quad u_t(x,0)=0.
+\end{align*}
+
+As found in Section 11.3. "Standing waves of a finite string" in Knobel, the solution to the BVP
+\begin{align*}
+u_{tt} &= c^2u_{xx}, \quad 0<x<L, t>0, \\
+u(0,t) &= 0, \\
+u(L,t) &= 0.
+\end{align*}
+is $u_n(x,t)=\sin(n\pi x/L)\left[A_n\cos(n\pi ct/L)+B_n\sin(n\pi ct/L)\right]$. For our BVP, $c=L=1$, therefore the solution is $u_n(x,t)=\sin(n\pi x)\left[A_n\cos(n\pi t)+B_n\sin(n\pi t)\right]$. Since the PDE is linear and homogeneous it has a superposition principle thus any linear combination of these above solutions is also a solution. Hence we can write the above solutions into one, thus $u(x,t)=\sum\limits^{\infty}_{n=1}\sin(n\pi x)\left[A_n\cos(n\pi t)+B_n\sin(n\pi t)\right]$.
+
+**Step 1:** Show new solution satisfies boundary conditions: $\\$
+Since $\sin(0)=\sin(n\pi)=0$, it follows that $u(0,t)=u(1,t)=0$, therefore the new $u(x,t)$ satisfies the boundary conditions. $\\$
+
+**Step 2:** Apply the first initial condition: $\\$
+The first initial condition for this problem is
+\begin{align*}
+u(x,0) &= x(1-x).
+\end{align*}
+For now we will call this function $f(x)$. Applying the initial condition to $u(x,t)$, we can see that
+\begin{align*}
+u(x,0) &= \sum\limits^{\infty}_{n=1}\sin(n\pi x)\left[A_n\cos(n\pi\cdot 0)+B_n\sin(n\pi\cdot 0)\right] \\
+&= \sum\limits^{\infty}_{n=1}A_n\sin(n\pi x)
+\end{align*}
+This above solution form to the IBVP implies that the coefficient $A_n$ is that of a Fourier sine series. Since the function we are looking at is on a non-symmetric interval, we must extend $f(x)$, so that it is on a symmetric interval. In particular, since we are looking for the Fourier sine series of $f(x)$, it turns out that we are looking at the odd extension of $f$, which in our case is defined as
+\begin{align*}
+f_{odd}(x) =
+\begin{cases}
+f(x) & x \in \left(0,1\right) \\
+-f(-x) & x \in \left(-1,0\right)
+\end{cases}
+\end{align*}
+We can now proceed in finding the Fourier series of $f_{odd}(x)$. $\\$
+
+**Step 2(i):** Solve for $A_n$: $\\$
+Since in our case $L=1$, $f(x)=f_{odd}(x)$ and $A_n=\frac{1}{L}\int^{L}_{-L}f(x)\sin\left(\frac{n\pi}{L}x\right)dx$, we have $A_n=\int^{1}_{-1}f_{odd}(x)\sin\left(n\pi x\right)dx$. Since $f_{odd}(x)$ is an odd function, and $\sin(n\pi x)$ is an odd function, it follows that their product is an even function function, hence we can simplify the integral to $2\int^{1}_{0}f(x)\sin\left(n\pi x\right)dx$. Replacing $f(x)$ with its expression defined in the initial condition get the integral $2\int^{1}_{0}x(1-x)\sin\left(n\pi x\right)dx=2\int^{1}_{0}x\sin\left(n\pi x\right)-2\int^{1}_{0}x^2\sin\left(n\pi x\right)$. Using integration by parts we can see that $\int x\sin(n\pi x)dx=\frac{\sin(n\pi x)}{n^2\pi^2}-\frac{x\cos(n\pi x)}{n\pi}$ and $\int x^2\sin(n\pi x)=\frac{2\cos(n\pi x)}{n^3\pi^3}+\frac{2x\sin(n\pi x)}{n^2\pi^2}-\frac{x^2\cos(n\pi x)}{n\pi}$. We will use these results to solve the above integral for $a_n$.
+\begin{align*}
+a_n &= 2\int^{1}_{0}x\sin\left(n\pi x\right)-2\int^{1}_{0}x^2\sin\left(n\pi x\right) \\
+&= 2\left[\frac{\sin(n\pi x)}{n^2\pi^2}-\frac{x\cos(n\pi x)}{n\pi}\right]^{1}_{0}+2\left[\frac{2\cos(n\pi x)}{n^3\pi^3}+\frac{2x\sin(n\pi x)}{n^2\pi^2}-\frac{x^2\cos(n\pi x)}{n\pi}\right]^{1}_{0} \\
+&= \frac{-2\cos(n\pi)}{n\pi}-\frac{4\cos(n\pi)}{n^3\pi^3}+\frac{2\cos(n\pi)}{n\pi}+\frac{4}{n^3\pi^3} \\
+&= \frac{4-4\cos(n\pi)}{n^3\pi^3} \\
+&= \frac{4-4(-1)^n}{n^3\pi^3}
+\end{align*}
+
+**Step 3:** Apply the second initial condition: $\\$
+The second initial condition for this problem is
+\begin{align*}
+u_t(x,0) &= 0.
+\end{align*}
+For now we will call this function $g(x)$. Applying the initial condition to $u(x,t)$, we can see that
+\begin{align*}
+u_t(x,0) &= \frac{\partial}{\partial t}\left[\sum\limits^{\infty}_{n=1}\sin(n\pi x)\left[A_n\cos(n\pi t)+B_n\sin(n\pi t)\right]\right]_{t=0} \\
+&= \left[\sum\limits^{\infty}_{n=1}\sin(n\pi x)\left[-n\pi A_n\sin(n\pi t)+n\pi B_n\cos(n\pi t)\right]\right]_{t=0} \\
+&= \sum\limits^{\infty}_{n=1}n\pi B_n\sin(n\pi x)
+\end{align*}
+This above solution form to the IBVP implies that the coefficient $B_n$ is that of a Fourier sine series. Since the function we are looking at is on a non-symmetric interval, we must extend $g(x)$, so that it is on a symmetric interval. In particular, since we are looking for the Fourier sine series of $g(x)$, it turns out that we are looking at the odd extension of $f$, which in our case is defined as
+\begin{align*}
+g_{odd}(x) =
+\begin{cases}
+g(x) & x \in \left(0,1\right) \\
+g(-x) & x \in \left(-1,0\right)
+\end{cases}
+\end{align*}
+We can now proceed in finding the Fourier series of $g_{odd}(x)$. $\\$
+
+**Step 3(i):** Solve for $B_n$: $\\$
+Since in our case $L=1$, $g(x)=g_{odd}(x)$ and $B_n=\frac{1}{L}\int^{L}_{-L}g(x)\cos\left(\frac{n\pi}{L}x\right)dx$, we have $B_n=\frac{1}{n\pi}\int^{1}_{-1}g_{odd}(x)\sin\left(n\pi x\right)dx$. Since $g_{odd}(x)$ is an odd function, and $\sin(n\pi x)$ is an odd function, it follows that their product is an even function function, hence we can simplify the integral to $2\int^{1}_{0}g(x)\sin\left(n\pi x\right)dx$. Replacing $g(x)$ with its expression defined in the initial condition get the integral $2\int^{1}_{0}0\cdot\sin\left(n\pi x\right)dx=0$. $\\$
+
+Since $A_n=\frac{4-4(-1)^n}{n^3\pi^3}$ and $B_n=0$, the solution to the IBVP is $u(x,t)=\sum\limits^{\infty}_{n=1}\frac{4-4(-1)^n}{n^3\pi^3}\sin(n\pi x)\cos(n\pi t)$. Since the PDE is linear and homogeneous it has a superposition principle thus any linear combination of these above solutions is also a solution. Hence we can write the above solutions into one, thus $u(x,t)=\sum\limits^{\infty}_{n=1}\frac{8}{(2n+1)^3\pi^3}\sin((2n+1)\pi x)\cos((2n+1)\pi t)$.
+
+We will now make snapshot plots of the above solution from $t=0$ to $t=1$ in increments of $0.2$. We will do this by truncating out series representation of the solution to 100 terms and plot this truncated solution. The snapshot plots are shown below.
+
+```{r echo=F, out.width = "90%", fig.align = "center"}
+knitr::include_graphics("hw6plot.png")
+``` 
+
+# Multi-Step Problem
+
+Problem taken from Ryan Creedon's 2021 class. Consider the initial boundary value problem
+\begin{align*}
+\begin{cases} u_t = u_{xx} & x \in [0,L] \\
+u(0,t) = 0 \\ u(L,t) = 1 \\\\ u(x,0) = \begin{cases} 0 & x \in \left[0,\frac{L}{2} \right] \\ 1 & x \in \left(\frac{L}{2},L \right] \end{cases} \end{cases}.
+\end{align*}
+Physically, this initial boundary value problem corresponds to the evolution of temperature in a rod where the temperature at the end points are fixed at two different temperatures. Notice that, because we are requiring the temperature to be different at the boundaries, we no longer have homogeneous Dirichlet boundary conditions, so our usual techniques to solve this initial boundary value problem will not work. Let's see the workaround, shall we?
+
+(\textbf{S1.4}) Verify that $v(x) = \frac{x}{L}$ solves the heat equation and satisfies the boundary conditions. 
+
+To verify that $v(x) = \frac{x}{L}$ solves the heat equation, we will take derivative and plug-in the results into the heat equation. We will do these derivative calculations below.
+\begin{align*}
+\frac{\partial}{\partial t} v(x) &= \frac{\partial}{\partial t} \frac{x}{L} = 0 \\
+\frac{\partial}{\partial x} v(x) &= \frac{\partial}{\partial x} \frac{x}{L} = \frac{1}{L} \\
+\frac{\partial^2}{\partial x^2} v(x) &= \frac{\partial}{\partial x} \frac{1}{L} = 0 \\
+\end{align*}
+Plugging this into the heat equation we can see that $0=0$, hence $v(x)$ solve the heat equation. We will now check that $v(x)$ satisfies the boundary conditions below.
+\begin{align*}
+v(0) &= \frac{0}{L} = 0 \\
+v(0) &= \frac{L}{L} = 1 \\
+\end{align*}
+Since $v(0)=v(L)=0$, it follows that $v(x)$ also satisfies the boundary conditions.
+
+(\textbf{S5.4}) Let $w(x,t) = u(x,t) -v(x)$. Given $u(x,t)$ is the solution to the initial boundary value problem above, verify that $w(x,t)$ is the solution of the initial boundary value problem
+\begin{align*}
+\begin{cases} w_t = w_{xx} & x \in [0,L] \\
+w(0,t) = w(L,t) = 0  \\\\ w(x,0) = \begin{cases} -\frac{x}{L} & x \in \left[0,\frac{L}{2} \right] \\ 1-\frac{x}{L} & x \in \left(\frac{L}{2},L \right] \end{cases} \end{cases}.
+\end{align*}
+
+Given that $u(x,t)$ is the solution to the initial boundary value problem above, then to show that $w(x,t) = u(x,t) -v(x)$ solves the IBVP presented in this problem we will show that it (i) solves the PDE, (ii) satisfies the boundary conditions, and (iii) satisfies the initial condition. We will start by showing that $w(x,t)$ solves the PDE. Taking the necessary derivatives of $w$ we see that $w_t=u_t$ and $w_{xx} = u_{xx}$, hence this shows us that $w_t = w_{xx} \implies u_t = u_{xx}$, hence we can see that $w(x,t)$ solves the PDE. We will now show that $w(x,t)$ satisfies the boundary conditions below.
+\begin{align*}
+w(0,t) &= u(0,t) - v(0) = 0 - 0 = 0 \\
+w(L,t) &= u(1,t) - v(L) = 1 - 1 = 0
+\end{align*}
+Since $w(0,t)=w(L,t)=0$, it follows that $w(x,t)$ satisfies the boundary conditions. Lastly, we must show that $w(x,t)$ satisfies the initial condition.
+\begin{align*}
+w(x,0) &= u(x,0) - v(x) \\
+&= \begin{cases} 0 & x \in \left[0,\frac{L}{2} \right] \\ 1 & x \in \left(\frac{L}{2},L \right] \end{cases} - \frac{x}{L} \\
+&= \begin{cases} -\frac{x}{L} & x \in \left[0,\frac{L}{2} \right] \\ 1-\frac{x}{L} & x \in \left(\frac{L}{2},L \right] \end{cases}
+\end{align*}
+Therefore $w(x,t)$ satisfies the initial condition and thus is a solution to the IBVP.
+
+(\textbf{S5.6}) The above initial boundary value problem now has homogeneous Dirichlet boundary conditions! Solve it using our usual technique.
+
+Since we haven't solved any part of the IBVP in the previous part in-class, in the homework, or in the textbook, we will solve it from scratch.
+
+**Step 1:** Separate variables: $\\$
+
+Let $w(x,t)=X(x)T(t)$ be a standing wave solution of $w_t = w_{xx}$, we will use separation of variables to obtain ODE's for $X(x)$ and $T(t)$ letting $\lambda$ denote our separation constant. This process is shown below.
+\begin{align*}
+w_t &= w_{xx} \\
+\left(X(x)T(t)\right)_{t} &= \left(X(x)T(t)\right)_{xx} \\
+X(x)T'(t) &= X''(x)T(t) \\
+\frac{T'(t)}{T(t)} &= \frac{X''(x)}{X(x)} = \lambda
+\end{align*}
+The last line from the above separation of variables process gives us ODE's for $X(x)$ and $T(t)$. These ODEs are $T'(t) = \lambda T(t)$ and $X''(x) = \lambda X(x) \implies X''(x) - \lambda X(x) = 0$. $\\$
+ 
+**Step 2:** Solve $X(x)$ equation: $\\$
+
+  - $\bf{Case \ 1, \ \lambda < 0}$:
+
+In this case our ODE is $X''(x)-\lambda X(x)=0$ with $\lambda < 0$. Since this is a linear second order homogeneous ODE with constant coefficients, it takes one of three forms. In particular, the discriminant of the characteristic polynomial is $\Delta = -4(1)(-\lambda) = 4\lambda$. However, $\lambda < 0 \implies 4\lambda < 0$. Hence the resulting polynomial has complex conjugate roots of the form $\sigma\pm i\omega$, where $\sigma = \frac{0}{2}=0$ and $\omega = \frac{\sqrt{|4\lambda|}}{2} = \frac{\sqrt{-4\lambda}}{2} = \sqrt{-\lambda}$. The general solution of ODEs of this form is $f(x)=c_1e^{\sigma x}\cos(\omega x)+c_2e^{\sigma x}\sin(\omega x)$. Hence in our case, $X(x)=A\cos\left(x\sqrt{-\lambda}\right)+B\sin\left(x\sqrt{-\lambda}\right)$.
+
+  - $\bf{Case \ 2, \ \lambda = 0}$:
+  
+In this case our ODE is $X''(x)=0$. Since this is a linear second order homogeneous ODE with constant coefficients, it takes one of three forms. In particular, the discriminant of the characteristic polynomial is $\Delta =  0$. Hence the resulting polynomial has one repeated root of the form $r = \frac{0}{2} = 0$. The general solution of ODEs of this form is $f(x)=c_1e^{r x}+c_2xe^{r x}$. Hence in our case, $X(x)=Cx+D$. 
+
+  - $\bf{Case \ 3, \ \lambda > 0}$:
+
+In this case our ODE is $X''(x)-\lambda X(x)=0$ with $\lambda > 0$. Since this is a linear second order homogeneous ODE with constant coefficients, it takes one of three forms. In particular, the discriminant of the characteristic polynomial is $\Delta = -4(1)(-\lambda) = 4\lambda$. However, $\lambda > 0 \implies 4\lambda > 0$. Hence the resulting polynomial has two real roots of the form $r_{1,2}=\frac{\pm\sqrt{4\lambda}}{2} = \pm\sqrt\lambda$. The general solution of ODEs of this form is $f(x)=c_1e^{r_1 x}+c_2e^{r_2 x}$. Hence in our case, $X(x)=Ee^{x\sqrt{\lambda}}+Fe^{-x\sqrt{\lambda}}$. $\\$
+
+**Step 3:** Enforce the boundary conditions for each form of $X(x)$: $\\$
+
+  - $\bf{Case \ 1, \ \lambda < 0}$:
+  
+In case 1, $X(x)=A\cos\left(x\sqrt{-\lambda}\right)+B\sin\left(x\sqrt{-\lambda}\right)$, and the boundary conditions are $w(0,t) = w(L,t) = 0$. Below we will enforce these boundary conditions to find $X(x)$ that satisfy the boundary conditions.
+\begin{align*}
+X(0) &= A\cos\left(0\cdot\sqrt{-\lambda}\right)+B\sin\left(0\cdot\sqrt{-\lambda}\right) = A = 0 \implies A = 0 \\
+X(L) &= A\cos\left(L\cdot\sqrt{-\lambda}\right)+B\sin\left(L\cdot\sqrt{-\lambda}\right) = B\sin\left(L\cdot\sqrt{-\lambda}\right) = 0
+\end{align*}
+Hence from above we can see that $A=0$ and $B\sin\left(L\sqrt{-\lambda}\right) = 0$. Since we are looking for nonzero forms of $X(x)$, it follows that $B\neq0$, hence $\sin\left(L\sqrt{-\lambda}\right) = 0$. The function $\sin$ equals zero at an argument of $k\pi$ where $k\in\mathbb{Z}$, this implies that $L\sqrt{-\lambda}=k\pi$. However, since $L,\sqrt{-\lambda}>0$, it follows that $n = k \in \mathbb{N}$. Thus we rewrite the previous expression as $L\sqrt{-\lambda}=n\pi$. Solving for $\sqrt{-\lambda}$ we obtain $\sqrt{-\lambda}=\frac{n\pi}{L}$. Hence our nonzero form of $X(x)$ is $X_n(x)=B_n\sin\left(\frac{n\pi}{L}x\right),\:n\in\mathbb{N}$
+
+  - $\bf{Case \ 2, \ \lambda = 0}$:
+  
+In case 2, $X(x)=Cx+D$, and the boundary conditions are $w(0,t) = w(L,t) = 0$. Below we will enforce these boundary conditions to find $X(x)$ that satisfy the boundary conditions.
+\begin{align*}
+X(0) &= C(0)+D = D = 0 \implies D = 0 \\
+X(L) &= C(L) + D = CL = 0 \implies C = 0
+\end{align*}
+Hence from above we can see that $C, D = 0$, hence $X(x)=0 \implies w(x,t)=0$. Thus there are no nonzero forms of $X(x)$ for this case.
+
+  - $\bf{Case \ 3, \ \lambda > 0}$:
+  
+In case 3, $X(x)=Ee^{x\sqrt{\lambda}}+Fe^{-x\sqrt{\lambda}}$, and the boundary conditions are $w(0,t) = w(L,t) = 0$. Below we will enforce these boundary conditions to find $X(x)$ that satisfy the boundary conditions.
+\begin{align*}
+X(0) &= Ee^{0\cdot\sqrt{\lambda}}+Fe^{-0\cdot\sqrt{\lambda}} = E + F = 0 \implies -E = F \\
+X(L) &= Ee^{L\sqrt{\lambda}}+Fe^{-L\sqrt{\lambda}} = Ee^{L\sqrt{\lambda}}-Ee^{-L\sqrt{\lambda}} = E\left(e^{L\sqrt{\lambda}}-e^{-L\sqrt{\lambda}}\right) = 0
+\end{align*}
+Hence from above we can see that $E\left(e^{L\sqrt{\lambda}}-e^{-L\sqrt{\lambda}}\right)=0$. Since we are looking for nonzero forms of $X(x)$, it follows that $E\neq0$, thus we are looking at $e^{L\sqrt{\lambda}}-e^{-L\sqrt{\lambda}}=0$. This equation is only satisfied for $\lambda=0$, however $\lambda>0$. Therefore $E$ must equal $0$ which implies $F=0$, hence $X(x)=0 \implies w(x,t)=0$. Thus there are no nonzero forms of $X(x)$ for this case. $\\$
+
+**Step 4:** Solve the corresponding $T(t)$ equation for nonzero $X(x)$ terms: $\\$
+
+The only case with nonzero forms for $X(x)$ was case 1. In this case $X_n(x)=B_n\sin\left(\frac{n\pi}{L}x\right),\:n\in\mathbb{N}$, which implies that $\lambda = -\frac{n^2\pi^2}{L^2}$. We will now solve the ODE $T'(t)=\lambda T(t)$ with $\lambda$ as defined above.
+\begin{align*}
+T'(t) &= \lambda T(t) \\
+\int\frac{T'(t)dt}{T(t)} &= \int\lambda dt + C \\
+\int\frac{dT}{T} &= \int\lambda dt + C \\
+\ln|T| &= \lambda t + C \\
+|T| &= e^{C}e^{\lambda t} \\
+T &= \pm e^{C}e^{\lambda t} \\
+T &= G_n e^{\lambda t} \quad \text{($G_n = \pm e^{C}$)}
+\end{align*}
+Replacing $\lambda$ with the expression calculated above we see that $T_n(t)=G_n e^{\frac{-n^2\pi^2}{L^2}t}$. $\\$
+
+**Step 5:** Nonzero standing wave solutions: $\\$
+As seen in the previous two parts, we found that $X_n(x)=B_n\sin\left(\frac{n\pi}{L}x\right)$ and $T_n(t)=G_n e^{\frac{-n^2\pi^2}{L^2}t}$. Hence, letting $H_n=B_nG_n$ the countably infinite number of standing wave solutions to the above BVP are $w_n(x,t)=H_n\sin\left(\frac{n\pi}{L}x\right)e^{\frac{-n^2\pi^2}{L^2}t}$.Since the PDE is linear and homogeneous it has a superposition principle thus any linear combination of these above solutions is also a solution. Hence we can write the above solutions into one, thus $w(x,t)=\sum\limits^{\infty}_{n=1}H_n\sin\left(\frac{n\pi}{L}x\right)e^{\frac{-n^2\pi^2}{L^2}t}$. $\\$
+
+**Step 6:** Show new solution satisfies boundary conditions: $\\$
+Since $\sin(0)=\sin(n\pi)=0$, it follows that $w(0,t)=u(L,t)=0$, therefore the new $w(x,t)$ satisfies the boundary conditions. $\\$
+
+**Step 7:** Apply the initial condition: $\\$
+The first initial condition for this problem is
+\begin{align*}
+u(x,0) &= \begin{cases} -\frac{x}{L} & x \in \left[0,\frac{L}{2} \right] \\ 1-\frac{x}{L} & x \in \left(\frac{L}{2},L \right] \end{cases}.
+\end{align*}
+For now we will call this function $f(x)$. Applying the initial condition to $u(x,t)$, we can see that
+\begin{align*}
+u(x,0) &= \sum\limits^{\infty}_{n=1}H_n\sin\left(\frac{n\pi}{L}x\right)e^{\frac{-n^2\pi^2}{L^2}\cdot 0} \\
+&= \sum\limits^{\infty}_{n=1}H_n\sin\left(\frac{n\pi}{L}x\right)
+\end{align*}
+This above solution form to the IBVP implies that the coefficient $H_n$ is that of a Fourier sine series. Since the function we are looking at is on a non-symmetric interval, we must extend $f(x)$, so that it is on a symmetric interval. In particular, since we are looking for the Fourier sine series of $f(x)$, it turns out that we are looking at the odd extension of $f$, which in our case is defined as
+\begin{align*}
+f_{odd}(x) =
+\begin{cases}
+f(x) & x \in \left(0,1\right) \\
+-f(-x) & x \in \left(-1,0\right)
+\end{cases}
+\end{align*}
+We can now proceed in finding the Fourier series of $f_{odd}(x)$. $\\$
+
+**Step 7(i):** Solve for $H_n$: $\\$
+Since in our case $L=L$, $f(x)=f_{odd}(x)$ and $H_n=\frac{1}{L}\int^{L}_{-L}f(x)\cos\left(\frac{n\pi}{L}x\right)dx$, we have $H_n=\frac{1}{L}\int^{L}_{-L}f_{odd}(x)\sin\left(\frac{n\pi}{L} x\right)dx$. Since $f_{odd}(x)$ is an odd function, and $\sin(\frac{n\pi}{L} x)$ is an odd function, it follows that their product is an even function function, hence we can simplify the integral to $\frac{2}{L}\int^{L}_{0}f(x)\sin\left(\frac{n\pi}{L} x\right)dx$. Splitting the preceding integral based on the cases of $f(x)$ we can see that the integral becomes $\frac{2}{L}\int^{L/2}_{0}\frac{-x}{L}\sin\left(\frac{n\pi}{L} x\right)dx+\frac{2}{L}\int^{L}_{L/2}\left(1-\frac{x}{L}\right)\sin\left(\frac{n\pi}{L} x\right)dx$. Expanding the terms we arrive at the equivalent integral of $\frac{-2}{L^2}\int^{L/2}_{0}x\sin\left(\frac{n\pi}{L} x\right)dx-\frac{2}{L^2}\int^{L}_{L/2}x\sin\left(\frac{n\pi}{L} x\right)dx+\frac{2}{L}\int^{L}_{L/2}\sin\left(\frac{n\pi}{L} x\right)dx$. Lastly, this simplifies to $\frac{-2}{L^2}\int^{L}_{0}x\sin\left(\frac{n\pi}{L} x\right)dx+\frac{2}{L}\int^{L}_{L/2}\sin\left(\frac{n\pi}{L} x\right)dx$. Using integration by parts we see that $\int x\sin\left(\frac{n\pi}{L} x\right)dx=\frac{L^2\sin(n\pi x)}{n^2\pi^2}-\frac{Lx\cos(n\pi x)}{n\pi}$. We will finish solving this integral below.
+\begin{align*}
+H_n &= \frac{-2}{L^2}\int^{L}_{0}x\sin\left(\frac{n\pi}{L} x\right)dx+\frac{2}{L}\int^{L}_{L/2}\sin\left(\frac{n\pi}{L} x\right)dx \\
+&= \frac{-2}{L^2}\left[\frac{L^2\sin(n\pi x)}{n^2\pi^2}-\frac{Lx\cos(n\pi x)}{n\pi}\right]^{L}_{0}-\frac{2}{n\pi}\left[\cos\left(\frac{n\pi}{L}\right)\right]^{L}_{L/2} \\
+&= \frac{2\cos(n\pi)}{n\pi}-\frac{2\cos(n\pi)}{n\pi}+\frac{2\cos\left(\frac{n\pi}{2}\right)}{n\pi} \\
+&= \frac{2\cos\left(\frac{n\pi}{2}\right)}{n\pi}
+\end{align*}
+Hence as can be seen $H_n=\frac{2\cos\left(\frac{n\pi}{2}\right)}{n\pi}$. Thus the solution to the IBVP is $w(x,t)=\sum\limits^{\infty}_{n=1}\frac{2}{n\pi}\cos\left(\frac{n\pi}{2}\right)\sin\left(\frac{n\pi}{L}x\right)e^{\frac{-n^2\pi^2}{L^2}t}$.
+
+(\textbf{S5.6}) What must the solution of the original initial boundary value problem be?
+
+In general, one means of solving initial boundary value problems with nonhomogeneous boundary conditions is first to cook up a relatively simple function that both solves the PDE and satisfies the nonhomogeneous boundary conditions and then to subtract this function from the solution of the initial boundary value problem. In so doing, one reduces the problem of nonhomogeneous boundary conditions to one with homogeneous boundary conditions.
+
+As found above, the solution to the IBVP of $w(x,t)$ is $w(x,t)=\sum\limits^{\infty}_{n=1}\frac{2}{n\pi}\cos\left(\frac{n\pi}{2}\right)\sin\left(\frac{n\pi}{L}x\right)e^{\frac{-n^2\pi^2}{L^2}t}$. Furthermore, as defined in the second part of this problem, $w(x,t)=u(x,t)-v(x)$, hence we can see that $u(x,t)=w(x,t)+v(x)$. Therefore the solution of the original initial boundary value problem is $u(x,t)=\frac{x}{L}+\sum\limits^{\infty}_{n=1}\frac{2}{n\pi}\cos\left(\frac{n\pi}{2}\right)\sin\left(\frac{n\pi}{L}x\right)e^{\frac{-n^2\pi^2}{L^2}t}$.

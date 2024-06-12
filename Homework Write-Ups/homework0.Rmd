@@ -1,0 +1,117 @@
+---
+title: "AMATH 353 Homework 0"
+author: "Jaiden Atterbury, Student Number: 2028502"
+date: "2023-06-23"
+output: pdf_document
+---
+
+# 1 Introduction
+Hello everybody, and welcome to AMATH 353 this summer! Alex and I are hoping to have an excellent quarter with you all, but first we’d love to learn a bit more about each of you! This homework is meant to be a brief introduction for us to each of you and your mathematical background going into the quarter: the first part will deal with you as a person and the second part will deal with you as a mathematician. Without further ado:
+
+# 2 You!
+1. What is your name as listed on canvas?
+
+My name, as listed on canvas, is Jaiden Atterbury
+
+2. Would you like to be referred to by a different name in this classroom or in email communications with either the instructor or the TA? If so, what name would you prefer us to use for you and in what circumstances?
+
+I would not like to be referred to by a different name in this classroom or in email communications.
+
+3. What are your pronouns?
+
+My pronouns are He/Him.
+
+4. What year are you at UW, and what is your major?
+
+I am currently entering my fourth/senior year at UW, and my major is Statistics, in particular the data science track.
+
+5. What is something interesting you enjoy doing outside of your academic work?
+
+Some things that I enjoy doing outside of my academic work include: hiking, boxing, running, playing sports, going out with friends, and pretty much anything active that gets me outside of the house.
+
+6. Is there anything else outside that we should know about you?
+
+There isn't anything else outside of class that you should no about me, or nothing that comes to mind to be specific.
+
+# 3 Your Mathematics Background
+1. When someone asks you to think about waves in the context of mathematics, what do you think about?
+
+My first thought When someone asks you to think about waves in the context of mathematics is trigonometric functions such as sine and cosine. The reason for this coming to mind is that I have heard terms such as "sine wave" before.
+
+2. For the next questions, please rate from 1 to 5 your confidence in the following mathematical techniques, with 1 being you haven’t seen that technique before and 5 being most confident. Some of these are background material, many of them should be new to this course, but we will cover all of these in the class, and hopefully by the end of the course you will feel confident in all of them!
+
+  (a) Using mathematical plotting software to visualize a function (potentially of multiple variables)
+  
+4.5  
+
+  (b) Taking partial derivatives
+
+5
+
+  (c) Interpreting partial derivatives of a function physically
+
+4
+
+  (d) Using the multi-variable chain rule
+
+4
+
+  (e) Changing variables to simplify an equation
+
+2.5
+
+  (f) Solving linear ordinary differential equations
+
+5
+
+  (g) Using that a particular equation’s solutions may be put in a superposition
+
+2
+
+  (h) Transforming a PDE into an ODE by looking for traveling solutions.
+
+1
+
+  (i) Computing a linear dispersion relation
+
+1
+
+  (j) Using a linear dispersion relation to extract information about solutions to a PDE.
+
+1
+
+  (k) Solving boundary value problems for ODEs
+
+1
+
+  (l) Solving initial value problems for ODEs
+
+5
+
+  (m) Using separation of variables to solve an initial boundary value problem for PDEs
+
+1
+ 
+  (n) Expressing a PDE as a conservation law.
+
+1
+
+3. What is your favorite thing about mathematics?
+
+My favorite thing about mathematics is that it makes me a better problem solver in other areas of my life not just in the academic world. Mathematics has taught me how to critically think and analyze aspects of certain situations that help me find solutions to problems.
+
+4. What is something in math that you tend to struggle with?
+
+One thing about math that I tend to struggle with more than other things is setting up problems using physical laws. For example given a word problem describing a physical situation, I tend to struggle to set up this problem correctly.
+
+5. How much do you collaborate in math?
+
+I don't collaborate very much in math, I am very independent when it comes to solving problems. However, I do like checking my work and solutions with others to catch possible mistakes in my work.
+
+6. Is there anything in particular that we as instructors can do to help facilitate your learning of this material?
+
+One thing that you guys can do to help facilitate my learning of this material is to post associated readings from the textbook that correspond to the topics of lectures.
+
+7. If there’s anything else you think we should know about you and your background in mathematics, please put it here.
+
+I have taken a lot of math classes here at UW, however, I'm definitely quite rusty with a lot of concepts. Hence, when going over examples I'd appreciated if instead of assuming something is known, show all the steps to a derivation up to a reasonable point.

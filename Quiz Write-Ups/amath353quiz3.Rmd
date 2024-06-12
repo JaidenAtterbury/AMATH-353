@@ -1,0 +1,477 @@
+---
+title: "AMATH 353 Quiz 3"
+author: "Jaiden Atterbury"
+date: "2023-08-04"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Note: In this quiz, I briefly collaborated with Kai Poffenbarger, as well as Robert Lu. In this collaboration we mainly compared answers to see if what we were getting for our solutions were similar.
+
+# Component Skills
+
+1. Consider the following questions about the wave equation:
+\begin{align}
+u_{tt} &= c^2 u_{xx}, \quad c \neq 0. \label{eqn1}
+\end{align}  
+
+  (i) What change of variables simplifies the wave equation to $u_{\hat{x}\hat{t}} = 0$? (There is more than one answer.)
+
+One of the change of variables that simplifies the wave equation to $u_{\hat{x}\hat{t}} = 0$ is $\hat{x}=x-ct$ and $\hat{t}=x+ct$.
+
+We will use the change of variables $\hat{x}=x-ct$ and $\hat{t}=x+ct$, to show that the PDE $u_{tt}=c^2u_{xx}$ results in $u_{\hat{x}\hat{t}}=0$ after the change of variables. We will start off by finding $u_t$ using the multivariate chain rule.
+\begin{align*}
+u_t(x,t) &= \frac{\partial}{\partial t} u(x,t) \\
+&= \frac{\partial u}{\partial \hat{x}}\frac{\partial \hat{x}}{\partial t}+\frac{\partial u}{\partial \hat{t}}\frac{\partial \hat{t}}{\partial t} \\
+&= u_{\hat{x}}(-c)+u_{\hat{t}}(c) \\
+&= -cu_{\hat{x}}+cu_{\hat{t}}
+\end{align*}
+As seen above, $u_t(x,t)=-cu_{\hat{x}}(x,t)+cu_{\hat{t}}(x,t)$. We will now use the multivariate chain rule to find $u_x$.
+\begin{align*}
+u_x(x,t) &= \frac{\partial}{\partial x} u(x,t) \\
+&= \frac{\partial u}{\partial \hat{x}}\frac{\partial \hat{x}}{\partial x}+\frac{\partial u}{\partial \hat{t}}\frac{\partial \hat{t}}{\partial x} \\
+&= u_{\hat{x}}(1)+u_{\hat{t}}(1) \\
+&= u_{\hat{x}}+u_{\hat{t}}
+\end{align*}
+As seen above, $u_x(x,t)=Au_{\hat{x}}(x,t)+Cu_{\hat{t}}(x,t)$. We will now use the multivariate chain rule to find $u_{tt}$.
+\begin{align*}
+u_{tt}(x,t) &= \frac{\partial}{\partial t} \left(-cu_{\hat{x}}+cu_{\hat{t}}\right) \\
+&= -c\left(\frac{\partial}{\partial\hat{x}}u_{\hat{x}}\frac{\partial\hat{x}}{\partial t}+\frac{\partial}{\partial\hat{t}}u_{\hat{x}}\frac{\partial\hat{t}}{\partial t}\right)+c\left(\frac{\partial}{\partial\hat{x}}u_{\hat{t}}\frac{\partial\hat{x}}{\partial t}+\frac{\partial}{\partial\hat{t}}u_{\hat{t}}\frac{\partial\hat{t}}{\partial t}\right) \\
+&= -c\left(u_{\hat{x}\hat{x}}(-c)+u_{\hat{x}\hat{t}}(c)\right)+c\left(u_{\hat{x}\hat{t}}(-c)+u_{\hat{t}\hat{t}}(c)\right) \\
+&= c^2u_{\hat{x}\hat{x}}-2c^2u_{\hat{x}\hat{t}}+c^2u_{\hat{t}\hat{t}}
+\end{align*}
+As seen above, $u_{tt}=c^2u_{\hat{x}\hat{x}}(x,t)-2c^2u_{\hat{x}\hat{t}}(x,t)+c^2u_{\hat{t}\hat{t}}(x,t)$. We will now use the multivariate chain rule to find $u_{xx}$.
+\begin{align*}
+u_{xx}(x,t) &= \frac{\partial}{\partial x} \left(u_{\hat{x}}+u_{\hat{t}}\right) \\
+&= \left(\frac{\partial}{\partial\hat{x}}u_{\hat{x}}\frac{\partial\hat{x}}{\partial x}+\frac{\partial}{\partial\hat{t}}u_{\hat{x}}\frac{\partial\hat{t}}{\partial x}\right)+c\left(\frac{\partial}{\partial\hat{x}}u_{\hat{t}}\frac{\partial\hat{x}}{\partial x}+\frac{\partial}{\partial\hat{t}}u_{\hat{t}}\frac{\partial\hat{t}}{\partial x}\right) \\
+&= \left(u_{\hat{x}\hat{x}}(1)+u_{\hat{x}\hat{t}}(1)\right)+\left(u_{\hat{x}\hat{t}}(1)+u_{\hat{t}\hat{t}}(1)\right) \\
+&= u_{\hat{x}\hat{x}}+2u_{\hat{x}\hat{t}}+u_{\hat{t}\hat{t}}
+\end{align*}
+As seen above, $u_{xx}=u_{\hat{x}\hat{x}}(x,t)+2u_{\hat{x}\hat{t}}(x,t)+u_{\hat{t}\hat{t}}(x,t)$. We will now plug these expressions into our PDE and simplify.
+\begin{align*}
+c^2u_{\hat{x}\hat{x}}-2c^2u_{\hat{x}\hat{t}}+c^2u_{\hat{t}\hat{t}} &= c^2u_{\hat{x}\hat{x}}+2c^2u_{\hat{x}\hat{t}}+c^2u_{\hat{t}\hat{t}} \\
+-4c^2u_{\hat{x}\hat{t}} &= 0 \\
+u_{\hat{x}\hat{t}} &= 0 \\
+\end{align*}
+Thus we have shown that the change of variables $\hat{x}=x-ct$ and $\hat{t}=x+ct$ results in $u_{\hat{x}\hat{t}}=0$ once plugged into the PDE.
+
+In general, the change of variables $\hat{x}=x\pm ct$ and $\hat{t} = x \mp ct$ simplifies the wave equation to $u_{\hat{x}\hat{t}} = 0$.
+
+  (ii) While solving a \textit{gnarly} initial value problem for \eqref{eqn1} over $\mathbb{R}$, student Smar T. Pants obtained the following solution:
+\begin{align*}
+u(x,t) &= \sqrt{\left(1 + e^{\cos\left(\frac{\tan^{-1}(x-2ct)}{1+sech(x-2ct)}\right)}\right)}.
+\end{align*}
+Is Smar correct? Justify your answer in a sentence or two.
+
+The general solution of the wave equation, as computed in lecture, is $u(x,t)=F(x-ct)+G(x+ct)$. Where $F$ and $G$ are arbitrary functions to be determined by initial conditions. As can be seen from, $u(x,t) = \sqrt{\left(1 + e^{\cos\left(\frac{\tan^{-1}(x-2ct)}{1+sech(x-2ct)}\right)}\right)}$, $G \equiv 0$. However, we notice that the function $F$, can be written notationally as $F(x-2ct)$. No matter what we do, we cannot get $F$ into the form $F(x-ct)$, hence Smar is incorrect and the above function is not a solution of an IVP of the wave equation.
+
+  (iii) One can readily show $u(x,t) = 2\cosh(x)\cosh(ct)$ is a solution of the wave equation (but you don't have to). Find $F$ and $G$ such that $u(x,t) = F(x-ct)+G(x+ct)$. 
+\textit{Hint}: Use the definition of $\cosh$ and properties of exponentials.
+
+Since $u(x,t) = 2\cosh(x)\cosh(ct)$ is a solution of the wave equation, it can be rewritten in the form $u(x,t) = F(x-ct)+G(x+ct)$. We will find $F$ and $G$ for our particular $u(x,t)$ using the definition of $\cosh$ and properties of exponentials. Notice that by definition $\cosh(x)=\frac{e^x+e^{-x}}{2}$. We will use this fact to simplify the solution and derive $F$ and $G$ below.
+\begin{align*}
+u(x,t) &= 2\cosh(x)\cosh(ct) \\
+&= 2\left(\frac{e^{x}+e^{-x}}{2}\right)\left(\frac{e^{ct}+e^{-ct}}{2}\right) \\
+&= \left(e^{x}+e^{-x}\right)\left(\frac{e^{ct}+e^{-ct}}{2}\right) \\
+&= \frac{1}{2}\left(e^{x+ct}+e^{x-ct}+e^{-x+ct}+e^{-x-ct}\right) \\
+&= \frac{1}{2}\left(e^{x+ct}+e^{x-ct}+e^{-(x-ct)}+e^{-(x+ct)}\right) \\
+&= \frac{e^{x-ct}+e^{-(x-ct)}}{2} + \frac{e^{x+ct}+e^{-(x+ct)}}{2} \\
+&= \cosh(x-ct) + \cosh(x+ct)
+\end{align*}
+Hence, as computed above, $F(x-ct)=\cosh(x-ct)$, and $G(x-ct)=\cosh(x+ct)$.
+
+  (iv) True or false: there exists a real-valued constant $A$ such that $u_{tt} = -c^2 u_{xx}$ becomes $u_{\hat{t} \hat{t}} = c^2 u_{\hat{x} \hat{x}}$ under the change of variables $\hat{x} = Ax$ and $\hat{t} = t$. Justify your answer with a brief calculation.
+
+In this problem, we will use the change of variables $\hat{x}=Ax$ and $\hat{t}=t$ in order to find the real-valued choice for the constant $A$ that turns $u_{tt}=-c^2u_{xx}$ into $u_{\hat{t}\hat{t}}=c^2u_{\hat{x}\hat{x}}$. We will first use the multivariate chain rule to find $u_t$.
+\begin{align*}
+u_t(x,t) &= \frac{\partial}{\partial t} u(x,t) \\
+&= \frac{\partial u}{\partial \hat{x}}\frac{\partial \hat{x}}{\partial t}+\frac{\partial u}{\partial \hat{t}}\frac{\partial \hat{t}}{\partial t} \\
+&= u_{\hat{x}}(0)+u_{\hat{t}}(1) \\
+&= u_{\hat{t}}
+\end{align*}
+As seen above, $u_t(x,t)=u_{\hat{t}}(x,t)$. We will now use the multivariate chain rule to find $u_x$.
+\begin{align*}
+u_x(x,t) &= \frac{\partial}{\partial x} u(x,t) \\
+&= \frac{\partial u}{ \partial \hat{x}}\frac{\partial \hat{x}}{\partial x}+\frac{\partial u}{\partial \hat{t}}\frac{\partial \hat{t}}{\partial x} \\
+&= u_{\hat{x}}(A)+u_{\hat{t}}(0) \\
+&= Au_{\hat{x}}
+\end{align*}
+As seen above, $u_x(x,t)=Au_{\hat{x}}(x,t)$. We will now use the multivariate chain rule to find $u_{tt}$.
+\begin{align*}
+u_{tt}(x,t) &= \frac{\partial}{\partial t} \left(u_{\hat{t}}\right) \\
+&= \frac{\partial}{\partial\hat{x}}u_{\hat{t}}\frac{\partial\hat{x}}{\partial t}+\frac{\partial}{\partial\hat{t}}u_{\hat{t}}\frac{\partial\hat{t}}{\partial t} \\
+&= u_{\hat{x}\hat{t}}(0)+u_{\hat{t}\hat{t}}(1) \\
+&= u_{\hat{t}\hat{t}}
+\end{align*}
+As seen above, $u_{tt}=u_{\hat{t}\hat{t}}(x,t)$. We will now use the multivariate chain rule to find $u_{xx}$.
+\begin{align*}
+u_{xx}(x,t) &= \frac{\partial}{\partial x} \left(Au_{\hat{x}}\right) \\
+&= A\left(\frac{\partial}{\partial\hat{x}}u_{\hat{x}}\frac{\partial\hat{x}}{\partial x}+\frac{\partial}{\partial\hat{t}}u_{\hat{x}}\frac{\partial\hat{t}}{\partial x}\right) \\
+&= Au_{\hat{x}\hat{x}}(A)+Au_{\hat{t}\hat{x}}(0) \\
+&= A^2u_{\hat{x}\hat{x}}
+\end{align*}
+As seen above, $u_{xx}=A^2u_{\hat{x}\hat{x}}(x,t)$. With these expressions found, we can now see that we need $-c^2A^2=c^2$. Below we will find the value(s) of $A$ that make this happen.
+\begin{align*}
+-c^2A^2 &= c^2 \\
+-A^2 &= 1 \\
+A^2 &= -1 \\
+A &= \pm \sqrt{-1}
+\end{align*}
+However, notice that $A = \pm \sqrt{-1}$ is a non real-valued constant, thus there does not exist a real-valued constant $A$ such that the change of variables $\hat{x}=Ax$ and $\hat{t}=t$ turns $u_{tt}=-c^2u_{xx}$ into $u_{\hat{t}\hat{t}}=c^2u_{\hat{x}\hat{x}}$.
+
+  (v) True or false: if $u(x,t)$ solves \eqref{eqn1} and is infinitely differentiable with respect to $x$ and $t$ (so that one can interchange the order of mixed partial derivatives), then $u_t$ solves \eqref{eqn1}. \textit{Hint}: What operations can you apply to both sides of \eqref{eqn1}? 
+
+Since $u(x,t)$ solves \eqref{eqn1}, the wave equation, it follows that $u_{tt}=c^2u_{xx}$. Taking the partial derivative with respect to $t$ on both sides of this equation leads to the relation $u_{ttt}=c^2u_{txx}$. Furthermore, if $u_t(x,t)$ is a solution of the wave equation \eqref{eqn1}, then it would satisfy $(u_t)_{tt}=c^2(u_t)_{xx} \implies u_{ttt}=c^2u_{xxt}$. Lastly, since $u(x,t)$  is infinitely differentiable with respect to $x$ and $t$, so that we can interchange the order of mixed partial derivatives, it follows that assuming $u_t$ is a solution leads to the following equation $u_{ttt}=c^2u_{txx}$. As can be seen, since we achieved the same form from taking the derivative with respect to $t$ of $u(x,t)$ as we did from assuming $u_t$ was a solution, it follows that if $u(x,t)$ solves \eqref{eqn1} and is infinitely differentiable with respect to $x$ and $t$, then $u_t$ solves \eqref{eqn1}.
+
+2. Consider the following initial value problem over $\mathbb{R}$:
+\begin{align}
+\begin{cases} u_{tt} = 4 u_{xx} \\ u(x,0) = 2sech^2(x)\\
+u_t(x,0) =-\frac{4}{1+x^2}  \end{cases}. \label{eqn2}
+\end{align}
+
+  (i) Solve \eqref{eqn2}.
+  
+In order to find $u(x,t)$ for the above initial value problem, we must use d'Alembert's formula which states that $u(x,t)=\frac{1}{2}(\phi(x-ct)+\phi(x+ct))+\frac{1}{2c}\int\limits^{x+ct}_{x-ct}\psi(s)ds$, where $u(x,0)=\phi(x)$ and $u_t(x,0)=\psi(x)$. In our case $c=2$, and if we let $\phi(x)=2sech^2(x)$, and $\psi(x)=\frac{-4}{1+x^2}$, then d'Alembert's formula gives us the following:
+\begin{align*}
+u(x,t) &= \frac{1}{2}(\phi(x-ct)+\phi(x+ct))+\frac{1}{2c}\int\limits^{x+ct}_{x-ct}\psi(s)ds \\
+&= \frac{1}{2}(\phi(x-2t)+\phi(x+2t))+\frac{1}{4}\int\limits^{x+2t}_{x-2t}\psi(s)ds \\
+&= \frac{1}{2}(2sech^2(x-2t)+2sech^2(x+2t))+\frac{1}{4}\int\limits^{x+2t}_{x-2t}\frac{-4}{1+s^2}ds \\
+&= sech^2(x-2t)+sech^2(x+2t)-\left[\arctan(s)\right]^{x+2t}_{x-2t} \\
+&= sech^2(x-2t)+sech^2(x+2t)-\arctan(x+2t)+\arctan(x-2t)
+\end{align*}
+Thus, the solution to the initial value problem using d'Alembert's formula is $u(x,t)=sech^2(x-2t)+sech^2(x+2t)-\arctan(x+2t)+\arctan(x-2t)$.
+  
+  (ii) Show that your solution from (i) satisfies $u_x(0,t) = 0$ for all $t$. Effectively, you have solved the following initial boundary value problem on $[0,\infty)$:
+\begin{align*}
+\begin{cases} u_{tt} = 4 u_{xx} \\ u_x(0,t) = 0 \\u(x,0) = 2 sech^2(x)\\
+u_t(x,0) =-\frac{4}{1+x^2}
+\end{cases}
+\end{align*}
+
+Our first step in showing that our solution from (i) satisfies $u_x(0,t) = 0$ for all $t$ is to take the partial derivative with respect to $x$ of the solution of the IVP above. This turns out to be: $u_x(x,t)=-2sech^2(x-2t)\tanh(x-2t)-2sech^2(x+2t)\tanh(x+2t)-\frac{1}{1+(x+2t)^2}+\frac{1}{1+(x-2t)^2}$. Hence evaluating this expression at $t=0$ leads to the following result.
+\begin{align*}
+u_x(x,0) &= \left[-2sech^2(x-2t)\tanh(x-2t)-2sech^2(x+2t)\tanh(x+2t)-\frac{1}{1+(x+2t)^2}+\frac{1}{1+(x-2t)^2}\right]_{t=0} \\
+&= -2sech^2(0-2t)\tanh(0-2t)-2sech^2(0+2t)\tanh(0+2t)-\frac{1}{1+(0+2t)^2}+\frac{1}{1+(0-2t)^2} \\
+&= -2sech^2(-2t)\tanh(-2t)-2sech^2(2t)\tanh(2t)-\frac{1}{1+(2t)^2}+\frac{1}{1+(-2t)^2} \\
+&= -2sech^2(-2t)\tanh(-2t)-2sech^2(2t)\tanh(2t)-\frac{1}{1+4t^2}+\frac{1}{1+4t^2} \\
+&= -2sech^2(-2t)\tanh(-2t)-2sech^2(2t)\tanh(2t)
+\end{align*}
+Since $sech(x)$ is even and $\tanh(x)$ is odd, it follows that
+\begin{align*}
+u_x(x,0) &= -2sech^2(-2t)\tanh(-2t)-2sech^2(2t)\tanh(2t) \\
+&= 2sech^2(2t)\tanh(2t)-2sech^2(2t)\tanh(2t) \\
+&= 0
+\end{align*}
+Hence we have shown that our solution from (i) satisfies $u_x(0,t) = 0$ for all $t$. Effectively, we have solved the above initial boundary value problem on $[0,\infty)$.
+
+3. Consider the following heat equation with damping:
+\begin{align}
+u_t + u &= u_{xx}. \label{eqn3}
+\end{align}
+
+  (i) Let $u(x,t) = X(x)T(t)$ be a (real-valued) standing wave solution of \eqref{eqn3}. Show that $X(x)$ and $T(t)$ satisfy the following ODE's:
+\begin{align*}
+X''(x) &= \lambda X(x) \\
+T'(t) &= (\lambda - 1)T(t),
+\end{align*}
+where $\lambda$ is an arbitrary (real) constant.
+
+Let $u(x,t)=X(x)T(t)$ be a standing wave solution of $u_t + u = u_{xx}$, we will use separation of variables to obtain ODE's for $X(x)$ and $T(t)$ letting $\lambda$ denote our separation constant. This process is shown below.
+\begin{align*}
+u_{t} + u &= u_{xx} \\
+\left(X(x)T(t)\right)_{t} + X(x)T(t) &= \left(X(x)T(t)\right)_{xx} \\
+X(x)T'(t) + X(x)T(t) &= X''(x)T(t) \\
+\frac{T'(t)+T(t)}{T(t)} &= \frac{X''(x)}{X(x)} = \lambda
+\end{align*}
+The last line from the above separation of variables process gives us ODE's for $X(x)$ and $T(t)$. These ODEs are $T'(t) + T(t) = \lambda T(t) \implies T'(t) = (\lambda-1) T(t)$ and $X''(x) = \lambda X(x)$. Hence we have show that $X(x)$ and $T(t)$ satisfy the correct ODE's.
+
+  (ii) Find all the (real-valued) standing wave solutions of \eqref{eqn3}. (You will need to consider different cases for $\lambda$. The $X(x)$ equation will tell you what these cases are.)
+
+To find all the (real-valued) standing wave solutions of \eqref{eqn3}, we will consider different cases for $\lambda$. The $X(x)$ equation tells us what these cases are. In particular, since the ODE for $X(x)$ is $X''(x) = \lambda X(x)$, we can see that the cases for lambda are (i) $\lambda <0$, (ii) $\lambda = 0$, and (iii) $\lambda > 0$. In each of these cases we will solve the pair of ODEs for $X(x)$ and $T(t)$ and then combine the two resulting solutions to obtain the standing wave solution.
+
+ - $\bf{Case \ 1, \ \lambda < 0}$:
+
+In this case our $X(x)$ ODE is $X''(x)-\lambda X(x)=0$ with $\lambda < 0$. Since this is a linear second order homogeneous ODE with constant coefficients, it takes one of three forms. In particular, the discriminant of the characteristic polynomial is $\Delta = -4(1)(-\lambda) = 4\lambda$. However, $\lambda < 0 \implies 4\lambda < 0$. Hence the resulting polynomial has complex conjugate roots of the form $\sigma\pm i\omega$, where $\sigma = \frac{0}{2}=0$ and $\omega = \frac{\sqrt{|4\lambda|}}{2} = \frac{\sqrt{-4\lambda}}{2} = \sqrt{-\lambda}$. The general solution of ODEs of this form is $f(x)=c_1e^{\sigma x}\cos(\omega x)+c_2e^{\sigma x}\sin(\omega x)$. Hence in our case, $X(x)=A\cos\left(x\sqrt{-\lambda}\right)+B\sin\left(x\sqrt{-\lambda}\right)$.
+
+Furthermore, in this case our $T(t)$ ODE is $T'(t)=(\lambda-1)T(t)$. We will solve this separable ODE below.
+\begin{align*}
+T'(t) &= (\lambda-1) T(t) \\
+\int\frac{T'(t)dt}{T(t)} &= \int(\lambda-1) dt + C_1 \\
+\int\frac{dT}{T} &= \int(\lambda-1) dt + C_1 \\
+\ln|T| &= (\lambda-1) t + C_1 \\
+|T| &= e^{C_1}e^{(\lambda-1) t} \\
+T &= \pm e^{C_1}e^{(\lambda-1) t} \\
+T &= C e^{(\lambda-1) t} \quad \text{($C = \pm e^{C_1}$)}
+\end{align*}
+Hence, $T(t)=C e^{(\lambda-1) t}$.
+
+Lastly, since $u(x,t)=X(x)T(t)$, we see that the real-valued standing wave solutions in this case are $u(x,t)=\left(A\cos\left(x\sqrt{-\lambda}\right)+B\sin\left(x\sqrt{-\lambda}\right)\right)\left(C e^{(\lambda-1) t}\right)$
+
+  - $\bf{Case \ 2, \ \lambda = 0}$:
+  
+In this case our $X(x)$ ODE is $X''(x)=0$. Since this is a linear second order homogeneous ODE with constant coefficients, it takes one of three forms. In particular, the discriminant of the characteristic polynomial is $\Delta =  0$. Hence the resulting polynomial has one repeated root of the form $r = \frac{0}{2} = 0$. The general solution of ODEs of this form is $f(x)=c_1e^{r x}+c_2xe^{r x}$. Hence in our case, $X(x)=Dx+E$. 
+
+Furthermore, in this case our $T(t)$ ODE is $T'(t)=-T(t)$. We will solve this separable ODE below.
+\begin{align*}
+T'(t) &= -T(t) \\
+\int\frac{T'(t)dt}{T(t)} &= -\int dt + C_2 \\
+\int\frac{dT}{T} &= -\int dt + C_2 \\
+\ln|T| &= -t + C_2 \\
+|T| &= e^{C_2}e^{-t} \\
+T &= \pm e^{C_2}e^{-t} \\
+T &= F e^{-t} \quad \text{($F = \pm e^{C_2}$)}
+\end{align*}
+Hence, $T(t)=F e^{-t}$.
+
+Lastly, since $u(x,t)=X(x)T(t)$, we see that the real-valued standing wave solutions in this case are $u(x,t)=\left(Dx+E\right)\left(F e^{-t}\right)$.
+
+  - $\bf{Case \ 3, \ \lambda > 0}$:
+
+In this case our $X(x)$ ODE is $X''(x)-\lambda X(x)=0$ with $\lambda > 0$. Since this is a linear second order homogeneous ODE with constant coefficients, it takes one of three forms. In particular, the discriminant of the characteristic polynomial is $\Delta = -4(1)(-\lambda) = 4\lambda$. However, $\lambda > 0 \implies 4\lambda > 0$. Hence the resulting polynomial has two real roots of the form $r_{1,2}=\frac{\pm\sqrt{4\lambda}}{2} = \pm\sqrt\lambda$. The general solution of ODEs of this form is $f(x)=c_1e^{r_1 x}+c_2e^{r_2 x}$. Hence in our case, $X(x)=Ge^{x\sqrt{\lambda}}+He^{-x\sqrt{\lambda}}$.
+
+Furthermore, in this case our $T(t)$ ODE is $T'(t)=(\lambda-1)T(t)$. We will solve this separable ODE below.
+\begin{align*}
+T'(t) &= (\lambda-1) T(t) \\
+\int\frac{T'(t)dt}{T(t)} &= \int(\lambda-1) dt + C_3 \\
+\int\frac{dT}{T} &= \int(\lambda-1) dt + C_3 \\
+\ln|T| &= (\lambda-1) t + C_3 \\
+|T| &= e^{C_3}e^{(\lambda-1) t} \\
+T &= \pm e^{C_3}e^{(\lambda-1) t} \\
+T &= I e^{(\lambda-1) t} \quad \text{($I = \pm e^{C_3}$)}
+\end{align*}
+Hence, $T(t)=C e^{(\lambda-1) t}$.
+
+Lastly, since $u(x,t)=X(x)T(t)$, we see that the real-valued standing wave solutions in this case are $u(x,t)=\left(Ge^{x\sqrt{\lambda}}+He^{-x\sqrt{\lambda}}\right)\left(I e^{(\lambda-1) t}\right)$
+
+Along with these three standing wave solution forms for the three different cases of $\lambda$, it follows that the trivial solutions $u(x,t)=0$ is also a real-valued standing wave solution. Note that in the above cases $A, B, C, D, E, F, G, H$ and $I$ are arbitrary constants in $\mathbb{R}$.
+
+# Multi-Step Problem
+
+A levy is a wall built to protect low-lying areas from flooding by a neighboring body of water. Suppose we have a body of water (say 10 feet deep, for concreteness) for $x<0$ with a levy situated at $x=0$ and dry land for $x>0$. If $u(x,t)$ represents the depth of the water (in feet) at a displacement $x$ from the levy (in hundreds of feet) at time $t$ (in minutes), then we can approximate our set-up by
+\begin{align}
+u(x,0) &= \begin{cases} 10 & x<0\\ 0 &x>0 \end{cases}. \label{eqn4} \end{align}
+Suppose the levy fails at $t=0$ so that the initial tendency of $u(x,t)$ is
+\begin{align}
+u_t(x,0) &= \begin{cases} -4 & -1<x<0 \\ 4 &0<x<1 \\ 0 & |x|>1 \end{cases}. \label{eqn5} \end{align}
+Suppose $u(x,t)$ for $t\geq0$ is governed by the wave equation
+\begin{align}
+u_{tt} &= 4 u_{xx}.\label{eqn6}
+\end{align}
+
+  (i) Smar T. Pants owns a home located at $x=4$. When will their home begin to flood? (That is, when will the interval of nonzero initial conditions $-\infty<x_0<1$ first reach $x=4$?)
+
+Since characteristic lines of the domain of influence start at a $t$ value of $0$, we are only looking at rightward propagating lines, which are lines with positive slope. In particular, these lines take the form $t=\frac{1}{c}(x-\tilde{x})+\tilde{t}$. Since $x=4$ is to the right of the right-most characteristic line, we only need to find the equation of this characteristic. With that said, the right-most characteristic line, which has an x-intercept of $x_0=1$, has an equation $t=\frac{1}{2}(x-1)$, hence it arrives at $x=4$ at $t=\frac{1}{2}(4-1)=\frac{3}{2}$. Therefore Smar T. Pants' home will begin to flood at $t=\frac{3}{2}$ minutes.
+
+  (ii) Will the water reach Smar's friend at $x=9$ by $t=3$? (That is, does the interval of nonzero initial conditions $-\infty<x_0<1$ influence the depth of the water at $x=9$ and $t=3$?)
+
+In order to know what interval of initial conditions we must consider if Smar's friend is located at $(x=9,t=3)$, we must find the domain of dependence of the point $(\tilde{x},\tilde{t})=(9,3)$. The domain of dependence of a point $(\tilde{x},\tilde{t})$ is the interval $\left[\tilde{x}-c\tilde{t},\tilde{x}+c\tilde{t}\right]$ such that the value of $u(\tilde{x},\tilde{t})$ only depends on $\phi(x_0)$ and $\psi(x_0)$ for $x_0$ in the aforementioned interval.
+
+Thus in our given scenario, $c=2$ and $(\tilde{x},\tilde{t})=(9,3)$. Hence the domain of dependence of $(\tilde{x},\tilde{t})=(9,3)$ is $\left[\tilde{x}-c\tilde{t},\tilde{x}+c\tilde{t}\right]=[9-2(3),9+2(3)]=[3,15]$. Therefore we must consider initial conditions $\phi(x_0)$ and $\psi(x_0)$ for $x_0\in[3,15]$.
+  
+Since $-\infty<x_0<1$ is not a subset of the interval of dependence of $(\tilde{x},\tilde{t})=(9,3)$, namely $-\infty<x_0<1\not\subset[3,15]$, the initial conditions at $-\infty<x_0<1$, $\phi(x_0)$ and $\psi(x_0)$, will not influence the value of $u$ at $(x=9,t=3)$. Hence we know that the water won't reach Smar's friend at $x=9$ by $t=3$.
+
+  (iii) Construct the characteristic diagram of the initial value problem given by \eqref{eqn4}-\eqref{eqn6}. Be sure to include expressions for $u$ in each region.
+
+In order to create a characteristic diagram, we need to compute the domains of influence of the intervals $x_0<-1$, $-1<x_0<0$, $0<x_0<1$, and $x_0>1$. These intervals correspond to the four cases over which $u(x_0,0)$ and $u_t(x_0, 0)$ is defined.
+
+To find the domain of influence of the interval $x_0<-1$, we must find the outward propagating characteristic at the point $x_0=-1$. This characteristic must be $t=\frac{1}{2}(x+1)$, since this line passes through $x=-1$ and has slope $1/c = 1/2$ (since $c=2$). The region bounded by the x-axis and to the left of $t=\frac{1}{2}(x+1)$ is the domain of influence of the interval $x_0<-1$.
+
+To find the domain of influence of the interval $-1<x_0<0$, we must find the outward propagating characteristics at the points $x_0=-1$ and $x_0=0$. The outward propagating characteristic at $x_0=-1$ is $t=-\frac{1}{2}(x+1)$, since this line passes through $x=-1$ with slope $-1/c = -1/2$ (since $c=2$). The outward propagating characteristic at the point $x_0=0$ is $t=\frac{1}{2}x$, since this line passes through the origin and has slope $1/c = 1/2$ (since $c=2$). The region bounded between the x-axis, the line $t=-\frac{1}{2}(x+1)$, and the line $t=\frac{1}{2}x$ is the domain of influence of the interval $-1<x_0<0$.
+
+To find the domain of influence of the interval $0<x_0<1$, we must find the outward propagating characteristics at the points $x_0=0$ and $x_0=1$. The outward propagating characteristic at $x_0=0$ is $t=-\frac{1}{2}x$, since this line passes through the origin with slope $-1/c = -1/2$ (since $c=2$). The outward propagating characteristic at the point $x_0=1$ is $t=\frac{1}{2}(x-1)$, since this line passes through $x=1$ and has slope $1/c = 1/2$ (since $c=2$). The region bounded between the x-axis, the line $t=\frac{1}{2}(x-1)$, and the line $t=-\frac{1}{2}x$ is the domain of influence of the interval $0<x_0<1$.
+
+To find the domain of influence of the interval $x_0>1$, we must find the outward propagating characteristic at the point $x_0=1$. This characteristic must be $t=-\frac{1}{2}(x-1)$, since this line passes through $x=1$ and has slope $-1/c = -1/2$ (since $c=2$). The region bounded by the x-axis and to the right of $t=-\frac{1}{2}(x-1)$ is the domain of influence of the interval $x_0>1$.
+
+Plotting each of the outward propagating characteristics in the $xt$-plane gives us the
+characteristic diagram below.
+
+```{r echo=F, out.width = "90%", fig.align = "center"}
+knitr::include_graphics("charplot2.png")
+```
+
+To obtain a graphical solution to the initial value problem presented above, we will now determine the value of $u$ in each region.
+
+ - **Region 1.**
+  
+Let $(\tilde{x},\tilde{t})$ be a point in this region. d'Alembert's formula tells us
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-2\tilde{t})+\phi(\tilde{x}+2\tilde{t})\right)+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{\tilde{x}-2\tilde{t}}\psi(x)dx.
+\end{align*}
+In this region, $\tilde{x}\pm2\tilde{t}<-1$. We have $\phi(x_0)\equiv10$ and $\psi(x_0)\equiv0$ for $x_0<-1$. Therefore,
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-2\tilde{t})+\phi(\tilde{x}+2\tilde{t})\right)+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{\tilde{x}-2\tilde{t}}\psi(x)dx \\
+&= \frac{1}{2}[(10)+(10)]+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{\tilde{x}-2\tilde{t}}(0)dx \\
+&= 10.
+\end{align*}
+For any $(\tilde{x},\tilde{t})$ in this region, we have $u(\tilde{x},\tilde{t})\equiv10$.
+
+  - **Region 2.**
+  
+Let $(\tilde{x},\tilde{t})$ be a point in this region. d'Alembert's formula tells us
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-2\tilde{t})+\phi(\tilde{x}+2\tilde{t})\right)+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{\tilde{x}-2\tilde{t}}\psi(x)dx.
+\end{align*}
+In this region, $\tilde{x}-2\tilde{t}<-1$ and $-1<\tilde{x}+2\tilde{t}<0$. We have $\phi(x_0)\equiv10$ and $\psi(x_0)\equiv0$ for $x_0<-1$, and $\phi(x_0)\equiv10$ and $\psi(x_0)\equiv-4$ for $-1<x_0<0$. Therefore,
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-2\tilde{t})+\phi(\tilde{x}+2\tilde{t})\right)+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{\tilde{x}-2\tilde{t}}\psi(x)dx \\
+&= \frac{1}{2}[(10)+(10)]+\frac{1}{4}\int\limits^{-1}_{\tilde{x}-2\tilde{t}} (0) dx+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{-1} (-4) dx \\
+&= 10 - \tilde{x} - 2\tilde{t} - 1 \\
+&= 9 - \tilde{x} - 2\tilde{t}
+\end{align*}
+For any $(\tilde{x},\tilde{t})$ in this region, we have $u(\tilde{x},\tilde{t})= 9 - \tilde{x} - 2\tilde{t}$.
+
+  - **Region 3.**
+  
+Let $(\tilde{x},\tilde{t})$ be a point in this region. d'Alembert's formula tells us
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-2\tilde{t})+\phi(\tilde{x}+2\tilde{t})\right)+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{\tilde{x}-2\tilde{t}}\psi(x)dx.
+\end{align*}
+In this region, $-1<\tilde{x}\pm2\tilde{t}<0$. We have $\phi(x_0)\equiv10$ and $\psi(x_0)\equiv-4$ for $-1<x_0<0$. Therefore,
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-2\tilde{t})+\phi(\tilde{x}+2\tilde{t})\right)+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{\tilde{x}-2\tilde{t}}\psi(x)dx \\
+&= \frac{1}{2}[(10)+(10)]+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{\tilde{x}-2\tilde{t}}(-4)dx \\
+&= 10 - (\tilde{x} + 2\tilde{t} - \tilde{x} + 2\tilde{t}) \\
+&= 10 - 4\tilde{t}
+\end{align*}
+For any $(\tilde{x},\tilde{t})$ in this region, we have $u(\tilde{x},\tilde{t})=10 - 4\tilde{t}$.
+
+  - **Region 4.**
+  
+Let $(\tilde{x},\tilde{t})$ be a point in this region. d'Alembert's formula tells us
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-2\tilde{t})+\phi(\tilde{x}+2\tilde{t})\right)+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{\tilde{x}-2\tilde{t}}\psi(x)dx.
+\end{align*}
+In this region, $\tilde{x}-2\tilde{t}<-1$ and $0<\tilde{x}+2\tilde{t}<1$. We have $\phi(x_0)\equiv10$ and $\psi(x_0)\equiv0$ for $x_0<-1$, and $\phi(x_0)\equiv0$ and $\psi(x_0)\equiv4$ for $0<x_0<1$. Therefore,
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-2\tilde{t})+\phi(\tilde{x}+2\tilde{t})\right)+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{\tilde{x}-2\tilde{t}}\psi(x)dx \\
+&= \frac{1}{2}[(10)+(0)]+\frac{1}{4}\int\limits^{-1}_{\tilde{x}-2\tilde{t}}(0)dx+\frac{1}{4}\int\limits^{0}_{-1}(-4)dx + \frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{0}(4)dx \\
+&= 5 + 0 - 1 + \tilde{x} + 2\tilde{t} \\
+&= 4 + \tilde{x} + 2\tilde{t}
+\end{align*}
+For any $(\tilde{x},\tilde{t})$ in this region, we have $u(\tilde{x},\tilde{t})=4 + \tilde{x} + 2\tilde{t}$.
+
+  - **Region 5.**
+  
+Let $(\tilde{x},\tilde{t})$ be a point in this region. d'Alembert's formula tells us
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-2\tilde{t})+\phi(\tilde{x}+2\tilde{t})\right)+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{\tilde{x}-2\tilde{t}}\psi(x)dx.
+\end{align*}
+In this region, $-1<\tilde{x}-2\tilde{t}<0$ and $0<\tilde{x}+2\tilde{t}<1$. We have $\phi(x_0)\equiv10$ and $\psi(x_0)\equiv-4$ for $-1<x_0<0$, and $\phi(x_0)\equiv0$ and $\psi(x_0)\equiv4$ for $0<x_0<1$. Therefore,
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-2\tilde{t})+\phi(\tilde{x}+2\tilde{t})\right)+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{\tilde{x}-2\tilde{t}}\psi(x)dx \\
+&= \frac{1}{2}[(10)+(0)]+\frac{1}{4}\int\limits^{0}_{\tilde{x}-2\tilde{t}}(-4)dx+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{0}(4)dx \\
+&= 5 + \tilde{x} - 2\tilde{t} + \tilde{x} + 2\tilde{t} \\
+&= 5 + 2\tilde{x}
+\end{align*}
+For any $(\tilde{x},\tilde{t})$ in this region, we have $u(\tilde{x},\tilde{t})=5 + 2\tilde{x}$.
+
+  - **Region 6.**
+
+Let $(\tilde{x},\tilde{t})$ be a point in this region. d'Alembert's formula tells us
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-2\tilde{t})+\phi(\tilde{x}+2\tilde{t})\right)+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{\tilde{x}-2\tilde{t}}\psi(x)dx.
+\end{align*}
+In this region, $0<\tilde{x}\pm2\tilde{t}<1$. We have $\phi(x_0)\equiv0$ and $\psi(x_0)\equiv4$ for $0<x_0<1$. Therefore,
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-2\tilde{t})+\phi(\tilde{x}+2\tilde{t})\right)+\frac{1}{4}\int\limits^{\tilde{x}+\tilde{t}}_{\tilde{x}-\tilde{t}}\psi(x)dx \\
+&= \frac{1}{2}[(0)+(0)]+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{\tilde{x}-2\tilde{t}}(4)dx \\
+&= 0 + \tilde{x} + 2\tilde{t} - \tilde{x} + 2\tilde{t} \\
+&= 4\tilde{t}
+\end{align*}
+For any $(\tilde{x},\tilde{t})$ in this region, we have $u(\tilde{x},\tilde{t})=4\tilde{t}$.
+
+  - **Region 7.**
+  
+Let $(\tilde{x},\tilde{t})$ be a point in this region. d'Alembert's formula tells us
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-2\tilde{t})+\phi(\tilde{x}+2\tilde{t})\right)+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{\tilde{x}-2\tilde{t}}\psi(x)dx.
+\end{align*}
+In this region, $-1<\tilde{x}-2\tilde{t}<0$ and $\tilde{x}+2\tilde{t}>1$. We have $\phi(x_0)\equiv10$ and $\psi(x_0)\equiv-4$ for $-1<x_0<0$, and $\phi(x_0)\equiv0$ and $\psi(x_0)\equiv4$ for $x_0>1$. Therefore,
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-2\tilde{t})+\phi(\tilde{x}+2\tilde{t})\right)+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{\tilde{x}-2\tilde{t}}\psi(x)dx \\
+&= \frac{1}{2}[(10)+(0)]+\frac{1}{4}\int\limits^{0}_{\tilde{x}-2\tilde{t}}(-4)dx+\frac{1}{4}\int\limits^{1}_{0}(-4)dx+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{1}(0)dx \\
+&= 5 + \tilde{x} - 2\tilde{t} + 1 + 0 \\
+&= 6 + \tilde{x} - 2\tilde{t}
+\end{align*}
+For any $(\tilde{x},\tilde{t})$ in this region, we have $u(\tilde{x},\tilde{t})=6 + \tilde{x} - 2\tilde{t}$.
+
+  - **Region 8.**
+  
+Let $(\tilde{x},\tilde{t})$ be a point in this region. d'Alembert's formula tells us
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-2\tilde{t})+\phi(\tilde{x}+2\tilde{t})\right)+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{\tilde{x}-2\tilde{t}}\psi(x)dx.
+\end{align*}
+In this region, $0<\tilde{x}-2\tilde{t}<1$ and $\tilde{x}+2\tilde{t}>1$. We have $\phi(x_0)\equiv0$ and $\psi(x_0)\equiv4$ for $0<x_0<1$, and $\phi(x_0)\equiv0$ and $\psi(x_0)\equiv0$ for $x_0>0$. Therefore,
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-2\tilde{t})+\phi(\tilde{x}+2\tilde{t})\right)+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{\tilde{x}-2\tilde{t}}\psi(x)dx \\
+&= \frac{1}{2}[(0)+(0)]+\frac{1}{4}\int\limits^{1}_{\tilde{x}-2\tilde{t}}(4)dx+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{1}(0)dx \\
+&= 0 + 1 - \tilde{x} + 2\tilde{t} + 0 \\
+&= 1 - \tilde{x} + 2\tilde{t}
+\end{align*}
+For any $(\tilde{x},\tilde{t})$ in this region, we have $u(\tilde{x},\tilde{t})=1 - \tilde{x} + 2\tilde{t}$.
+
+  - **Region 9.**
+  
+Let $(\tilde{x},\tilde{t})$ be a point in this region. d'Alembert's formula tells us
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-2\tilde{t})+\phi(\tilde{x}+2\tilde{t})\right)+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{\tilde{x}-2\tilde{t}}\psi(x)dx.
+\end{align*}
+In this region, $\tilde{x}\pm2\tilde{t}>1$. We have $\phi(x_0)\equiv0$ and $\psi(x_0)\equiv0$ for $x_0>1$. Therefore,
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-2\tilde{t})+\phi(\tilde{x}+2\tilde{t})\right)+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{\tilde{x}-2\tilde{t}}\psi(x)dx \\
+&= \frac{1}{2}[(0)+(0)]+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{\tilde{x}-2\tilde{t}}(0)dx \\
+&= 0.
+\end{align*}
+For any $(\tilde{x},\tilde{t})$ in this region, we have $u(\tilde{x},\tilde{t})\equiv0$.
+
+  - **Region 10.**
+  
+Let $(\tilde{x},\tilde{t})$ be a point in this region. d'Alembert's formula tells us
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-2\tilde{t})+\phi(\tilde{x}+2\tilde{t})\right)+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{\tilde{x}-2\tilde{t}}\psi(x)dx.
+\end{align*}
+In this region, $\tilde{x}-2\tilde{t}<-1$ and $\tilde{x}+2\tilde{t}>1$. We have $\phi(x_0)\equiv10$ and $\psi(x_0)\equiv0$ for $x_0<-1$, and $\phi(x_0)\equiv0$ and $\psi(x_0)\equiv0$ for $x_0>1$. However, we also have $\phi(x_0)\equiv10$ and $\psi(x_0)\equiv-4$ for $-1<x_0<0$, as well as $\phi(x_0)\equiv0$ and $\psi(x_0)\equiv4$ for $0<x_0<1$. Therefore,
+\begin{align*}
+u(\tilde{x},\tilde{t}) &= \frac{1}{2}\left(\phi(\tilde{x}-2\tilde{t})+\phi(\tilde{x}+2\tilde{t})\right)+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{\tilde{x}-2\tilde{t}}\psi(x)dx \\
+&= \frac{1}{2}[(0)+(0)]+\frac{1}{4}\int\limits^{-1}_{\tilde{x}-2\tilde{t}}(0)dx+\frac{1}{4}\int\limits^{0}_{-1}(-4)dx+\frac{1}{4}\int\limits^{1}_{0}(4)dx+\frac{1}{4}\int\limits^{\tilde{x}+2\tilde{t}}_{1}(0)dx \\
+&= 5 + 0 -1 + 1 + 0 \\
+&= 5
+\end{align*}
+For any $(\tilde{x},\tilde{t})$ in this region, we have $u(\tilde{x},\tilde{t})\equiv5$.
+
+Combining our analysis of each region above, the characteristic diagram becomes the graphical solution to the initial value problem as shown below.
+
+```{r echo=F, out.width = "90%", fig.align = "center"}
+knitr::include_graphics("charsol2.png")
+```
+
+  (iv) Obtain snapshot plots of your solution from (iii) for $t=0, 1/2,$ and $1$.
+
+We will now use the above characteristic plot/graphical solution to make snapshot plots for $t=0, 1/2,$ and $1$. Give that these multi-part equations are hard to read we will break up these snapshot plots for the different values of $t$, as well as show all of the plots together at the end.
+
+ - Snapshot plot for $t=0$.
+ 
+```{r echo=F, out.width = "90%", fig.align = "center"}
+knitr::include_graphics("snapshotplot1.png")
+``` 
+ 
+ - Snapshot plot for $t=1/2$.
+ 
+```{r echo=F, out.width = "90%", fig.align = "center"}
+knitr::include_graphics("snapshotplot2.png")
+``` 
+ 
+ - Snapshot plot for $t=1$.
+ 
+```{r echo=F, out.width = "90%", fig.align = "center"}
+knitr::include_graphics("snapshotplot3.png")
+``` 
+ 
+ - Snapshot plots for all $t$.
+ 
+```{r echo=F, out.width = "90%", fig.align = "center"}
+knitr::include_graphics("snapshotplot4.png")
+``` 

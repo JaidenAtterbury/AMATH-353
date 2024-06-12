@@ -1,0 +1,248 @@
+---
+title: "AMATH 353 Quiz 2"
+author: "Jaiden Atterbury"
+date: "2023-07-20"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Note: In this quiz, I briefly collaborated with Kai Poffenbarger. In this collaboration we mainly compared answers to see if what we were getting for our solutions were similar.
+
+# Component Skills
+
+1. Determine whether each statement is true or false. **If the statement is false, briefly justify why.**
+
+  (i) $u(x,t)=\sqrt[7]{x+2t}$ is a front.
+
+In order for $u(x,t)=\sqrt[7]{x+2t}$ to be a front, it must be a traveling wave, and it must have infinite limits (positive and negative) that exist and differ from each other. For the latter case, if we let $z=x+2t$, we can see that $\lim_{z\to -\infty}\sqrt[7]{z}=-\infty$ and $\lim_{z\to\infty}\sqrt[7]{z}=\infty$. Hence these two limits exist and are different, now all we must do is check that this wave is in fact a traveling wave. First off, we can see that this wave is in the form $f(x-ct)$, thus it meets the first criterion of a traveling wave. However, since $\lim_{z\to -\infty}\sqrt[7]{z}=-\infty$ and $\lim_{z\to\infty}\sqrt[7]{z}=\infty$, it is apparent that this wave isn't bounded and is therefore not a traveling wave, which implies that it is also not a front. Therefore the answer is false.
+
+  (ii) $u(x,t)=e^{3x+2t}$ is a traveling wave.
+  
+In order for $u(x,t)=e^{3x+2t}$ to be a traveling wave, it must be able to be rewritten in the form $u(x,t)=f(x-ct)$, and the function must be bounded. Rewriting $u(x,t)$, we can see that $u(x,t)=e^{3x+2t}=e^{3\left(x+\frac{2}{3}t\right)}$, which is in the form of $f(x-ct)$. If we let $u(x,t)=f(z)$ where $z=x+\frac{2}{3}t$, then in order for $u(x,t)$ to be bounded, $|f|$ must never go to $\infty$ for any $z\in\mathbb{R}$, or as $|z|\to\infty$. However, we can see that $f(z)=e^{3z}$ goes off to $\infty$ as $z\to\infty$. Hence the wave is not bounded, and is thus not a traveling wave. Therefore the answer is false.
+
+  (iii) $u(x,t)=\frac{x+2t}{\sqrt{3(x+2t)^2+1}}$ is a pulse.
+  
+In order for $u(x,t)=\frac{x+2t}{\sqrt{3(x+2t)^2+1}}$ to be a pulse, it must be a traveling wave, and it must have infinite limits (positive and negative) that exist and are equal to each other. For the latter case, if we let $z=x+2t$, we can calculate these limits to see if they equal each other. First we will calculate the positive infinite limit.
+\begin{align*}
+\lim_{z\to\infty} f(z) &= \lim_{z\to\infty} \frac{z}{\sqrt{3z^2+1}} \\
+&= \lim_{z\to\infty} \frac{\frac{z}{z}}{\frac{\sqrt{3z^2+1}}{z}} \\
+&= \lim_{z\to\infty} \frac{1}{\frac{\sqrt{3z^2+1}}{\sqrt{z^2}}} \\
+&= \lim_{z\to\infty} \frac{1}{\sqrt{3+\frac{1}{z^2}}} \\
+&= \frac{1}{\sqrt{3}} \\
+&= \frac{\sqrt{3}}{3}
+\end{align*}
+Thus we can see that $\lim_{z\to\infty}f(z)=\frac{\sqrt{3}}{3}$. We will now calculate the negative infinite limit.
+\begin{align*}
+\lim_{z\to-\infty} f(z) &= \lim_{z\to-\infty} \frac{z}{\sqrt{3z^2+1}} \\
+&= \lim_{z\to-\infty} \frac{\frac{z}{z}}{\frac{\sqrt{3z^2+1}}{z}} \\
+&= \lim_{z\to-\infty} \frac{1}{\frac{\sqrt{3z^2+1}}{-\sqrt{z^2}}} \\
+&= \lim_{z\to-\infty} \frac{1}{-\sqrt{3+\frac{1}{z^2}}} \\
+&= \frac{1}{-\sqrt{3}} \\
+&= \frac{-\sqrt{3}}{3}
+\end{align*}
+Thus we can see that $\lim_{z\to-\infty}f(z)=\frac{-\sqrt{3}}{3}$. Hence, before even seeing if $u(x,t)$ is a traveling wave, which it is, we can see that $\lim_{z\to-\infty}f(z)\neq\lim_{z\to\infty}f(z)$, thus $u(x,t)$ is a front and not a pulse. Therefore the answer is false.
+
+  (iv) There exists a traveling wave that is both a pulse and a periodic wavetrain.
+  
+In order for a traveling wave $u(x,t)$ to be a pulse, it must have infinite limits (positive and negative) that exist and are equal to each other. Also, in order for a traveling wave $u(x,t)$ to be a periodic wavetrain, there must exist a period in $p\in\mathbb{R}/\{0\}$ such that $f(z)=f(z+p)$. However, based on the fact that any non-constant periodic function has no infinite limit (positive or negative), then it will be impossible for $\lim_{z\to-\infty}f(z)=\lim_{z\to\infty}f(z)$ since no traveling wave takes the form of a constant and thus can't be periodic and also have infinite limits. Therefore the answer is false.
+
+  (v) There exists a traveling wave that is both a front and a periodic wavetrain.
+  
+In order for a traveling wave $u(x,t)$ to be a front, it must have infinite limits (positive and negative) that exist and differ from each other. Also, in order for a traveling wave $u(x,t)$ to be a periodic wavetrain, there must exist a period in $p\in\mathbb{R}/\{0\}$ such that $f(z)=f(z+p)$. However, based on the fact that any non-constant periodic function has no infinite limit (positive or negative), then it will be impossible for the two infinite limits to exist and have the property that $\lim_{z\to-\infty}f(z)\neq\lim_{z\to\infty}f(z)$ since no traveling wave takes the form of a constant and thus can't be periodic and also have infinite limits. Therefore the answer is false.
+
+2. Consider the following PDE:
+\begin{align}
+u_{tt}-2u_{xt} &= -4u.
+\end{align}
+If we introduce the change of variables
+\begin{subequations}
+\begin{align}
+\hat{x} &= x+2t \\
+\hat{t} &= x,
+\end{align}
+\end{subequations}
+show that (1) in the hatted variables becomes $u_{\hat{x}\hat{t}}=u$, the Klein-Gordon equation. You may interchange the order of the partial derivatives as needed.
+
+In this problem we will use the change of variables $\hat{x}=x+2t$ and $\hat{t}=x$, to show that the PDE $u_{tt}-2u_{xt}=-4u$ results in $u_{\hat{x}\hat{t}}=u$ after the change of variables. We will start off by finding $u_t$ using the multivariate chain rule.
+\begin{align*}
+u_t(x,t) &= \frac{\partial}{\partial t} u(x,t) \\
+&= \frac{\partial u}{\partial \hat{x}}\frac{\partial \hat{x}}{\partial t}+\frac{\partial u}{\partial \hat{t}}\frac{\partial \hat{t}}{\partial t} \\
+&= u_{\hat{x}}(2)+u_{\hat{t}}(0) \\
+&= 2u_{\hat{x}}
+\end{align*}
+As seen above, $u_t(x,t)=2u_{\hat{x}}(x,t)$. We will now use the multivariate chain rule to find $u_{tt}$.
+\begin{align*}
+u_{tt}(x,t) &= \frac{\partial}{\partial t} (2u_{\hat{x}}) \\
+&= 2\left(\frac{\partial u_{\hat{x}}}{\partial \hat{x}}\frac{\partial \hat{x}}{\partial t}+\frac{\partial u_{\hat{x}}}{\partial \hat{t}}\frac{\partial \hat{t}}{\partial t}\right) \\
+&= 2(u_{\hat{x}\hat{x}}(2)+u_{\hat{x}\hat{t}}(0)) \\
+&= 4u_{\hat{x}\hat{x}}
+\end{align*}
+As seen above, $u_{tt}(x,t)=4u_{\hat{x}\hat{x}}(x,t)$. We will now use the multivariate chain rule to find $u_{xt}$.
+\begin{align*}
+u_{xt}(x,t) &= \frac{\partial}{\partial x} (2u_{\hat{x}}) \\
+&= 2\left(\frac{\partial u_{\hat{x}}}{\partial \hat{x}}\frac{\partial \hat{x}}{\partial x}+\frac{\partial u_{\hat{x}}}{\partial \hat{t}}\frac{\partial \hat{t}}{\partial x}\right) \\
+&= 2(u_{\hat{x}\hat{x}}(1)+u_{\hat{x}\hat{t}}(1)) \\
+&= 2u_{\hat{x}\hat{x}}+2u_{\hat{x}\hat{t}}
+\end{align*}
+As seen above, $u_{xt}(x,t)=2u_{\hat{x}\hat{x}}(x,t)+2u_{\hat{x}\hat{t}}(x,t)$. We will now plug these expressions into our PDE and simplify.
+\begin{align*}
+u_{tt}-2u_{xt} &= -4u \\
+4u_{\hat{x}\hat{x}}-2(2u_{\hat{x}\hat{x}}+2u_{\hat{x}\hat{t}}) &= -4u \\
+4u_{\hat{x}\hat{x}}-4u_{\hat{x}\hat{x}}-4u_{\hat{x}\hat{t}} &= -4u \\
+-4u_{\hat{x}\hat{t}} &= -4u \\
+u_{\hat{x}\hat{t}} &= u
+\end{align*}
+Thus we have shown that the change of variables $\hat{x}=x+2t$ and $\hat{t}=x$ results in $u_{\hat{x}\hat{t}}=u$ once plugged into the PDE $u_{tt}-2u_{xt}=-4u$.
+
+3. Consider the viscous Burger's equation:
+\begin{align}
+u_t + uu_x &= \nu u_{xx},
+\end{align}
+where $\nu > 0$.
+
+**Remark:** This PDE was derived in 1915 as a model of nonlinear fluid flow with viscosity. Today, Burger's equation is foundational in many areas of science, including nonlinear acoustics, traffic flow, and gas dynamics, among others. (This question was taken from Ryan Creedon's 2021 version of the class).
+
+  (i) Let $u(x,t)=f(z)=f(x-ct)$ such that $\lim_{z\to\infty}f(z)=0$ and $\lim_{|z|\to\infty}f'(z)=0$. Derive a first-order ODE for $f$.
+  
+If we let $u(x,t)=f(x-ct)=f(z)$, and assume that $\lim_{z\to\infty}f(z)= \lim_{|z|\to\infty} f'(z)=0$, then we can find a first-order ODE satisfied by $f$. To start off we will calculate the necessary partial derivatives. Notice that: $u_x=f'(z)$, $u_{xx}=f''(z)$, and $u_{t}=-cf'(z)$ plugging these into Burger's equation, we obtain
+\begin{align*}
+u_t + uu_x &= \nu u_{xx} \\
+-cf' + ff' - \nu f'' &= 0 \\
+-cf' + \left(\frac{f^2}{2}\right)' - \nu f'' &= 0 \quad \text{Since $ff'= \left(\frac{f^2}{2}\right)'$} \\
+\frac{d}{dz} \left( -cf + \frac{1}{2}f^2 -\nu f' \right) &= 0 \\
+-cf + \frac{1}{2}f^2 -\nu f' &= A
+\end{align*}
+Since we assumed $\lim_{z\to\infty} f(z) = \lim_{|z|\to\infty} f'(z) = 0$, it follows that as $z\to\infty \implies -c(0)+\frac{(0)^2}{2}+\nu0=A \implies A=0$. Hence we can see that
+\begin{align*}
+-cf + \frac{1}{2}f^2 -\nu f' &= 0 \\
+\nu f' &= -cf + \frac{1}{2}f^2 \\
+f' &= \frac{-c}{\nu}f + \frac{1}{2\nu}f^2 \\
+f' &= f \left( \frac{-c}{\nu}+\frac{1}{2\nu}f \right)
+\end{align*}
+Hence a first-order ODE for $f$ is $f' = f \left( \frac{-c}{\nu}+\frac{1}{2\nu}f \right)$ as computed above.
+
+  (ii) Impose the additional constraint $\lim_{z\to-\infty}f(z)=U>0$ on your first-order ODE from part (i). Because of this extra condition, $c$ is no longer arbitrary. What is $c$?
+  
+In order to find the value of $c$, we will take the limit as $z$ approaches negative infinity of our first-order ODE from part (i). We will use the facts that $\lim_{z\to-\infty}f(z)=U>0$ and $\lim_{z\to-\infty} f'(z)=0$.
+\begin{align*}
+\lim_{z\to-\infty} f' &= \lim_{z\to-\infty} f \left( \frac{-c}{\nu}+\frac{1}{2\nu}f \right) \\
+\lim_{z\to-\infty} f' &= \lim_{z\to-\infty} f \left( \frac{-c}{\nu}+\frac{1}{2\nu} \lim_{z\to-\infty} f \right) \\
+0 &= U \left( \frac{-c}{\nu} + \frac{U}{2\nu} \right) \\
+0 &= \frac{-cU}{\nu} + \frac{U^2}{2\nu} \\
+\frac{cU}{\nu} &= \frac{U^2}{2\nu} \\
+c &= \frac{U}{2}
+\end{align*}
+Thus after imposing the additional constraint, we see that $c = \frac{U}{2}$.
+
+  (iii) Solve your ODE from part (i) with $c$ given by the expression found in part (ii). You should find
+\begin{align}
+f(z) &= \frac{U}{1+Ae^{\frac{Uz}{2\nu}}},
+\end{align}
+where $A$ is an arbitrary constant.
+
+We will now solve our ODE from part (i) with $c$ given by the expression found in part (ii). The new ODE with $c$ plugged in is $f' = f \left( \frac{-U}{2\nu}+\frac{1}{2\nu}f \right) \implies f' = \frac{1}{2\nu}f(f-U)$. We will now solve this ODE using the method of partial fractions.
+\begin{align*}
+f' &= \frac{1}{2\nu}f(f-U) \\
+\frac{f'}{\frac{1}{2\nu}f(f-U)} &= 1 \\
+\int\frac{f'dz}{\frac{1}{2\nu}f(f-U)} &= \int dz + C \\
+\int\frac{df}{\frac{1}{2\nu}f(f-U)} &= z + C
+\end{align*}
+We will now decompose the fraction $\frac{1}{\frac{1}{2\nu}f(f-U)}$. We must find constants $A$ and $B$ such that $\frac{A}{\frac{1}{2\nu}f} + \frac{B}{f-U} = 1$. Clearing the denominators we see that $Af-AU+\frac{1}{2\nu}Bf=1$. Hence we must satisfy the equations $-AU=1$ and $A+\frac{1}{2\nu}B=0$. Thus we can see that $A=\frac{-1}{U}$ and $B=\frac{2\nu}{U}$. Plugging these values of $A$ and $B$ back into the decomposition, we can go back to solving the integral.
+\begin{align*}
+\int\frac{\frac{-2\nu}{U}}{f}df + \int\frac{\frac{2\nu}{U}}{f-U}df &= z + C \\
+\frac{2\nu}{U}\left(\ln|f-U| - \ln|f|\right) &= z + C \\
+\ln\left|\frac{f-U}{f}\right| &= \frac{Uz}{2\nu} + D \quad \text{where $D=\frac{CU}{2\nu}$} \\
+\left|\frac{f-U}{f}\right| &= Ee^{\frac{Uz}{2\nu}} \quad \text{where $E=e^D$} \\
+\frac{f-U}{f} &= Fe^{\frac{Uz}{2\nu}} \quad \text{where $F=\pm E$} \\
+1-\frac{U}{f} &= Fe^{\frac{Uz}{2\nu}} \\
+\frac{U}{f} - 1 &= Ae^{\frac{Uz}{2\nu}} \quad \text{where $A = -F$} \\
+\frac{U}{f} &= 1 + Ae^{\frac{Uz}{2\nu}} \\
+U &= f\left(1 + Ae^{\frac{Uz}{2\nu}}\right) \\
+f(z) &= \frac{U}{1 + Ae^{\frac{Uz}{2\nu}}}
+\end{align*}
+Thus we can see that the solution to our ODE is $f(z) = \frac{U}{1 + Ae^{\frac{Uz}{2\nu}}}$, as expected.
+
+  (iv) In order for (4) to be a traveling wave solution of (3), what restriction must be placed on $A$? Once this restriction is made, what type of traveling wave is $u(x,t)=f(z)$ (where $f$ is given by (4))?
+
+In order for (4) to be a traveling wave solution of (3), the constraint on $A$ that must be placed is $A>0$. This constraint needs to be made in order to make $f(z)$ bounded on $\mathbb{R}$. If $A<0$, then $f(z)$ becomes unbounded and is thus not a traveling wave. Once this restriction is made, we can now identify the type of traveling wave that $f(z)$ is. It is obvious that $f(z)$ is not a periodic wavetrain, thus, in order to decide whether it is a pulse or a front we must take infinite limits. We will start by taking the positive infinite limit; $\lim_{z\to\infty}f(z)=\lim_{z\to\infty}\frac{U}{1 + Ae^{\frac{Uz}{2\nu}}}=\frac{U}{1+\infty}=0$. We will also take the negative infinite limit; $\lim_{z\to-\infty}f(z)=\lim_{z\to-\infty}\frac{U}{1 + Ae^{\frac{Uz}{2\nu}}}=\frac{U}{1+0}=U$. Since $\lim_{z\to-\infty}f(z)\neq\lim_{z\to\infty}f(z)$, it follows that $u(x,t)=f(z)$ is a front.
+
+# Multi-Step Problem
+
+Consider the Swift-Hohenburg equation:
+\begin{align}
+u_t &= u\left(r-1+u(g-u)\right)-2u_{xx}-u_{xxxx},
+\end{align}
+where $r>0$ and $g\in\mathbb{R}$.
+
+**Remark:** This equation was discovered in 1977 as a model for Rayleigh-Benard convective instabilities in fluids. The equation has since been used to describe pattern formation in neural nets and synchronization of lasers, among other applications. (This question was taken from Ryan Creedon's 2021 version of the class).
+
+1. Show that the small-amplitude linearization of (5) is
+\begin{align}
+q_t &= (r-1)q-2q_{xx}-q_{xxxx}. 
+\end{align}
+
+In order to linearize the Swift-Hohenburg equation, we will follow a step-by-step procedure. The first step in performing a small-amplitude linearization on the above PDE is to assume that $u(x,t)=\epsilon q(x,t)$, and then substitute $u=\epsilon q$ into the PDE.
+\begin{align*}
+(\epsilon q)_t &= (\epsilon q)\left(r-1+(\epsilon q)(g-\epsilon q)\right)-2(\epsilon q)_{xx}-(\epsilon q)_{xxxx} \\
+\epsilon q_t &= (\epsilon q)\left(r-1+(\epsilon q)(g-\epsilon q)\right)-2\epsilon q_{xx}-\epsilon q_{xxxx} 
+\end{align*}
+Hence our new PDE is $\epsilon q_t = (\epsilon q)\left(r-1+(\epsilon q)(g-\epsilon q)\right)-2\epsilon q_{xx}-\epsilon q_{xxxx}$. The second step of the linearization process is to divide by $\epsilon$ across the whole PDE to preserve our linear terms before performing step 3, hence our PDE becomes $q_t = q\left(r-1+(\epsilon q)(g-\epsilon q)\right)-2q_{xx}-q_{xxxx}$. The third step of small-amplitude linearization is to take the limit as $\epsilon \to 0$, this calculation is done below.
+\begin{align*}
+q_t &= \lim_{\epsilon \to 0} q\left(r-1+(\epsilon q)(g-\epsilon q)\right)-2q_{xx}-q_{xxxx} \\
+q_t &= q\left(r-1+\left(\lim_{\epsilon \to 0} \epsilon q\right)\left(g-\lim_{\epsilon \to 0}\epsilon q\right)\right)-2q_{xx}-q_{xxxx} \\
+q_t &= q\left(r-1+(0)(g-0)\right)-2q_{xx}-q_{xxxx} \\
+q_t &= q\left(r-1\right)-2q_{xx}-q_{xxxx} \\
+\end{align*}
+As can be seen above, the small-amplitude linearization of the above PDE is $q_t = q\left(r-1\right)-2q_{xx}-q_{xxxx}$, which is the equation we were looking to find.
+
+2. Obtain the dispersion relation of (6). For short time, is (5) dissipative, unstable, dispersive, or none of the above?
+
+We will now obtain the dispersion relation of linearized Kawahara equation using the same substitution rules as Homework 3.
+\begin{align*}
+q_t &= q\left(r-1\right)-2q_{xx}-q_{xxxx} \\
+-i\omega &= r - 1 - 2(ik)^2 - (ik)^4 \\
+-i\omega &= r - 1 - 2i^2k^2 - i^4k^4 \\
+-i\omega &= r - 1 + 2k^2 - k^4 \\
+\omega &= i\left(r - 1 + 2k^2 - k^4\right)
+\end{align*}
+Hence the dispersion relation is $\omega(k)=i\left(r - 1 + 2k^2 - k^4\right)$ which implies that the real part of $\omega(k)$ is $\omega_{R}(k)=0$ and the imaginary part of $\omega(k)$ is $\omega_{I}(k)=r - 1 + 2k^2 - k^4=r-(k^2-1)^2$. Hence $(k^2-1)^2 > r \implies \omega_I(k) < 0$, and $(k^2-1)^2 < r \implies \omega_I(k) > 0$. If we let $k=1$, then we obtain $\omega_I(k)=r \implies \omega_I(k) > 0$ since $r>0$. Hence for short time (5) is unstable.
+
+3. For which **wavenumbers** is the amplitude of sinusoidal wavetrain solutions of (6) neither increasing or decreasing in time when (i) $0<r<1$, (ii) $r=1$, (iii) $r>1$?
+
+*Hint:* $-1+2k^2-k^4=-(k^2-1)^2$
+
+To find which wavenumbers make the amplitude of sinusoidal wavetrain solutions of (6) neither increasing or decreasing in time for certain values of $r$ we must make use of the fact that $\omega_I(k)$ controls the growth or decay of the amplitude of our sinusoid. Thus to find the values of $k$ that make the amplitude of sinusoidal wavetrain solutions of (6) neither increasing or decreasing in time, we must solve $\omega_I(k)=0$ for $k$.
+\begin{align*}
+r - 1 + 2k^2 - k^4 &= 0 \\
+r - (k^2 - 1)^2 &= 0 \\
+(k^2 - 1)^2 &= r \\
+k^2-1 &= \pm \sqrt{r} \\
+k^2 &= 1 \pm \sqrt{r} \\
+k &= \pm \sqrt{1 \pm \sqrt{r}}
+\end{align*}
+Thus the values of $k$ are $\pm \sqrt{1 \pm \sqrt{r}}$. However, now we will find specific values of $k$ for 3 different ranges of $r$ values. When solving for these values of $k$ we must keep in mind that $k\in\mathbb{R}$.
+
+  (i) $0<r<1$.
+  
+If $0<r<1$, then the expression of $k$, $\pm \sqrt{1 \pm \sqrt{r}}$, is real for all combinations of pluses and minuses since $\sqrt{r} < 1$. Thus the wavenumbers that make the amplitude of sinusoidal wavetrain solutions of (6) neither increasing or decreasing in time are $k_1 = \sqrt{1 + \sqrt{r}}$, $k_2 = \sqrt{1 - \sqrt{r}}$, $k_3 = -\sqrt{1 + \sqrt{r}}$, and $k_4 = -\sqrt{1 - \sqrt{r}}$.
+
+  (ii) $r=1$.
+
+If $r=1$, then the expression for $k$ becomes $\pm \sqrt{1 \pm \sqrt{1}} = \pm \sqrt{1 \pm 1}$. Thus the wavenumbers that make the amplitude of sinusoidal wavetrain solutions of (6) neither increasing or decreasing in time are $k_1 = 0$, $k_2 = \sqrt{2}$, $k_3 = -\sqrt{2}$.
+
+  (iii) $r > 1$.
+  
+If $r>1$, then the expression of $k$, $\pm \sqrt{1 \pm \sqrt{r}}$, is real only for the plus sign inside the radical since $\sqrt{r} > 1 \implies 1 - \sqrt{r} < 0$. Thus the wavenumbers that make the amplitude of sinusoidal wavetrain solutions of (6) neither increasing or decreasing in time are $k_1 = \sqrt{1 + \sqrt{r}}$ and $k_2 = -\sqrt{1 + \sqrt{r}}$.
+
+4. What is the **wavelength** of the most unstable sinusoidal wavetrain solution of (6)?
+
+In order to find the **wavelength** of the most unstable sinusoidal wavetrain solution of (6), we must first find the wavenumber of the most unstable sinusoidal wavetrain solution of (6). In order to find the maximum wavenumber, we will take the first derivative of $\omega_I{k}$ with respect to k, find the critical points $\hat{k}$, and lastly find which of these points is the maximum using the second derivative test. We will start by finding the first derivative of $\omega_I{k}$, which we see is $\omega_I'(k)=4k-4k^3$. 
+
+In order to find the critical points we must find where $\omega_I'(k) = 0$. This occurs when $\omega_I'(k)=0$, which implies that $4k=0$ or $1-k^2=0$. The latter term simplifies to $k=\pm \sqrt{1}$. Hence we can see that the critical points are $\hat{k}_1 = 0$, $\hat{k}_2 = -1$, and $\hat{k}_3 = 1$.
+
+We will now calculate the second derivative of $\omega_I(k)$ with respect to k, which we see is $\frac{d^2}{dk^2}(\omega_I(k)) = \frac{d}{dk} (4k-4k^3)=4-12k^2$. Plugging in our three critical points we can see that $\omega_I''(\hat{k}_1) = \omega_I''(0) = 4$, $\omega_I''(\hat{k}_2) = \omega_I''(-1) = -8$, $\omega_I''(\hat{k}_3) = \omega_I''(1) = -8$. Hence $0$ is a minimum and $\pm 1$ are maximums.
+
+Since the wavelength is defined as $\lambda=\frac{2\pi}{|k|}$, we can see that the wavelength of the most unstable sinusoidal wavetrain solution of (6) is $\lambda=\frac{2\pi}{|\pm 1|}=2\pi$.

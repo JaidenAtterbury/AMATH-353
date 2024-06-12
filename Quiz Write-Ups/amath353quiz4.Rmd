@@ -1,0 +1,195 @@
+---
+title: "AMATH 353 Quiz 4"
+author: "Jaiden Atterbury"
+date: "2023-08-11"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Note: In this quiz, I briefly collaborated with Kai Poffenbarger. In this collaboration we mainly compared answers to see if what we were getting for our solutions were similar.
+
+# Component Skills
+
+1. Consider the function $f(x)=x^2$ on $-\pi<x<\pi$.
+
+  (i) Compute the Fourier series of $f(x)$. Simplify expressions involving $\cos(n\pi)$ and $\sin(n\pi)$.
+
+In order to determine the Fourier series representation of $f(x) = x^2$ on $-\pi<x<\pi$, we must solve for the coefficients $a_0$, $a_n$, and $b_n$ of the Fourier series representation of $f(x)$ on $[-L, L]$ defined as $f(x)=\frac{a_0}{2}+\sum\limits^{\infty}_{n=1}a_n\cos\left(\frac{n\pi}{L}x\right)+b_n\sin\left(\frac{n\pi}{L}x\right)$. The formulas for these coefficients are defined as,
+$a_0=\frac{1}{L}\int^{L}_{-L}f(x)dx$, $a_n=\frac{1}{L}\int^{L}_{-L}f(x)\cos\left(\frac{n\pi}{L}x\right)dx$, and  $b_n=\frac{1}{L}\int^{L}_{-L}f(x)\sin\left(\frac{n\pi}{L}x\right)dx$. $\\$
+
+**Step 1:** Solve for $a_0$: $\\$
+Since in our case $L=\pi$, $f(x)=x^2$ and $a_0=\frac{1}{L}\int^{L}_{-L}f(x)dx$, we have $a_0=\frac{1}{\pi}\int^{\pi}_{-\pi}x^2dx$. Since $x^2$ is an even function we can instead solve $\frac{2}{\pi}\int^{\pi}_{0}x^2dx$. This calculation is simple and hence $a_0=\frac{2}{\pi}\left[\frac{1}{3}x^3\right]^{\pi}_{0}=\frac{2\pi^2}{3}$. $\\$
+
+**Step 2:** Solve for $a_n$: $\\$
+Since in our case $L=\pi$, $f(x)=x^2$ and $a_n=\frac{1}{L}\int^{L}_{-L}f(x)\cos\left(\frac{n\pi}{L}x\right)dx$, we have $a_n=\frac{1}{\pi}\int^{\pi}_{-\pi}x^2\cos\left(nx\right)dx$. Hence we must solve, since $x^2$ and $\cos(nx)$ are even functions, their product is even and we can instead solve $\frac{2}{\pi}\int^{\pi}_{0}x^2\cos(nx)dx$. Using integration by parts, we can see that $\int x^2\cos(nx)dx=\frac{x^2\sin(nx)}{n}+\frac{2x\cos(nx)}{n^2}-\frac{2\sin(nx)}{n^3}$. Hence in our case $\frac{2}{\pi}\int^{\pi}_{0}x\cos(nx)dx = \frac{2}{\pi}\left[\frac{x^2\sin(nx)}{n}+\frac{2x\cos(nx)}{n^2}-\frac{2\sin(nx)}{n^3}\right]^{\pi}_{0}=\frac{4\cos(n\pi)}{n^2}$. Since $\cos(n\pi)=(-1)^n$, it follows that $a_n=\frac{4(-1)^n}{n^2}$. $\\$
+
+**Step 3:** Solve for $b_n$: $\\$
+Since in our case $L=\pi$, $f(x)=x^2$ and $b_n=\frac{1}{L}\int^{L}_{-L}f(x)\sin\left(\frac{n\pi}{L}x\right)dx$, we have $b_n=\frac{1}{\pi}\int^{\pi}_{-\pi}x^2\sin\left(nx\right)dx$. Since $x^2$ is an even function, and $\sin(nx)$ is an odd function, it follows that their product is an odd function. With that said, since the integral over a symmetric interval of an odd function equals zero, we can see that $b_n=\frac{1}{\pi}\int^{\pi}_{-\pi}x^2\sin\left(nx\right)dx=0 \implies b_n = 0,\:\forall n\in\mathbb{N}$. $\\$
+
+Replacing the Fourier series form of $f(x)$ with our values of $a_0$, $a_n$ and $b_n$, we can see that the Fourier series representation of $f(x) = x^2$ on $[-\pi,\pi]$ is $f(x)=\frac{\pi^2}{3}+\sum\limits^{\infty}_{n=1}\frac{4(-1)^n}{n^2}\cos\left(nx\right)$.
+
+  (ii) Evaluate your series at $x = \pi$. Show that
+\begin{align*} \displaystyle 
+\sum_{n=1}^{\infty} \frac{1}{n^2} &= \frac{\pi^2}{6}
+\end{align*}
+This was a famous problem solved by Euler in the mid-18th century.
+
+Since $f(x)=x^2$ and $f(x)=\frac{\pi^2}{3}+\sum\limits^{\infty}_{n=1}\frac{4(-1)^n}{n^2}\cos\left(nx\right)$, in order to show that $\sum_{n=1}^{\infty}\frac{1}{n^2}=\frac{\pi^2}{6}$, we will compute $f(\pi)$ for both expressions of $f$, set them equal to each other, then solve for $\sum_{n=1}^{\infty}\frac{1}{n^2}$. First off, $f(x)=x^2\implies f(\pi)=\pi^2$. We will now move onto finding $f(\pi)$ based on the other expression.
+\begin{align*}
+f(\pi) &= \frac{\pi^2}{3}+\sum\limits^{\infty}_{n=1}\frac{4(-1)^n}{n^2}\cos\left(n\pi\right) \\
+&= \frac{\pi^2}{3}+\sum\limits^{\infty}_{n=1}\frac{4(-1)^n}{n^2}(-1)^n \\
+&= \frac{\pi^2}{3}+\sum\limits^{\infty}_{n=1}\frac{4}{n^2}
+\end{align*}
+Setting these two expressions for $f(\pi)$ equal to each other and solving for $\sum_{n=1}^{\infty}\frac{1}{n^2}$ we obtain the expected result.
+\begin{align*}
+\pi^2 &= \frac{\pi^2}{3}+\sum\limits^{\infty}_{n=1}\frac{4}{n^2} \\
+\pi^2 - \frac{\pi^2}{3} &= \sum\limits^{\infty}_{n=1}\frac{4}{n^2} \\
+\frac{\pi^2 - \frac{\pi^2}{3}}{4} &= \sum\limits^{\infty}_{n=1}\frac{1}{n^2} \\
+\frac{2\pi^2}{12} &= \sum\limits^{\infty}_{n=1}\frac{1}{n^2} \\
+\sum\limits^{\infty}_{n=1}\frac{1}{n^2} &= \frac{\pi^2}{6}
+\end{align*}
+Hence we have shown that $\sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}$.
+
+2. Consider the function $f(x)=x^2$ on $0<x<\pi$.
+
+  (i) Compute the Fourier sine series of $f(x)$. Simplify expressions involving $\cos(n\pi)$ and $\sin(n\pi)$.
+  
+Since the function we are looking at is on a non-symmetric interval, we must extend $f(x)=x^2$, so that it is on a symmetric interval. In particular, since we are looking for the Fourier sine series of $f(x)=x^2$, it turns out that we are looking at the odd extension of $f$, which in our case is defined as
+\begin{align*}
+f_{odd}(x) =
+\begin{cases}
+x^2 & x \in \left(0,\pi\right) \\
+-x^2 & x \in \left(-\pi,0\right)
+\end{cases}
+\end{align*}
+We can now proceed in finding the Fourier series of $f_{odd}(x)$. By definition, $f_{odd}(x)$ is an odd function, hence it follows that $a_n=0,\:\forall n\in\mathbb{N}$. Thus all we have to find is $b_n$. Since $f_{odd}(x)$ is an odd function, and $\sin(nx)$ is an odd function, this integral simplifies to $\frac{2}{\pi}\int^{\pi}_{0}x^2\sin(nx)dx$. Using integration by parts, we can see that $\int x^2\sin(nx)dx=\frac{-x^2\cos(nx)}{n}+\frac{2x\sin(nx)}{n^2}+\frac{\cos(nx)}{n^3}$. This integral is solved below.
+\begin{align*}
+b_n &= \frac{2}{\pi}\left[\frac{-x^2\cos(nx)}{n}+\frac{2x\sin(nx)}{n^2}+\frac{\cos(nx)}{n^3}\right]^{\pi}_{0} \\
+&= \frac{-2\pi\cos(n\pi)}{n}+\frac{4\cos(n\pi)}{n^3\pi}-\frac{4}{n^3\pi} \\
+&= \frac{4\cos(n\pi)-2\pi^2n^2\cos(n\pi)-4}{n^3\pi} \\
+&= \frac{4(-1)^n-2\pi^2n^2(-1)^n-4}{n^3\pi} \\
+&= \frac{(4-2\pi^2n^2)(-1)^n-4}{n^3\pi}
+\end{align*}
+Since $b_n=\frac{(4-2\pi^2n^2)(-1)^n-4}{n^3\pi}$ and $a_n=0,\:\forall n\in\mathbb{N}$, the Fourier sine series of $f(x)=x^2$ on $0<x<\pi$ is $f(x)=\sum\limits^{\infty}_{n=1}\frac{(4-2\pi^2n^2)(-1)^n-4}{n^3\pi}\sin(nx)$.
+
+  (ii) Compute the Fourier cosine series of $f(x)$ Simplify expressions involving $\cos(n\pi)$ and $\sin(n\pi)$. (Do yo need to compute anything? Look at the previous problem.)
+  
+Since the function we are looking at is on a non-symmetric interval, we must extend $f(x)=x^2$, so that it is on a symmetric interval. In particular, since we are looking for the Fourier cosine series of $f(x)=x^2$, it turns out that we are looking at the even extension of $f$, which in our case is defined as
+\begin{align*}
+f_{even}(x) =
+\begin{cases}
+x^2 & x \in \left(0,\pi\right) \\
+x^2 & x \in \left(-\pi,0\right)
+\end{cases}
+\end{align*}
+We can now proceed in finding the Fourier series of $f_{even}(x)$. By definition, $f_{even}(x)$ is an even function, hence it follows that $b_n=0\:\forall n\in\mathbb{N}$. Thus all we have to find is $a_n$ and $a_0$. $\\$
+
+Notice that $f_{even}(x)$ is simply just $f(x)=x^2$ on $-\pi<x<\pi$. Thus we are finding the normal Fourier series of $f(x)=x^2$ on $-\pi<x<\pi$. This is exactly what we did in problem 1 part (i), hence the Fourier cosine series of $f(x)$ is $f(x)=\frac{\pi^2}{3}+\sum\limits^{\infty}_{n=1}\frac{4(-1)^n}{n^2}\cos\left(nx\right)$. Below we will show that these $a_0$, $a_n$, and $b_n$ are the same from problem 1 part (i). $\\$
+
+**Step 1:** Solve for $a_0$: $\\$
+Since in our case $L=\pi$, $f(x)=f_{even}(x)$ and $a_0=\frac{1}{L}\int^{L}_{-L}f(x)dx$, we have $a_0=\frac{1}{\pi}\int^{\pi}_{-\pi}f_{even}(x)dx$. Since $f_{even}(x)$ is an even function, we must solve $\frac{2}{\pi}\int^{\pi}_{0}x^2dx$. $\\$
+
+**Step 2:** Solve for $a_n$: $\\$
+Since in our case $L=\pi$, $f(x)=f_{even}(x)$ and $a_n=\frac{1}{L}\int^{L}_{-L}f(x)\cos\left(\frac{n\pi}{L}x\right)dx$, we have $a_n=\frac{1}{\pi}\int^{\pi}_{-\pi}f_{even}(x)\cos\left(nx\right)dx$. Since $f_{even}(x)$ is an even function, and $\cos(nx)$ is an even function, it follows that their product is an even function function, hence we can simplify the integral to $a_n=\frac{2}{\pi}\int^{\pi}_{0}x^2\cos(nx)dx$. $\\$
+
+As can be seen since the coefficients $a_0$, $a_n$, and $b_n$ are the same from problem 1 part (i), we have reassurance that we didn't need to calculate anything new from this problem and that the Fourier cosine series of $f(x)$ is $f(x)=\frac{\pi^2}{3}+\sum\limits^{\infty}_{n=1}\frac{4(-1)^n}{n^2}\cos\left(nx\right)$.
+ 
+  (iii) Which of these series converges to $f(x)$ faster? Give a brief justification of your choice.
+  
+As can be seen from the forms of $f_{odd}(x)$ and $f_{even}(x)$, we can see that there are no obvious removable, jump or infinite discontinuities in either of the two functions. However, as mentioned in Piazza, since $f_{odd}(-\pi)=-\pi^2\neq f_{odd}(\pi)=\pi^2$, but $f_{even}(-\pi)=f_{even}(\pi)=\pi^2$, it has been shown that $f_{odd}(x)$ has a boundary discontinuity, while $f_{even}(x)$ has no discontinuities. Since $f_{odd}$ has more discontinuities than $f_{even}$, the Fourier cosine series should converge to $f(x)$ faster.
+
+3. Solve the following initial boundary value problem \textit{without using Fourier series to satisfy the initial condition}:
+\begin{align*}
+\begin{cases} u_t = u_{xx}, \quad 0 < x < L, \\ u(0,t) = u(L,t) = 0, \\ u(x,0) = \sin( \frac{\pi}{L} x) - 2\sin(\frac{2\pi}{L} x) + 3\sin( \frac{3\pi}{L}x). \end{cases}
+\end{align*}
+
+As found in the Homework 6 Multi-Step Problem, the BVP
+\begin{align*}
+u_{t} &= u_{xx}, \quad 0<x<L \\
+u(0,t) &= u(L,t) = 0,
+\end{align*}
+has a countably infinite number of standing wave solutions of the form.
+\begin{align*}
+u_n(x,t) &= H_n\sin\left(\frac{n\pi x}{L}\right)e^{\frac{-n^2\pi^2}{L^2}t}.
+\end{align*}
+Since the PDE is linear and homogeneous it has a superposition principle thus any linear combination of these above solutions is also a solution. Hence we can write the above solutions into one as shown below.
+\begin{align*}
+u(x,t) &= \sum\limits^{\infty}_{n=1}H_n\sin\left(\frac{n\pi x}{L}\right)e^{\frac{-n^2\pi^2}{L^2}t}
+\end{align*}
+As shown below, this new solution form also satisfies the boundary conditions.
+\begin{align*}
+u(0,t) &= \sum\limits^{\infty}_{n=1}H_n\sin\left(0\right)e^{\frac{-n^2\pi^2}{L^2}t} = 0 \\
+u(L,t) &= \sum\limits^{\infty}_{n=1}H_n\sin\left(n\pi\right)e^{\frac{-n^2\pi^2}{L^2}t} = 0
+\end{align*}
+Applying the initial condition $u(x,0) = \sin( \frac{\pi}{L} x) - 2\sin(\frac{2\pi}{L} x) + 3\sin( \frac{3\pi}{L}x)$, we obtain the following.
+\begin{align*}
+\sin\left(\frac{\pi}{L} x\right) - 2\sin\left(\frac{2\pi}{L} x\right) + 3\sin\left(\frac{3\pi}{L}x\right) &= u(x,0) \\
+&= \sum\limits^{\infty}_{n=1}H_n\sin\left(\frac{n\pi x}{L}\right) \\
+&= H_1\sin\left(\frac{\pi x}{L}\right) + H_2\sin\left(\frac{2\pi x}{L}\right) + H_3\sin\left(\frac{3\pi x}{L}\right) + \dots
+\end{align*}
+Matching the forms of both sides of the initial condition, we can see that $H_1=1$, $H_2=-2$, $H_3=3$, and $H_n=0,\:\forall n\geq4$. Hence, plugging in these values of $n$ and $H_n$ into our general solution from, we can see that the solution to the above IBVP is
+\begin{align*}
+u(x,t) &= \sin\left(\frac{\pi x}{L}\right)e^{\frac{-\pi^2}{L^2}t}-2\sin\left(\frac{2\pi x}{L}\right)e^{\frac{-4\pi^2}{L^2}t}+3\sin\left(\frac{3\pi x}{L}\right)e^{\frac{-9\pi^2}{L^2}t}.
+\end{align*}
+
+4. Find the solution of the following initial boundary value problem \textit{using Fourier series}:
+\begin{align*}
+\begin{cases}
+u_{tt} = 9u_{xx}, \quad 0 < x < \pi, \\
+u_x(0,t) = 0 = u_x(\pi,t), \\
+u(x,0) = x^2(x-\pi)^2, \\
+u_t(x,0) \equiv 0.
+\end{cases}
+\end{align*}
+Feel free to use software of your choice to evaluate any integrals that appear in your solution. Be sure to simplify expressions involving $\cos(n\pi)$ and $\sin(n\pi)$.
+
+As found in Lecture 11 Example 5.6.2 the solution to the IBVP
+\begin{align*}
+\begin{cases}
+u_{tt} = c^2u_{xx}, \quad 0 < x < \pi, \\
+u_x(0,t) = 0 = u_x(\pi,t), \\
+u(x,0) = f(x), \\
+u_t(x,0) = g(x),
+\end{cases}
+\end{align*}
+is $u(x,t)=\frac{1}{2}A_0 + \frac{1}{2}B_0t+\sum\limits^{\infty}_{n=1}\cos(nx)\left[A_n\cos(nct)+B_n\sin(nct)\right]$. Where $A_n=\frac{2}{\pi}\int^{\pi}_{0}f(x)\cos(nx)dx, n=0,1,2,\dots$, $B_0=\frac{2}{\pi}\int^{\pi}_{0}g(x)dx$, and $B_n=\frac{2}{nc\pi}\int^{\pi}_{0}g(x)\cos(nx)dx,\:n=1,2,3,\dots$. Hence in our case $c=3$, and our solution becomes $u(x,t)=\frac{1}{2}A_0 + \frac{1}{2}B_0t+\sum\limits^{\infty}_{n=1}\cos(nx)\left[A_n\cos(3nt)+B_n\sin(3nt)\right]$. Below we will find values for the coefficients $A_0$, $A_n$, $B_0$, and $B_n$ for the solutions above. $\\$
+
+**Step 1:** Solve for $A_0$: $\\$
+As shown above, the form of our coefficient $A_0$ is, $A_0 = \frac{2}{\pi}\int^{\pi}_{0}f(x)dx$, hence in our case $A_0 = \frac{2}{\pi}\int^{\pi}_{0}x^4-2\pi x^3+\pi^2x^2dx$. This integral is solved below.
+\begin{align*}
+A_0 &= \frac{2}{\pi}\int^{\pi}_{0}x^4-2\pi x^3+\pi^2x^2dx \\
+&= \frac{2}{\pi}\left[\frac{x^5}{5}-\frac{\pi x^4}{2}+\frac{\pi^2x^3}{3}\right]^{\pi}_{0} \\
+&= \frac{2}{\pi}\left[\frac{\pi^5}{5}-\frac{\pi^5}{2}+\frac{\pi^5}{3}\right] \\
+&= \frac{2}{\pi}\left[\frac{\pi^5}{30}\right] \\
+&= \frac{\pi^4}{15}
+\end{align*}
+
+**Step 2:** Solve for $A_n$: $\\$
+As shown above, the form of our coefficient $A_n$ is, $A_n = \frac{2}{\pi}\int^{\pi}_{0}f(x)\cos(nx)dx$, hence in our case $A_n = \frac{2}{\pi}\int^{\pi}_{0}(x^4-2\pi x^3+\pi^2x^2)\cos(nx)dx$. This integral is solved below.
+\begin{align*}
+A_n &= \frac{2}{\pi}\int^{\pi}_{0}(x^4-2\pi x^3+\pi^2x^2)\cos(nx)dx \\
+&= \frac{2}{\pi}\int^{\pi}_{0}x^4\cos(nx)dx-4\int^{\pi}_{0}x^3\cos(nx)dx+2\pi\int^{\pi}_{0}x^2\cos(nx)dx
+\end{align*}
+Using integration by parts on the 3 above integrals we can see that
+\begin{align*}
+\int x^4\cos(nx)dx &= \frac{x^4\sin(nx)}{n} + \frac{4x^3\cos(nx)}{n^2} - \frac{12x^2\sin(nx)}{n^3} - \frac{24x\cos(nx)}{n^4} + \frac{24\sin(nx)}{n^5} \\
+\int x^3\cos(nx)dx &= \frac{x^3\sin(nx)}{n} + \frac{3x^2\cos(nx)}{n^2} - \frac{6x\sin(nx)}{n^3} - \frac{6\cos(nx)}{n^4} \\
+\int x^2\cos(nx)dx &= \frac{x^2\sin(nx)}{n} + \frac{2x\cos(nx)}{n^2} - \frac{2\sin(nx)}{n^3} \\
+\end{align*}
+Resuming our calculation of $A_n$ we see we must solve $\frac{2}{\pi}\left[\frac{x^4\sin(nx)}{n} + \frac{4x^3\cos(nx)}{n^2} - \frac{12x^2\sin(nx)}{n^3} - \frac{24x\cos(nx)}{n^4} + \frac{24\sin(nx)}{n^5}\right]^{\pi}_{0}-4\left[\frac{x^3\sin(nx)}{n} + \frac{3x^2\cos(nx)}{n^2} - \frac{6x\sin(nx)}{n^3} - \frac{6\cos(nx)}{n^4}\right]^{\pi}_{0}+2\pi\left[\frac{x^2\sin(nx)}{n} + \frac{2x\cos(nx)}{n^2} - \frac{2\sin(nx)}{n^3}\right]^{\pi}_{0}$. This calculation is shown below.
+\begin{align*}
+A_n &= \frac{8\pi^2\cos(n\pi)}{n^2}-\frac{48\cos(n\pi)}{n^4}-\frac{12\pi^2\cos(n\pi)}{n^2}+\frac{24\cos(n\pi)}{n^4}-\frac{24}{n^4}+\frac{4\pi^2\cos(n\pi)}{n^2} \\
+&= \frac{-24\cos(n\pi)}{n^4}-\frac{24}{n^4} \\
+&= \frac{-24(-1)^n-24}{n^4}
+\end{align*}
+
+**Step 3:** Solve for $B_0$: $\\$
+As shown above, the form of our coefficient $B_0$ is, $B_0 = \frac{2}{\pi}\int^{\pi}_{0}g(x)dx$, hence in our case $B_n = \frac{2}{\pi}\int^{\pi}_{0}0dx=0$. $\\$
+
+**Step 4:** Solve for $B_n$: $\\$
+As shown above, the form of our coefficient $B_n$ is, $B_n = \frac{2}{nc\pi}\int^{\pi}_{0}g(x)\cos(nx)dx$, hence in our case $B_n = \frac{2}{3n\pi}\int^{\pi}_{0}0\cdot\cos(nx)dx=\frac{2}{3n\pi}\int^{\pi}_{0}0dx=0$. $\\$
+
+Plugging in our values of $A_0$, $B_0$, $A_n$, and $B_n$ into our solution form above we obtain the solution to the above IBVP which is $u(x,t)=\frac{\pi^4}{30} +\sum\limits^{\infty}_{n=1}\frac{-24(-1)^n-24}{n^4}\cos(nx)\cos(3nt)$. Furthermore, since all of the odd numbers in this summation equal $0$, we can "rename" and replace $n$ as $2n$ in our summation to only account for the even numbers. Doing this leads to an equivalent result of $u(x,t)=\frac{\pi^4}{30} +\sum\limits^{\infty}_{n=1}\frac{-3}{n^4}\cos(2nx)\cos(6nt)$.

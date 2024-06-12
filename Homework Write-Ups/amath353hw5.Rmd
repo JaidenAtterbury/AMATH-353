@@ -1,0 +1,403 @@
+---
+title: "AMATH 353 Homework 5"
+author: "Jaiden Atterbury"
+date: "2023-08-01"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Component Skills Practice
+
+## Exercise 1. Skills 5.1-5.2.
+
+Consider the following damped wave equation:
+\begin{align*}
+u_{tt} - 2u_{x} &= u_{xx}.
+\end{align*}
+In this exercise, we find all its standing wave solutions. $\\$
+
+  a. Let $u(x,t) = X(x)T(t)$ be a standing wave solution of our damped wave equation. Use separation of variables to obtain ODE's for $X(x)$ and $T(t)$. Let $\lambda$ denote your separation constant.
+
+Let $u(x,t)=X(x)T(t)$ be a standing wave solution of $u_{tt} - 2u_{x} = u_{xx}$, we will use separation of variables to obtain ODE's for $X(x)$ and $T(t)$ letting $\lambda$ denote our separation constant. This process is shown below.
+\begin{align*}
+u_{tt} - 2u_{x} &= u_{xx} \\
+\left(X(x)T(t)\right)_{tt} - 2\left(X(x)T(t)\right)_{x} &= \left(X(x)T(t)\right)_{xx} \\
+X(x)T''(t) - 2X'(x)T(t) &= X''(x)T(t) \\
+X(x)T''(t) &= X''(x)T(t) + 2X'(x)T(t) \\
+\frac{T''(t)}{T(t)} &= \frac{X''(x) + 2X'(x)}{X(x)} = \lambda
+\end{align*}
+The last line from the above separation of variables process gives us ODE's for $X(x)$ and $T(t)$. These ODEs are $T''(t) = \lambda T(t) \implies T''(t) - \lambda T(t) = 0$ and $X''(x) + 2X'(x) = \lambda X(x) \implies X''(x) + 2X'(x) - \lambda X(x) = 0$.
+
+  b. Solve your $X(x)$ equation in three cases: (i) $\lambda < -1$, (ii) $\lambda = -1$, (iii) $\lambda > -1$. Make sure your solutions are real-valued in all three cases. 
+  
+We will now solve the ODE for $X(x)$ in three cases: (i) $\lambda < -1$, (ii) $\lambda = -1$, (iii) $\lambda > -1$.
+
+  - $\bf{Case \ 1, \ \lambda < -1}$:
+
+In this case our ODE is $X''(x) + 2X'(x) - \lambda X(x) = 0$ with $\lambda < -1$. Since this is a linear second order homogeneous ODE with constant coefficients, it takes one of three forms. In particular, the discriminant of the characteristic polynomial is $\Delta = 2^2 - 4(1)(-\lambda) = 4 + 4\lambda$. However, $\lambda < -1 \implies 4 + 4\lambda < 0$. Hence the resulting polynomial has complex conjugate roots of the form $\sigma\pm i\omega$, where $\sigma = \frac{-2}{2}=-1$ and $\omega = \frac{\sqrt{|4+4\lambda|}}{2} = \frac{\sqrt{-4\lambda - 4}}{2} =  \sqrt{-\lambda - 1}$. The general solution of ODEs of this form is $f(x)=c_1e^{\sigma x}\cos(\omega x)+c_2e^{\sigma x}\sin(\omega x)$. Hence in our case, $X(x)=Ae^{-x}\cos\left(x\sqrt{-\lambda - 1}\right)+Be^{-x}\sin\left(x\sqrt{-\lambda - 1}\right)$.
+
+  - $\bf{Case \ 2, \ \lambda = -1}$:
+
+In this case our ODE is $X''(x) + 2X'(x) + X(x) = 0$. Since this is a linear second order homogeneous ODE with constant coefficients, it takes one of three forms. In particular, the discriminant of the characteristic polynomial is $\Delta = 2^2 - 4(1)(1) = 4 - 4 = 0$. Hence the resulting polynomial has one repeated root of the form $r = \frac{-2}{2} = -1$. The general solution of ODEs of this form is $f(x)=c_1e^{r x}+c_2xe^{r x}$. Hence in our case, $X(x)=Ce^{-x}+Dxe^{-x}$.
+
+  - $\bf{Case \ 3, \ \lambda > -1}$:
+
+In this case our ODE is $X''(x) + 2X'(x) - \lambda X(x) = 0$ with $\lambda > -1$. Since this is a linear second order homogeneous ODE with constant coefficients, it takes one of three forms. In particular, the discriminant of the characteristic polynomial is $\Delta = 2^2 - 4(1)(-\lambda) = 4 + 4\lambda$. However, $\lambda > -1 \implies 4 + 4\lambda > 0$. Hence the resulting polynomial has two real roots of the form $r_{1,2}=\frac{-2\pm\sqrt{4+4\lambda}}{2}=-1\pm\sqrt{1+\lambda}$. The general solution of ODEs of this form is $f(x)=c_1e^{r_1x}+c_2e^{r_2 x}$. Hence in our case, $X(x)=Ee^{(-1+\sqrt{1+\lambda})x}+Fe^{(-1-\sqrt{1+\lambda})x}$.
+  
+  c. Solve your $T(t)$ equation in three cases: (i) $\lambda < 0$, (ii) $\lambda = 0$, (iii) $\lambda > 0$. Make sure your solutions are real-valued in all three cases.
+
+  - $\bf{Case \ 1, \ \lambda < 0}$:
+
+In this case our ODE is $T''(t)-\lambda T(t)=0$ with $\lambda < 0$. Since this is a linear second order homogeneous ODE with constant coefficients, it takes one of three forms. In particular, the discriminant of the characteristic polynomial is $\Delta = -4(1)(-\lambda) = 4\lambda$. However, $\lambda < 0 \implies 4\lambda < 0$. Hence the resulting polynomial has complex conjugate roots of the form $\sigma\pm i\omega$, where $\sigma = \frac{0}{2}=0$ and $\omega = \frac{\sqrt{|4\lambda|}}{2} = \frac{\sqrt{-4\lambda}}{2} = \sqrt{-\lambda}$. The general solution of ODEs of this form is $f(t)=c_1e^{\sigma t}\cos(\omega t)+c_2e^{\sigma t}\sin(\omega t)$. Hence in our case, $T(t)=G\cos\left(t\sqrt{-\lambda}\right)+H\sin\left(t\sqrt{-\lambda}\right)$.
+
+  - $\bf{Case \ 2, \ \lambda = 0}$:
+  
+In this case our ODE is $T''(t)=0$. Since this is a linear second order homogeneous ODE with constant coefficients, it takes one of three forms. In particular, the discriminant of the characteristic polynomial is $\Delta =  0$. Hence the resulting polynomial has one repeated root of the form $r = \frac{0}{2} = 0$. The general solution of ODEs of this form is $f(t)=c_1e^{r t}+c_2xe^{r t}$. Hence in our case, $T(t)=It+J$. 
+
+  - $\bf{Case \ 3, \ \lambda > 0}$:
+
+In this case our ODE is $T''(t)-\lambda T(t)=0$ with $\lambda > 0$. Since this is a linear second order homogeneous ODE with constant coefficients, it takes one of three forms. In particular, the discriminant of the characteristic polynomial is $\Delta = -4(1)(-\lambda) = 4\lambda$. However, $\lambda > 0 \implies 4\lambda > 0$. Hence the resulting polynomial has two real roots of the form $r_{1,2}=\frac{\pm\sqrt{4\lambda}}{2} = \pm\sqrt\lambda$. The general solution of ODEs of this form is $f(t)=c_1e^{r_1 t}+c_2e^{r_2 t}$. Hence in our case, $T(t)=Ke^{t\sqrt{\lambda}}+Le^{-t\sqrt{\lambda}}$.
+
+  d. From our calculations in (b) and (c), we see that there are five possible forms for $u(x,t)$, depending on the value of $\lambda$: (i) $\lambda < -1$, (ii) $\lambda = -1$, (iii) $-1 < \lambda < 0$, (iv) $\lambda = 0$, and (v) $\lambda > 0$. Determine the form of $u(x,t)$ in each case.
+
+  - $\bf{Case \ 1, \ \lambda < -1}$:
+  
+Since $\lambda < -1$, we will use the $X(x)$ for the $\lambda < -1$ case, and the $T(t)$ for the $\lambda < 0$ case. These are $X(x)=Ae^{-x}\cos\left(x\sqrt{-\lambda - 1}\right)+Be^{-x}\sin\left(x\sqrt{-\lambda - 1}\right)$ and $T(t)=G\cos\left(t\sqrt{-\lambda}\right)+H\sin\left(t\sqrt{-\lambda}\right)$. Putting them together we see that $u(x,t)=\left(Ae^{-x}\cos\left(x\sqrt{-\lambda - 1}\right)+Be^{-x}\sin\left(x\sqrt{-\lambda - 1}\right)\right)\left(G\cos\left(t\sqrt{-\lambda}\right)+H\sin\left(t\sqrt{-\lambda}\right)\right)$ for $\lambda < -1$.
+
+  - $\bf{Case \ 2, \ \lambda = -1}$:
+  
+Since $\lambda = -1$, we will use the $X(x)$ for the $\lambda = -1$ case, and the $T(t)$ for the $\lambda < 0$ case evaluated at $\lambda = -1$. These are $X(x)=Ce^{-x}+Dxe^{-x}$ and $T(t)=G\cos\left(t\right)+H\sin\left(t\right)$. Putting them together we see that $u(x,t)=\left(Ce^{-x}+Dxe^{-x}\right)\left(G\cos\left(t\right)+H\sin\left(t\right)\right)$.
+
+  - $\bf{Case \ 3, \ -1 < \lambda < 0}$:
+  
+Since $-1 < \lambda < 0$, we will use the $X(x)$ for the $\lambda > -1$ case, and the $T(t)$ for the $\lambda < 0$ case. These are $X(x)=Ee^{(-1+\sqrt{1+\lambda})x}+Fe^{(-1-\sqrt{1+\lambda})x}$ and $T(t)=G\cos\left(t\sqrt{-\lambda}\right)+H\sin\left(t\sqrt{-\lambda}\right)$. Putting them together we see that $u(x,t)=\left(Ee^{(-1+\sqrt{1+\lambda})x}+Fe^{(-1-\sqrt{1+\lambda})x}\right)\left(G\cos\left(t\sqrt{-\lambda}\right)+H\sin\left(t\sqrt{-\lambda}\right)\right)$ for $-1 < \lambda < 0$.
+
+  - $\bf{Case \ 4, \ \lambda = 0}$:
+  
+Since $\lambda = 0$, we will use the $X(x)$ for the $\lambda > -1$ case evaluated at $\lambda = 0$, and the $T(t)$ for the $\lambda = 0$ case. These are $X(x)=E+Fe^{-2x}$ and $T(t)=It+J$. Putting them together we see that $u(x,t)=\left(E+Fe^{-2x}\right)\left(It+J\right)$.
+
+  - $\bf{Case \ 5, \ \lambda > 0}$:
+  
+Since $\lambda > 0$, we will use the $X(x)$ for the $\lambda > -1$ case, and the $T(t)$ for the $\lambda > 0$ case. These are $X(x)=Ee^{(-1+\sqrt{1+\lambda})x}+Fe^{(-1-\sqrt{1+\lambda})x}$ and $T(t)=Ke^{t\sqrt{\lambda}}+Le^{-t\sqrt{\lambda}}$. Putting them together we see that $u(x,t)=\left(Ee^{(-1+\sqrt{1+\lambda})x}+Fe^{(-1-\sqrt{1+\lambda})x}\right)\left(Ke^{t\sqrt{\lambda}}+Le^{-t\sqrt{\lambda}}\right)$ for $\lambda > 0$.
+
+## Exercise 2. Skill 5.3.
+Particles in quantum mechanics are described by solutions to the Schrodinger equation called wavefunctions. The amplitude of these wavefunctions is related to the probability of finding a quantum particle at a particular location and time. For example, suppose we have an electron confined to a thin rod of length $L$. If the electron is free to move within the rod, then the wavefunction $u(x,t)$ of the electron satisfies the following boundary value problem: 
+\begin{align*}
+iu_t &= u_{xx} \\
+u(0,t) &= u(L,t) = 0,
+\end{align*} 
+where $i = \sqrt{-1}$. The PDE above is the free-potential Schrodinger equation (re-scaled to get rid of physical parameters, of course), and the boundary conditions communicate that the probability of finding the electron at the edges of the rod is zero. In this exercise, we find all the standing wave solutions of this boundary value problem.
+
+  a. Let $u(x,t) = X(x)T(t)$ be a standing wave solution of the Schrodinger equation. Using separation of variables, obtain ODE's for $X(x)$ and $T(t)$. To make life easier, keep the imaginary unit in the $T(t)$ equation. Let $\lambda$ be your separation constant.
+
+Let $u(x,t)=X(x)T(t)$ be a standing wave solution of $iu_t = u_{xx}$, we will use separation of variables to obtain ODE's for $X(x)$ and $T(t)$ letting $\lambda$ denote our separation constant. This process is shown below.
+\begin{align*}
+iu_t &= u_{xx} \\
+i\left(X(x)T(t)\right)_{t} &= \left(X(x)T(t)\right)_{xx} \\
+iX(x)T'(t) &= X''(x)T(t) \\
+\frac{iT'(t)}{T(t)} &= \frac{X''(x)}{X(x)} = \lambda
+\end{align*}
+The last line from the above separation of variables process gives us ODE's for $X(x)$ and $T(t)$. These ODEs are $iT'(t) = \lambda T(t)$ and $X''(x) = \lambda X(x) \implies X''(x) - \lambda X(x) = 0$.
+ 
+  b. Solve your $X(x)$ equation. Consider all three possibilities for $\lambda$. 
+
+  - $\bf{Case \ 1, \ \lambda < 0}$:
+
+In this case our ODE is $X''(x)-\lambda X(x)=0$ with $\lambda < 0$. Since this is a linear second order homogeneous ODE with constant coefficients, it takes one of three forms. In particular, the discriminant of the characteristic polynomial is $\Delta = -4(1)(-\lambda) = 4\lambda$. However, $\lambda < 0 \implies 4\lambda < 0$. Hence the resulting polynomial has complex conjugate roots of the form $\sigma\pm i\omega$, where $\sigma = \frac{0}{2}=0$ and $\omega = \frac{\sqrt{|4\lambda|}}{2} = \frac{\sqrt{-4\lambda}}{2} = \sqrt{-\lambda}$. The general solution of ODEs of this form is $f(x)=c_1e^{\sigma x}\cos(\omega x)+c_2e^{\sigma x}\sin(\omega x)$. Hence in our case, $X(x)=A\cos\left(x\sqrt{-\lambda}\right)+B\sin\left(x\sqrt{-\lambda}\right)$.
+
+  - $\bf{Case \ 2, \ \lambda = 0}$:
+  
+In this case our ODE is $X''(x)=0$. Since this is a linear second order homogeneous ODE with constant coefficients, it takes one of three forms. In particular, the discriminant of the characteristic polynomial is $\Delta =  0$. Hence the resulting polynomial has one repeated root of the form $r = \frac{0}{2} = 0$. The general solution of ODEs of this form is $f(x)=c_1e^{r x}+c_2xe^{r x}$. Hence in our case, $X(x)=Cx+D$. 
+
+  - $\bf{Case \ 3, \ \lambda > 0}$:
+
+In this case our ODE is $X''(x)-\lambda X(x)=0$ with $\lambda > 0$. Since this is a linear second order homogeneous ODE with constant coefficients, it takes one of three forms. In particular, the discriminant of the characteristic polynomial is $\Delta = -4(1)(-\lambda) = 4\lambda$. However, $\lambda > 0 \implies 4\lambda > 0$. Hence the resulting polynomial has two real roots of the form $r_{1,2}=\frac{\pm\sqrt{4\lambda}}{2} = \pm\sqrt\lambda$. The general solution of ODEs of this form is $f(x)=c_1e^{r_1 x}+c_2e^{r_2 x}$. Hence in our case, $X(x)=Ee^{x\sqrt{\lambda}}+Fe^{-x\sqrt{\lambda}}$.
+
+  c. Enforce the boundary conditions for each of your possible forms of $X(x)$. What are the nonzero forms of $X(x)$ that satisfy the boundary conditions?
+
+  - $\bf{Case \ 1, \ \lambda < 0}$:
+  
+In case 1, $X(x)=A\cos\left(x\sqrt{-\lambda}\right)+B\sin\left(x\sqrt{-\lambda}\right)$, and the boundary conditions are $u(0,t) = u(L,t) = 0$. Below we will enforce these boundary conditions to find $X(x)$ that satisfy the boundary conditions.
+\begin{align*}
+X(0) &= A\cos\left(0\cdot\sqrt{-\lambda}\right)+B\sin\left(0\cdot\sqrt{-\lambda}\right) = A = 0 \implies A = 0 \\
+X(L) &= A\cos\left(L\cdot\sqrt{-\lambda}\right)+B\sin\left(L\cdot\sqrt{-\lambda}\right) = B\sin\left(L\cdot\sqrt{-\lambda}\right) = 0
+\end{align*}
+Hence from above we can see that $A=0$ and $B\sin\left(L\sqrt{-\lambda}\right) = 0$. Since we are looking for nonzero forms of $X(x)$, it follows that $B\neq0$, hence $\sin\left(L\sqrt{-\lambda}\right) = 0$. The function $\sin$ equals zero at an argument of $k\pi$ where $k\in\mathbb{Z}$, this implies that $L\sqrt{-\lambda}=k\pi$. However, since $L,\sqrt{-\lambda}>0$, it follows that $n = k \in \mathbb{N}$. Thus we rewrite the previous expression as $L\sqrt{-\lambda}=n\pi$. Solving for $\sqrt{-\lambda}$ we obtain $\sqrt{-\lambda}=\frac{n\pi}{L}$. Hence our nonzero form of $X(x)$ is $X_n(x)=B_n\sin\left(\frac{n\pi}{L}x\right),\:n\in\mathbb{N}$
+
+  - $\bf{Case \ 2, \ \lambda = 0}$:
+  
+In case 2, $X(x)=Cx+D$, and the boundary conditions are $u(0,t) = u(L,t) = 0$. Below we will enforce these boundary conditions to find $X(x)$ that satisfy the boundary conditions.
+\begin{align*}
+X(0) &= C(0)+D = D = 0 \implies D = 0 \\
+X(L) &= C(L) + D = CL = 0 \implies C = 0
+\end{align*}
+Hence from above we can see that $C, D = 0$, hence $X(x)=0 \implies u(x,t)=0$. Thus there are no nonzero forms of $X(x)$ for this case.
+
+  - $\bf{Case \ 3, \ \lambda > 0}$:
+  
+In case 3, $X(x)=Ee^{x\sqrt{\lambda}}+Fe^{-x\sqrt{\lambda}}$, and the boundary conditions are $u(0,t) = u(L,t) = 0$. Below we will enforce these boundary conditions to find $X(x)$ that satisfy the boundary conditions.
+\begin{align*}
+X(0) &= Ee^{0\cdot\sqrt{\lambda}}+Fe^{-0\cdot\sqrt{\lambda}} = E + F = 0 \implies -E = F \\
+X(L) &= Ee^{L\sqrt{\lambda}}+Fe^{-L\sqrt{\lambda}} = Ee^{L\sqrt{\lambda}}-Ee^{-L\sqrt{\lambda}} = E\left(e^{L\sqrt{\lambda}}-e^{-L\sqrt{\lambda}}\right) = 0
+\end{align*}
+Hence from above we can see that $E\left(e^{L\sqrt{\lambda}}-e^{-L\sqrt{\lambda}}\right)=0$. Since we are looking for nonzero forms of $X(x)$, it follows that $E\neq0$, thus we are looking at $e^{L\sqrt{\lambda}}-e^{-L\sqrt{\lambda}}=0$. This equation is only satisfied for $\lambda=0$, however $\lambda>0$. Therefore $E$ must equal $0$ which implies $F=0$, hence $X(x)=0 \implies u(x,t)=0$. Thus there are no nonzero forms of $X(x)$ for this case.
+
+  d.  For those nonzero $X(x)$ that satisfy the boundary conditions, solve the corresponding $T(t)$ equation.
+\textit{Hint}: Treat $i$ as a constant. Keep your answer in the form of a complex exponential.
+
+The only case with nonzero forms for $X(x)$ was case 1. In this case $X_n(x)=B_n\sin\left(\frac{n\pi}{L}x\right),\:n\in\mathbb{N}$, which implies that $\lambda = -\frac{n^2\pi^2}{L^2}$. We will now solve the ODE $iT'(t)=\lambda T(t)$ with $\lambda$ as defined above.
+\begin{align*}
+iT'(t) &= \lambda T(t) \\
+\int\frac{T'(t)dt}{T(t)} &= \int-i\lambda dt + C \\
+\int\frac{dT}{T} &= \int-i\lambda dt + C \\
+\ln|T| &= -i\lambda t + C \\
+|T| &= e^{C}e^{-i\lambda t} \\
+T &= \pm e^{C}e^{-i\lambda t} \\
+T &= G_n e^{-i\lambda t} \quad \text{($G_n = \pm e^{C}$)}
+\end{align*}
+Replacing $\lambda$ with the expression calculated above we see that $T_n(t)=G_n e^{\frac{in^2\pi^2}{L^2}t}$.
+
+  e. What are the nonzero standing wave solutions of this boundary value problem?
+
+In part (c) we found that $X_n(x)=B_n\sin\left(\frac{n\pi}{L}x\right)$, and in part (d) we found that $T_n(t)=G_n e^{\frac{in^2\pi^2}{L^2}t}$. Putting these together and redefining a new constant $H_n=B_nG_n$, we get the countably infinite number of nonzero standing wave solutions of the above boundary value problem, $u_n(x,t)=H_n e^{\frac{in^2\pi^2}{L^2}t}\sin\left(\frac{n\pi}{L}x\right)$ for $n\in\mathbb{N}$. Furthermore, since the PDE is linear and homogeneous it has a superposition principle thus any linear combination of these above solutions is also a solution.
+
+## Exercise 3. Skill 5.3.
+
+For this problem, we will compute the standing wave solutions of the heat equation
+\begin{align*}
+u_{t} = u_{xx}
+\end{align*}
+subject to homogeneous Neumann boundary conditions
+\begin{align*}
+u_x(0,t) = 0 = u_x(L,t),  
+\end{align*}
+where $L>0$ is some constant. This is the first step to solving the physical problem of finding the temperature distribution in a rod of length $L$ with insulated end points (no heat flowing out of the end points). You'll get to finish solving this physical problem in the next homework assignment.
+
+  a. Let $u(x,t) = X(x)T(t)$ be a standing wave solution of the heat equation. Using separation of variables, obtain ODE's for $X(x)$ and $T(t)$. Let $\lambda$ be your separation constant.
+
+Let $u(x,t)=X(x)T(t)$ be a standing wave solution of $u_t = u_{xx}$, we will use separation of variables to obtain ODE's for $X(x)$ and $T(t)$ letting $\lambda$ denote our separation constant. This process is shown below.
+\begin{align*}
+u_t &= u_{xx} \\
+\left(X(x)T(t)\right)_{t} &= \left(X(x)T(t)\right)_{xx} \\
+X(x)T'(t) &= X''(x)T(t) \\
+\frac{T'(t)}{T(t)} &= \frac{X''(x)}{X(x)} = \lambda
+\end{align*}
+The last line from the above separation of variables process gives us ODE's for $X(x)$ and $T(t)$. These ODEs are $T'(t) = \lambda T(t)$ and $X''(x) = \lambda X(x) \implies X''(x) - \lambda X(x) = 0$.
+
+  b. Obtain solutions to your ODE for $X(x)$ in the usual three cases: $\lambda > 0$, $\lambda = 0$, and $\lambda < 0$. In each case, try to get your solutions to satisfy the boundary conditions. What are the nonzero $X(x)$'s that satisfy the boundary conditions?
+  
+  - $\bf{Case \ 1, \ \lambda < 0}$:
+
+In this case our ODE is $X''(x)-\lambda X(x)=0$ with $\lambda < 0$. Since this is a linear second order homogeneous ODE with constant coefficients, it takes one of three forms. In particular, the discriminant of the characteristic polynomial is $\Delta = -4(1)(-\lambda) = 4\lambda$. However, $\lambda < 0 \implies 4\lambda < 0$. Hence the resulting polynomial has complex conjugate roots of the form $\sigma\pm i\omega$, where $\sigma = \frac{0}{2}=0$ and $\omega = \frac{\sqrt{|4\lambda|}}{2} = \frac{\sqrt{-4\lambda}}{2} = \sqrt{-\lambda}$. The general solution of ODEs of this form is $f(x)=c_1e^{\sigma x}\cos(\omega x)+c_2e^{\sigma x}\sin(\omega x)$. Hence in our case, $X(x)=A\cos\left(x\sqrt{-\lambda}\right)+B\sin\left(x\sqrt{-\lambda}\right)$.
+
+Before we enforce the boundary conditions we will take the derivative of $X(x)$, which we can see is $X'(x)=-A\sqrt{-\lambda}\sin\left(x\sqrt{-\lambda}\right)+B\sqrt{-\lambda}\cos\left(x\sqrt{-\lambda}\right)$. Below we will enforce these boundary conditions to find $X(x)$ that satisfy the boundary conditions.
+\begin{align*}
+X'(0) &= -A\sqrt{-\lambda}\sin\left(0\cdot\sqrt{-\lambda}\right)+B\sqrt{-\lambda}\cos\left(0\cdot\sqrt{-\lambda}\right) = B\sqrt{-\lambda} = 0 \implies B = 0 \\
+X'(L) &= -A\sqrt{-\lambda}\sin\left(L\sqrt{-\lambda}\right)+B\sqrt{-\lambda}\cos\left(L\sqrt{-\lambda}\right) = -A\sqrt{-\lambda}\sin\left(L\sqrt{-\lambda}\right) = 0
+\end{align*}
+Hence from above we can see that $B=0$ and $-A\sqrt{-\lambda}\sin\left(L\sqrt{-\lambda}\right) = 0$. Since we are looking for nonzero forms of $X(x)$, it follows that $A\neq0$, hence $\sin\left(L\sqrt{-\lambda}\right) = 0$. The function $\sin$ equals zero at an argument of $k\pi$ where $k\in\mathbb{Z}$, this implies that $L\sqrt{-\lambda}=k\pi$. However, since $L,\sqrt{-\lambda}>0$, it follows that $n = k \in \mathbb{N}$. Thus we rewrite the previous expression as $L\sqrt{-\lambda}=n\pi$. Solving for $\sqrt{-\lambda}$ we obtain $\sqrt{-\lambda}=\frac{n\pi}{L}$. Hence our nonzero form of $X(x)$ is $X_n(x)=A_n\cos\left(\frac{n\pi}{L}x\right),\:n\in\mathbb{N}$
+
+  - $\bf{Case \ 2, \ \lambda = 0}$:
+  
+In this case our ODE is $X''(x)=0$. Since this is a linear second order homogeneous ODE with constant coefficients, it takes one of three forms. In particular, the discriminant of the characteristic polynomial is $\Delta =  0$. Hence the resulting polynomial has one repeated root of the form $r = \frac{0}{2} = 0$. The general solution of ODEs of this form is $f(x)=c_1e^{r x}+c_2xe^{r x}$. Hence in our case, $X(x)=Cx+D$.
+
+Before we enforce the boundary conditions we will take the derivative of $X(x)$, which we can see is $X'(x)=C$. Below we will enforce these boundary conditions to find $X(x)$ that satisfy the boundary conditions.
+\begin{align*}
+X'(0) &= C = 0 \implies C = 0 \\
+X'(L) &= C = 0 \implies C = 0 \\
+\end{align*}
+Hence from above we can see that $C=0$. Hence our nonzero form of $X(x)$ is $X_0(x)=D_0$
+
+  - $\bf{Case \ 3, \ \lambda > 0}$:
+
+In this case our ODE is $X''(x)-\lambda X(x)=0$ with $\lambda > 0$. Since this is a linear second order homogeneous ODE with constant coefficients, it takes one of three forms. In particular, the discriminant of the characteristic polynomial is $\Delta = -4(1)(-\lambda) = 4\lambda$. However, $\lambda > 0 \implies 4\lambda > 0$. Hence the resulting polynomial has two real roots of the form $r_{1,2}=\frac{\pm\sqrt{4\lambda}}{2} = \pm\sqrt\lambda$. The general solution of ODEs of this form is $f(x)=c_1e^{r_1 x}+c_2e^{r_2 x}$. Hence in our case, $X(x)=Ee^{x\sqrt{\lambda}}+Fe^{-x\sqrt{\lambda}}$.
+
+Before we enforce the boundary conditions we will take the derivative of $X(x)$, which we can see is $X'(x)=E\sqrt{-\lambda}e^{x\sqrt{\lambda}}-F\sqrt{-\lambda}e^{-x\sqrt{\lambda}}$. Below we will enforce these boundary conditions to find $X(x)$ that satisfy the boundary conditions.
+\begin{align*}
+X'(0) &= E\sqrt{-\lambda}e^{0\cdot\sqrt{\lambda}}-F\sqrt{-\lambda}e^{-0\cdot\sqrt{\lambda}} = E\sqrt{-\lambda} -F\sqrt{-\lambda} = 0 \implies E = F \\
+X'(L) &= E\sqrt{-\lambda}e^{L\sqrt{\lambda}}-F\sqrt{-\lambda}e^{-L\sqrt{\lambda}} = E\sqrt{-\lambda}e^{L\sqrt{\lambda}}-E\sqrt{-\lambda}e^{-L\sqrt{\lambda}} = E\sqrt{-\lambda}\left(e^{L\sqrt{\lambda}}-e^{-L\sqrt{\lambda}}\right) = 0
+\end{align*}
+Hence from above we can see that $E\sqrt{-\lambda}\left(e^{L\sqrt{\lambda}}-e^{-L\sqrt{\lambda}}\right)=0$. Since we are looking for nonzero forms of $X(x)$, it follows that $E\neq0$, thus we are looking at $e^{L\sqrt{\lambda}}-e^{-L\sqrt{\lambda}}=0$. This equation is only satisfied for $\lambda=0$, however $\lambda>0$. Therefore $E$ must equal $0$ which implies $F=0$, hence $X(x)=0 \implies u(x,t)=0$. Thus there are no nonzero forms of $X(x)$ for this case.
+
+  c. You should have found nontrivial solutions to the previous subexercise when $\lambda = 0$ and $\lambda < 0$. In each of these cases, determine $T(t)$.
+  
+  - $\bf{Case \ 1, \ \lambda < 0}$:
+  
+In the first case with nonzero forms of $X(x)$, we can see that $X_n(x)=A_n\cos\left(\frac{n\pi}{L}x\right),\:n\in\mathbb{N}$, which implies that $\lambda = -\frac{n^2\pi^2}{L^2}$. We will now solve the ODE $T'(t)=\lambda T(t)$ with $\lambda$ as defined above.
+\begin{align*}
+T'(t) &= \lambda T(t) \\
+\int\frac{T'(t)dt}{T(t)} &= \int\lambda dt + C \\
+\int\frac{dT}{T} &= \int\lambda dt + C \\
+\ln|T| &= \lambda t + C \\
+|T| &= e^{C}e^{\lambda t} \\
+T &= \pm e^{C}e^{\lambda t} \\
+T &= G_n e^{\lambda t} \quad \text{($G_n = \pm e^{C}$)}
+\end{align*}
+Replacing $\lambda$ with the expression calculated above we see that $T_n(t)=G_n e^{\frac{-n^2\pi^2}{L^2}t}$.
+
+  - $\bf{Case \ 2, \ \lambda = 0}$:
+  
+In the second case with nonzero forms of $X(x)$, we can see that $X_0(x)=D_0$. This was the $X(x)$ we got when $\lambda=0$, thus the ODE for $T$ we must solve is $T'(t)=0$. Integrating once with respect to $t$ we obtain $T_0(t)=H_0$.
+
+  d. Putting your work of the previous two subexercises together, what are all the standing wave solutions of the heat equation subject to homogeneous Neumann boundary conditions?
+
+As found in the previous two subexercies we found that, $X_n(x)=A_n\cos\left(\frac{n\pi}{L}x\right)$ and $T_n(t)=G_n e^{\frac{-n^2\pi^2}{L^2}t}$ as well as $X_0(x)=D_0$ and $T_0(t)=H_0$. Hence we can see that we get a countably infinite number of nonzero standing wave solutions $u_n(x,t)=I_ne^{\frac{-n^2\pi^2}{L^2}t}\cos\left(\frac{n\pi}{L}x\right)$ where $I_n=A_nG_n$ and $n\in\mathbb{N}$, as well as $u_0(x,t)=J_0$ where $J_0=D_0H_0$. All of these are nontrivial standing wave solutions of the heat equation subject to homogeneous Neumann boundary conditions. However, since this question asks for **all** standing wave solutions subject to the boundary conditions, we must include the trivial solution $u_0(x,t)=0$ in the solution set. Again, since the PDE is linear and homogeneous it has a superposition principle thus any linear combination of these above solutions is also a solution.
+  
+  e. What type of condition do we need to nail down the arbitrary constants remaining in your answer to the previous subexercise? \textit{Hint}: We've already exhausted our boundary conditions. 
+
+In order to fully nail down the arbitrary constants remaining in our answer to the previous subexercise, we would need to introduce **initial conditions**.
+
+## Exercise 4. Skill 5.3.
+
+**Exercise 11.2** in Knobel. Feel free to use results from the textbook as needed.
+
+The problem description in Knobel states: If a string with length $L$ has its left end fixed but the right end is free, then the boundary condition at $x=L$ changes to $u_x(L,t)=0$. Find the standing wave solutions of
+\begin{align*}
+u_tt &= c^2u_{xx}, \quad 0<x<L, \ t>0, \\
+u(0,t) &= 0, \\
+u_x(L,t) &= 0.
+\end{align*}
+
+**Step 1:** Find ODEs for $X(x)$ and $T(t)$: $\\\\$
+Let $u(x,t)=X(x)T(t)$ be a standing wave solution of $u_{tt} = c^2u_{xx}$, we will use separation of variables to obtain ODE's for $X(x)$ and $T(t)$ letting $\lambda$ denote our separation constant. This process is shown below.
+\begin{align*}
+u_{tt} &= c^2u_{xx} \\
+\left(X(x)T(t)\right)_{tt} &= c^2\left(X(x)T(t)\right)_{xx} \\
+X(x)T'(t) &= c^2X''(x)T(t) \\
+\frac{T'(t)}{c^2T(t)} &= \frac{X''(x)}{X(x)} = \lambda
+\end{align*}
+The last line from the above separation of variables process gives us ODE's for $X(x)$ and $T(t)$. These ODEs are $T''(t) = c^2\lambda T(t) \implies T''(t) - c^2\lambda T(t) = 0$ and $X''(x) = \lambda X(x) \implies X''(x) - \lambda X(x) = 0$.
+
+**Step 2:** Find solutions to the ODE of $X(x)$ for the usual 3 cases:
+
+  - $\bf{Case \ 1, \ \lambda < 0}$:
+
+In this case our ODE is $X''(x)-\lambda X(x)=0$ with $\lambda < 0$. Since this is a linear second order homogeneous ODE with constant coefficients, it takes one of three forms. In particular, the discriminant of the characteristic polynomial is $\Delta = -4(1)(-\lambda) = 4\lambda$. However, $\lambda < 0 \implies 4\lambda < 0$. Hence the resulting polynomial has complex conjugate roots of the form $\sigma\pm i\omega$, where $\sigma = \frac{0}{2}=0$ and $\omega = \frac{\sqrt{|4\lambda|}}{2} = \frac{\sqrt{-4\lambda}}{2} = \sqrt{-\lambda}$. The general solution of ODEs of this form is $f(x)=c_1e^{\sigma x}\cos(\omega x)+c_2e^{\sigma x}\sin(\omega x)$. Hence in our case, $X(x)=A\cos\left(x\sqrt{-\lambda}\right)+B\sin\left(x\sqrt{-\lambda}\right)$.
+
+  - $\bf{Case \ 2, \ \lambda = 0}$:
+  
+In this case our ODE is $X''(x)=0$. Since this is a linear second order homogeneous ODE with constant coefficients, it takes one of three forms. In particular, the discriminant of the characteristic polynomial is $\Delta =  0$. Hence the resulting polynomial has one repeated root of the form $r = \frac{0}{2} = 0$. The general solution of ODEs of this form is $f(x)=c_1e^{r x}+c_2xe^{r x}$. Hence in our case, $X(x)=Cx+D$. 
+
+  - $\bf{Case \ 3, \ \lambda > 0}$:
+
+In this case our ODE is $X''(x)-\lambda X(x)=0$ with $\lambda > 0$. Since this is a linear second order homogeneous ODE with constant coefficients, it takes one of three forms. In particular, the discriminant of the characteristic polynomial is $\Delta = -4(1)(-\lambda) = 4\lambda$. However, $\lambda > 0 \implies 4\lambda > 0$. Hence the resulting polynomial has two real roots of the form $r_{1,2}=\frac{\pm\sqrt{4\lambda}}{2} = \pm\sqrt\lambda$. The general solution of ODEs of this form is $f(x)=c_1e^{r_1 x}+c_2e^{r_2 x}$. Hence in our case, $X(x)=Ee^{x\sqrt{\lambda}}+Fe^{-x\sqrt{\lambda}}$.
+
+**Step 3:** Apply boundary conditions and find nonzero forms of $X(x)$:
+
+  - $\bf{Case \ 1, \ \lambda < 0}$:
+
+As found in step 3, $X(x)=A\cos\left(x\sqrt{-\lambda}\right)+B\sin\left(x\sqrt{-\lambda}\right)$. Before we enforce the boundary conditions we will take the derivative of $X(x)$, which we can see is $X'(x)=-A\sqrt{-\lambda}\sin\left(x\sqrt{-\lambda}\right)+B\sqrt{-\lambda}\cos\left(x\sqrt{-\lambda}\right)$. Below we will enforce these boundary conditions to find $X(x)$ that satisfy the boundary conditions.
+\begin{align*}
+X(0) &= A\cos\left(0\cdot\sqrt{-\lambda}\right)+B\sin\left(0\cdot\sqrt{-\lambda}\right) = A = 0 \implies A = 0 \\
+X'(L) &= -A\sqrt{-\lambda}\sin\left(L\sqrt{-\lambda}\right)+B\sqrt{-\lambda}\cos\left(L\sqrt{-\lambda}\right) = B\sqrt{-\lambda}\cos\left(L\sqrt{-\lambda}\right) = 0
+\end{align*}
+Hence from above we can see that $A=0$ and $B\sqrt{-\lambda}\cos\left(L\sqrt{-\lambda}\right)=0$. Since we are looking for nonzero forms of $X(x)$, it follows that $B\neq0$, hence $\cos\left(L\sqrt{-\lambda}\right) = 0$. The function $\cos$ equals zero at an argument of $(2k+1)\frac{\pi}{2}=k\pi+\frac{\pi}{2}$ where $k\in\mathbb{Z}$, this implies that $L\sqrt{-\lambda}=k\pi+\frac{\pi}{2}$. However, since $L,\sqrt{-\lambda}>0$, it follows that $n = k \in \mathbb{N}$. Thus we rewrite the previous expression as $L\sqrt{-\lambda}=n\pi+\frac{\pi}{2}$. Solving for $\sqrt{-\lambda}$ we obtain $\sqrt{-\lambda}=\frac{n\pi+\frac{\pi}{2}}{L}=\frac{2n\pi+\pi}{2L}$. Hence our nonzero form of $X(x)$ is $X_n(x)=B_n\sin\left(\frac{2n\pi+\pi}{2L}x\right),\:n\in\mathbb{N}$
+
+  - $\bf{Case \ 2, \ \lambda = 0}$:
+
+As found in step 3, $X(x)=Cx+D$. Before we enforce the boundary conditions we will take the derivative of $X(x)$, which we can see is $X'(x)=C$. Below we will enforce these boundary conditions to find $X(x)$ that satisfy the boundary conditions.
+\begin{align*}
+X(0) &= C(0) + D = D = 0 \implies D = 0 \\
+X'(L) &= C = 0 \implies C = 0 \\
+\end{align*}
+Hence from above we can see that $C, D = 0$, hence $X(x)=0 \implies u(x,t)=0$. Thus there are no nonzero forms of $X(x)$ for this case.
+
+  - $\bf{Case \ 3, \ \lambda > 0}$:
+                     
+As found in step 3, $X(x)=Ee^{x\sqrt{\lambda}}+Fe^{-x\sqrt{\lambda}}$. Before we enforce the boundary conditions we will take the derivative of $X(x)$, which we can see is $X'(x)=E\sqrt{-\lambda}e^{x\sqrt{\lambda}}-F\sqrt{-\lambda}e^{-x\sqrt{\lambda}}$. Below we will enforce these boundary conditions to find $X(x)$ that satisfy the boundary conditions.
+\begin{align*}
+X(0) &= Ee^{0\cdot\sqrt{\lambda}}+Fe^{-0\cdot\sqrt{\lambda}} = E + F = 0 \implies E = -F \\
+X'(L) &= E\sqrt{-\lambda}e^{L\sqrt{\lambda}}-F\sqrt{-\lambda}e^{-L\sqrt{\lambda}} = E\sqrt{-\lambda}e^{L\sqrt{\lambda}}+E\sqrt{-\lambda}e^{-L\sqrt{\lambda}} = E\sqrt{-\lambda}\left(e^{L\sqrt{\lambda}}+e^{-L\sqrt{\lambda}}\right) = 0
+\end{align*}
+Hence from above we can see that $E\sqrt{-\lambda}\left(e^{L\sqrt{\lambda}}+e^{-L\sqrt{\lambda}}\right)=0$. Since we are looking for nonzero forms of $X(x)$, it follows that $E\neq0$, thus we are looking at $e^{L\sqrt{\lambda}}+e^{-L\sqrt{\lambda}}=0$. This equation can never be zero. Therefore $E$ must equal $0$ which implies $F=0$, hence $X(x)=0 \implies u(x,t)=0$. Thus there are no nonzero forms of $X(x)$ for this case.
+
+**Step 4:** Find corresponding solutions to the ODE for $T(t)$: $\\\\$
+The only case with nonzero forms for $X(x)$ was case 1. In this case $X_n(x)=B_n\sin\left(\frac{2n\pi+\pi}{2L}x\right),\:n\in\mathbb{N}$. In this case our ODE is $T''(t)-c^2\lambda T(t)=0$ with $\lambda < 0$. Since this is a linear second order homogeneous ODE with constant coefficients, it takes one of three forms. In particular, the discriminant of the characteristic polynomial is $\Delta = -4(1)(-c^2\lambda) = 4c^2\lambda$. However, $\lambda < 0 \implies 4c^2\lambda < 0$. Hence the resulting polynomial has complex conjugate roots of the form $\sigma\pm i\omega$, where $\sigma = \frac{0}{2}=0$ and $\omega = \frac{\sqrt{|4c^2\lambda|}}{2} = \frac{\sqrt{-4c^2\lambda}}{2} = c\sqrt{-\lambda}$. The general solution of ODEs of this form is $f(t)=c_1e^{\sigma t}\cos(\omega t)+c_2e^{\sigma t}\sin(\omega t)$. Hence in our case we know that $\sqrt{-\lambda}=\frac{2n\pi+\pi}{2L}$, hence our form for $T(t)$ is $T_n(t)=G_n\cos\left(ct\left(\frac{2n\pi+\pi}{2L}\right)\right)+H_n\sin\left(ct\left(\frac{2n\pi+\pi}{2L}\right)\right)$.
+
+**Step 5:** Find the nonzero standing wave solutions to the BVP: $\\\\$
+As found in step 3, $X_n(x)=B_n\sin\left(\frac{2n\pi+\pi}{2L}x\right)$, and as fond in step 4, $T_n(t)=G_n\cos\left(ct\left(\frac{2n\pi+\pi}{2L}\right)\right)+H_n\sin\left(ct\left(\frac{2n\pi+\pi}{2L}\right)\right)$. Letting the $I_n=B_nG_n$ and $J_n=B_nH_n$ we obtain the countably infinite number of nonzero standing wave solutions to the BVP $u_n(x,t)=\sin\left(\frac{2n\pi+\pi}{2L}x\right)\left[I_n\cos\left(ct\left(\frac{2n\pi+\pi}{2L}\right)\right)+J_n\sin\left(ct\left(\frac{2n\pi+\pi}{2L}\right)\right)\right]$ for $n\in\mathbb{N}$. In order to account for all standing wave solutions, notice that the trivial solution $u_0(x,t)=0$, is also a standing wave solution to the BVP. Again, since the PDE is linear and homogeneous it has a superposition principle thus any linear combination of these above solutions is also a solution.
+
+## Exercise 5. Skill 5.4.
+
+**Exercise 11.3** in Knobel. You do not need to animate your results. Feel free to use results from the textbook as needed.
+
+The problem description in Knobel states: At this point we have omitted initial conditions for the string. By picking appropriate choices of the constants $n$, $A$, and $B$ in (11.7), find the particular standing wave solutions of
+\begin{align*}
+u_{tt} &= u_{xx}, \quad 0<x<1, \ t>0, \\
+u(0,t) &= 0, \\
+u(1,t) &= 0
+\end{align*}
+which satisfy the following initial conditions.
+
+As seen by (11.7) the standing wave solutions for the BVP:
+\begin{align*}
+u_{tt} &= c^2u_{xx}, \quad 0<x<1, \ t>0, \\
+u(0,t) &= 0, \\
+u(L,t) &= 0
+\end{align*}
+is $u_n(x,t) = \sin\left(\frac{n\pi x}{L}\right)\left[A_n\cos\left(\frac{n\pi ct}{L}\right)+B_n\sin\left(\frac{n\pi ct}{L}\right)\right]$. Hence for our BVP, $c, L=1$ and thus the standing wave solutions are $u_n(x,t) = \sin(n\pi x)\left[A_n\cos(n\pi t)+B_n\sin(n\pi t)\right]$.
+
+Also, from the Lecture 10 notes we have shown that, by the superposition principle, $u(x,t)=\sum\limits_{n=1}^{\infty}\sin(n\pi x)\left[A_n\cos(n\pi t)+B_n\sin(n\pi t)\right]$ is a solution to the BVP. We will use these above two facts to solve the following IBVPs.
+
+  a. $u(x,0) = 10\sin(\pi x)$ and $u_t(x,0) = 0$.
+  
+**Step 1:** Enforce the IC $u(x,0)=10\sin(\pi x)$:
+\begin{align*}
+u(x,0) &= \sum\limits_{n=1}^{\infty}\sin(n\pi x)\left[A_n\cos(n\pi 0)+B_n\sin(n\pi 0)\right] \\
+&= \sum\limits_{n=1}^{\infty}A_n\sin(n\pi x)
+\end{align*}
+As we can see $u(x,0)=\sum\limits_{n=1}^{\infty}A_n\sin(n\pi x)$, however the IC also says $u(x,0)=10\sin(\pi x)$. Matching these forms we can see that $A_1=10$, $A_n=0, \ \forall n>1$.
+
+**Step 2:** Enforce the IC $u_t(x,0) = 0$:
+\begin{align*}
+u_t(x,0) &= \frac{\partial}{\partial t} \left[10\sin(\pi x)\cos(\pi t) + \sum\limits^{\infty}_{n=1} B_n\sin(n\pi t)\sin(n\pi x)\right]_{t=0} \\
+&= \left[-10\pi\sin(\pi x)\sin(\pi t) + \sum\limits^{\infty}_{n=1} B_n n \pi \cos(n\pi t)\sin(n\pi x)\right]_{t=0} \\
+&= \sum\limits^{\infty}_{n=1} B_n n \pi \cos(n\pi 0)\sin(n\pi x) \\
+&= \sum\limits^{\infty}_{n=1} B_n n \pi \sin(n\pi x) \\
+\end{align*}
+As we can see $u_t(x,0)=\sum\limits^{\infty}_{n=1} B_n n \pi \sin(n\pi x)$, however the IC also says $u_t(x,0)=0$. Matching these forms we can see that $B_n = 0, \ \forall n$.
+
+Hence in terms of the problem $A=10$, $B=0$, $n=1$, hence the particular standing wave solution of the IBVP is $u(x,t)=10\sin(\pi x)\cos(\pi t)$.
+
+  b. $u(x,0) = 0$ and $u_t(x,0) = -3\sin(2\pi x)$.
+  
+**Step 1:** Enforce the IC $u(x,0)=0$:
+\begin{align*}
+u(x,0) &= \sum\limits_{n=1}^{\infty}\sin(n\pi x)\left[A_n\cos(n\pi 0)+B_n\sin(n\pi 0)\right] \\
+&= \sum\limits_{n=1}^{\infty}A_n\sin(n\pi x)
+\end{align*}
+As we can see $u(x,0)=\sum\limits_{n=1}^{\infty}A_n\sin(n\pi x)$, however the IC also says $u(x,0)=0$. Matching these forms we can see that $A_n=0, \ \forall n$.
+
+**Step 2:** Enforce the IC $u_t(x,0) = -3\sin(2\pi x)$:
+\begin{align*}
+u_t(x,0) &= \frac{\partial}{\partial t} \left[\sum\limits^{\infty}_{n=1} B_n\sin(n\pi t)\sin(n\pi x)\right]_{t=0} \\
+&= \left[\sum\limits^{\infty}_{n=1} B_n n \pi \cos(n\pi t)\sin(n\pi x)\right]_{t=0} \\
+&= \sum\limits^{\infty}_{n=1} B_n n \pi \cos(n\pi 0)\sin(n\pi x) \\
+&= \sum\limits^{\infty}_{n=1} B_n n \pi \sin(n\pi x) \\
+\end{align*}
+As we can see $u_t(x,0)=\sum\limits^{\infty}_{n=1} B_n n \pi \sin(n\pi x)$, however the IC also says $u_t(x,0)=-3\sin(2\pi x)$. Matching these forms we can see that $2\pi B_2 = -3 \implies B_2 = \frac{-3}{2\pi}$, $B_n = 0, \ \forall n \in \{1, 3, 4, \dots\}$.
+
+Hence in terms of the problem $A=0$, $B=\frac{-3}{2\pi}$, $n=2$, hence the particular standing wave solution of the IBVP is $u(x,t)=\frac{-3}{2\pi}\sin(2\pi x)\sin(2\pi t)$.
+
+  c. $u(x,0) = \sin(4\pi x)$ and $u_t(x,0) = 2\sin(4\pi x)$.
+  
+**Step 1:** Enforce the IC $u(x,0)=\sin(4\pi x)$:
+\begin{align*}
+u(x,0) &= \sum\limits_{n=1}^{\infty}\sin(n\pi x)\left[A_n\cos(n\pi 0)+B_n\sin(n\pi 0)\right] \\
+&= \sum\limits_{n=1}^{\infty}A_n\sin(n\pi x)
+\end{align*}
+As we can see $u(x,0)=\sum\limits_{n=1}^{\infty}A_n\sin(n\pi x)$, however the IC also says $u(x,0)=\sin(4\pi x)$. Matching these forms we can see that $A_4=1$, $A_n=1, \ \forall n\in\{1, 2, 3, 5, \dots\}$.
+
+**Step 2:** Enforce the IC $u_t(x,0) = 2\sin(4\pi x)$:
+\begin{align*}x
+u_t(x,0) &= \frac{\partial}{\partial t} \left[\sin(4\pi x)\cos(4\pi t) + \sum\limits^{\infty}_{n=1} B_n\sin(n\pi t)\sin(n\pi x)\right]_{t=0} \\
+&= \left[-4\pi\sin(4\pi x)\sin(4\pi t) + \sum\limits^{\infty}_{n=1} B_n n \pi \cos(n\pi t)\sin(n\pi x)\right]_{t=0} \\
+&= \sum\limits^{\infty}_{n=1} B_n n \pi \cos(n\pi 0)\sin(n\pi x) \\
+&= \sum\limits^{\infty}_{n=1} B_n n \pi \sin(n\pi x) \\
+\end{align*}
+As we can see $u_t(x,0)=\sum\limits^{\infty}_{n=1} B_n n \pi \sin(n\pi x)$, however the IC also says $u_t(x,0)=2\sin(4\pi x)$. Matching these forms we can see that $4\pi B_4 = 4 \implies B_4 = \frac{1}{2\pi}$, $B_n = 0, \ \forall n\in\{1, 2, 3, 5, \dots\}$.
+
+Hence in terms of the problem $A=1$, $B=\frac{1}{2\pi}$, $n=4$, hence the particular standing wave solution of the IBVP is $u(x,t)=\sin(4\pi x)\left[\cos(4\pi t) + \frac{1}{2\pi}\sin(4\pi t)\right]$.

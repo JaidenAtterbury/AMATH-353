@@ -1,0 +1,202 @@
+---
+title: "AMATH 353 Quiz 1"
+author: "Jaiden Atterbury"
+date: "2023-07-06"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Note: In this quiz, I briefly collaborated with Kai Poffenbarger. In this collaboration we mainly compared answers to see if what we were getting for our solutions were similar.
+
+# Component Skills Practice
+
+1. Consider a wave profile given by
+\begin{align*}
+u(x,t) &= \tanh\left(x+t\right)\sin\left(\pi\left(x-2t\right)\right)
+\end{align*}
+
+a. Using software of your choice, make snapshot plots of this wave at $t=0$, $t=1$, and $t=2$.
+
+For this part of the problem, we will use Desmos to make snapshot plots of the wave $u(x,t) = \tanh\left(x+t\right)\sin\left(\pi\left(x-2t\right)\right)$ at times  $t=0$, $t=1$, and $t=2$. The snapshot plots are shown below. In order to see the differences of the wave profiles at each individual time, we will set the axes of the snapshots to $-2\pi<x<2\pi$ and $-2\pi<u<2\pi$.
+
+```{r echo=F, out.width = "90%", fig.align = "center"}
+knitr::include_graphics("snapshotplot.png")
+```
+
+b. Compute $u_x$. What is $u_x(-2, 1)$? What does this value mean physically?
+
+To start off we will compute $u_x$, the partial derivative of $u$ with respect to $x$.
+\begin{align*}
+u_x(x,t) &= \frac{\partial}{\partial x}\left(\tanh\left(x+t\right)\sin\left(\pi\left(x-2t\right)\right)\right) \\
+&= \tanh\left(x+t\right)\frac{\partial}{\partial x}\sin\left(\pi\left(x-2t\right)\right)+\sin\left(\pi\left(x-2t\right)\right)\frac{\partial}{\partial x}\tanh\left(x+t\right) \\
+&= \tanh\left(x+t\right)\cdot\pi\cos\left(\pi\left(x-2t\right)\right)+sech^2\left(x+t\right)\cdot\sin\left(\pi\left(x-2t\right)\right) \\
+&= \pi\tanh\left(x+t\right)\cos\left(\pi\left(x-2t\right)\right)+sech^2\left(x+t\right)\sin\left(\pi\left(x-2t\right)\right)
+\end{align*}
+Thus $u_x(x,t)=\pi\tanh\left(x+t\right)\cos\left(\pi\left(x-2t\right)\right)sech^2\left(x+t\right)\sin\left(\pi\left(x-2t\right)\right)$. Now we will find $u_x(-2, 1)$.
+\begin{align*}
+u_x(-2, 1) &= \pi\tanh\left(-2+1\right)\cos\left(\pi\left(-2-2(1)\right)\right)+sech^2\left(-2+1\right)\sin\left(\pi\left(-2-2(1)\right)\right) \\
+&= \pi\tanh\left(-1\right)\cos\left(-4\pi)\right)+sech^2\left(-1\right)\sin\left(-4\pi)\right) \\
+&= \pi\tanh\left(-1\right)\cdot 1 + sech^2\left(-1\right) \cdot 0 \\
+&= \pi\tanh(-1)
+\end{align*}
+Thus $u_x(-2,1)=\pi\tanh(-1)$. We will now interpret this value in the context of waves. In general terms of partial derivatives, this value represents the instantaneous rate of change of the function $u$ treating $t$ as a constant and letting $x$ vary. Thus, the instantaneous rate of change of the function $u$ with respect to $x$ when $x=-2$ at $t=1$ is $\pi\tanh(-1)$. However, in the context of waves, $u_x(-2,1)$ tells us that the wave profile has steepness $\pi\tanh(-1)$ when $x=-2$ at $t=1$.
+
+c. Compute $u_t$. What is $u_t(-2, 1)$? What does this value mean physically?
+
+To start off we will compute $u_t$, the partial derivative of $u$ with respect to $t$.
+\begin{align*}
+u_t(x,t) &= \frac{\partial}{\partial t}\left(\tanh\left(x+t\right)\sin\left(\pi\left(x-2t\right)\right)\right) \\
+&= \tanh\left(x+t\right)\frac{\partial}{\partial t}\sin\left(\pi\left(x-2t\right)\right)+\sin\left(\pi\left(x-2t\right)\right)\frac{\partial}{\partial t}\tanh\left(x+t\right) \\
+&= \tanh\left(x+t\right)\cdot-2\pi\cos\left(\pi\left(x-2t\right)\right)+sech^2\left(x+t\right)\cdot\sin\left(\pi\left(x-2t\right)\right) \\
+&= -2\pi\tanh\left(x+t\right)\cos\left(\pi\left(x-2t\right)\right)+sech^2\left(x+t\right)\sin\left(\pi\left(x-2t\right)\right)
+\end{align*}
+Thus $u_t(x,t)=-2\pi\tanh\left(x+t\right)\cos\left(\pi\left(x-2t\right)\right)sech^2\left(x+t\right)\sin\left(\pi\left(x-2t\right)\right)$. Now we will find $u_t(-2, 1)$.
+\begin{align*}
+u_t(-2, 1) &= -2\pi\tanh\left(-2+1\right)\cos\left(\pi\left(-2-2(1)\right)\right)+sech^2\left(-2+1\right)\sin\left(\pi\left(-2-2(1)\right)\right) \\
+&= -2\pi\tanh\left(-1\right)\cos\left(-4\pi)\right)+sech^2\left(-1\right)\sin\left(-4\pi)\right) \\
+&= -2\pi\tanh\left(-1\right)\cdot 1 + sech^2\left(-1\right) \cdot 0 \\
+&= -2\pi\tanh(-1)
+\end{align*}
+Thus $u_t(-2,1)=-2\pi\tanh(-1)$. We will now interpret this value in the context of waves. In general terms of partial derivatives, this value represents the instantaneous rate of change of the function $u$ treating $x$ as a constant and letting $t$ vary. Thus, the instantaneous rate of change of the function $u$ with respect to $t$ when $x=-2$ at $t=1$ is $-2\pi\tanh(-1)$. However, in the context of waves, $u_t(-2,1)$ tells us that the wave amplitude is changing at a rate of $-2\pi\tanh(-1)$ when $x=-2$ at $t=1$.
+
+2. Provide an example of a PDE that fits each of the following descriptions below. Make sure that each of your example PDE’s has partial derivatives with respect to $x$ and $t$. No ODE examples will receive credit. **Please keep your examples distinct from your collaborators**.
+
+a. 2nd Order, Nonhomogeneous, Nonautonomous, Linear.
+
+An example of a PDE that is 2nd Order, Nonhomogeneous, Nonautonomous, Linear, and has partial derivatives with respect to $x$ and $t$ is $tu_{xx}+u_t=1$.
+
+b. 3rd Order, Nonhomogeneous, Nonautonomous, Nonlinear.
+
+An example of a PDE that is 3rd Order, Nonhomogeneous, Nonautonomous, Nonlinear, and has partial derivatives with respect to $x$ and $t$ is $tu_{xxx}+uu_t=1$.
+
+c. 1st Order, Homogeneous, Nonautonomous, Nonlinear.
+
+An example of a PDE that is 1st Order, Homogeneous, Nonautonomous, Nonlinear, and has partial derivatives with respect to $x$ and $t$ is $tu_x+uu_t=0$.
+
+d. 2nd Order, Nonhomogenous, Autonomous, Nonlinear.
+
+An example of a PDE that is 2nd Order, Nonhomogenous, Autonomous, Nonlinear, and has partial derivatives with respect to $x$ and $t$ is $u_{xx}+uu_t=1$.
+
+e. 1st Order, Homogeneous, Nonautonomous, Linear.
+
+An example of a PDE that is 1st Order, Homogeneous, Nonautonomous, Linear, and has partial derivatives with respect to $x$ and $t$ is $tu_x+u_t=0$.
+
+3. Consider the following PDE:
+\begin{align*}
+u_{xt} &= t^2 u_x+x^2 u_t.
+\end{align*}
+This equation is homogeneous and linear, so it should satisfy the superposition principle. Show this directly using the definition of the superposition principle.
+
+Suppose that $u^1$ and $u^2$ are solutions of the above PDE (using superscript notation for indexing like in the practice quiz). Then, we have that
+$$u^1_{xt} = t^2 u^1_x+x^2 u^1_t \quad \text{and} \quad u^2_{xt} = t^2 u^2_x+x^2 u^2_t$$
+Furthermore, if we let 
+\begin{align*}
+u^3 &= c_1u^1+c_2u^2
+\end{align*}
+where $c_1, c_2 \in \mathbb{R}$ are arbitrary constants, then we can see by the linearity of the derivative that
+\begin{align*}
+u^3_t &= (c_1u^1+c_2u^2)_t \\
+&= c_1u^1_t + c_2u^2_t
+\end{align*}
+Again, using the linearity of the derivative, we see that
+\begin{align*}
+u^3_{xt} &= (c_1u^1_t + c_2u^2_t)_x \\
+&= c_1u^1_{xt} + c_2u^2_{xt}
+\end{align*}
+Then, since $u^1$ and $u^2$ solve the above PDE, we have that
+\begin{align*}
+u^3_{xt} &= c_1u^1_{xt} + c_2u^2_{xt} \\
+&= c_1\left(t^2 u^1_x+x^2 u^1_t\right) + c_2\left(t^2 u^2_x+x^2 u^2_t\right) \\
+&= c_1 t^2 u^1_x + c_1x^2 u^1_t + c_2 t^2 u^2_x + c_2 x^2 u^2_t \\
+&= t^2\left(c_1 u^1_x + c_2 u^2_x \right) + x^2\left(c_1 u^1_t + c_2 u^2_t \right)
+\end{align*}
+Again, by the linearity of the derivative, we see that
+\begin{align*}
+u^3_{xt} &= t^2\left(c_1 u^1_x + c_2 u^2_x \right) + x^2\left(c_1 u^1_t + c_2 u^2_t \right) \\
+&= t^2\left(c_1 u^1 + c_2 u^2 \right)_x + x^2\left(c_1 u^1 + c_2 u^2 \right)_t \\
+&= t^2u^3_x + x^2u^3_t
+\end{align*}
+Thus $u^3$ solves the PDE too. Therefore, the PDE has a superposition principle.
+
+# Multi-Step Problem
+
+Consider the Black-Scholes equation:
+\begin{align}
+u_t+\frac{1}{2}\sigma^2 x^2 u_{xx} + rxu_x - ru = 0.
+\end{align}
+This PDE models the price evolution of a European-style option $u$ as a function of the Stock price $x$ and time $t$. The constants $r \geq 0$ and $\sigma \geq 0$ represent the risk-free interest rate and volatility of the stock, respectively. This problem was taken from Ryan Creedon's version of this course offered in 2021.
+
+1. Classify (1) by order, homogeneity, autonomy, and linearity. **Justify each of your choices in complete sentences.**
+
+This PDE is a 2nd order, homogeneous, non-autonomous, and linear PDE. It is second order because our highest derivative is a second derivative in the form of the $u_{xx}$ term. It is homogeneous because the trivial solution $u=0$ is in fact a solution for any value of $x$. It is non-autonomous because it has explicit $x$-dependence in the form of the $\frac{1}{2}\sigma^2 x^2 u_xx$ and $rxu_x$ terms. Lastly, it is linear because it does not have any products, powers, or functions of $u$ or its derivatives.
+
+2. Suppose (1) has a solution of the form
+\begin{align*}
+u(x,t) &= x^p
+\end{align*}
+for some constant $p$. Determine the possible values of $p$. **Show all of your work, and simplify your final answer(s) as much as possible.**
+
+To find the possible values of $p$ that make $u(x,t)=x^p$ a solution to the above PDE, we must take the corresponding derivatives of $u(x,t)$ and plug them into the above PDE and solve for $p$. Since $u(x,t)$ is not a complicated function it can easily be seen that $u_t(x,t)=0$, $u_x(x,t)=px^{p-1}$, and $u_{xx}=p(p-1)x^{p-2}$. Plugging these values into the PDE we obtain
+\begin{align*}
+0 &= 0 + \frac{1}{2}\sigma^2x^2p(p-1)x^{p-2}+rxpx^{p-1}-rx^p \\
+&= \frac{\sigma^2x^2p(p-1)}{2}x^p+rpx^p-rx^p \\
+&= \left(\frac{\sigma^2x^2p(p-1)}{2}+rp-r\right)x^p 
+\end{align*}
+however, the value of $p$ we chose must make $u(x,t)$ satisfy the PDE for all values of $x$ and $t$, hence we can drop the $x^p$ term and instead solve
+\begin{align*}
+0 &= \frac{\sigma^2x^2p(p-1)}{2}+rp-r \\
+&= \frac{\sigma^2}{2}p^2-\frac{\sigma^2}{2}p+rp-r \\
+&= \frac{\sigma^2}{2}p^2+(r-\frac{\sigma^2}{2})p-r \\
+&= \sigma^2p^2 + (2r-\sigma^2)p-2r
+\end{align*}
+Using the quadratic formula we obtain the following solution solution form
+\begin{align*}
+p &= \frac{-2r+\sigma^2 \pm \sqrt{(2r-\sigma^2)^2-4(\sigma^2)(-2r)}}{2\sigma^2} \\
+&= \frac{-2r+\sigma^2 \pm \sqrt{4r^2-4r\sigma^2+\sigma^4+8r\sigma^2}}{2\sigma^2} \\
+&= \frac{-2r+\sigma^2 \pm \sqrt{4r^2+4r\sigma^2+\sigma^4}}{2\sigma^2} \\
+&= \frac{-2r+\sigma^2 \pm \sqrt{(2r+\sigma^2)^2}}{2\sigma^2} \\
+&= \frac{-2r+\sigma^2 \pm 2r+\sigma^2}{2\sigma^2}
+\end{align*}
+Now we must see what our value of $p$ is for each branch of the $\pm$ in the above expression. First, looking at the positive branch we see $p=\frac{-2r+\sigma^2 + 2r+\sigma^2}{2\sigma^2}=\frac{2\sigma^2}{2\sigma^2}=1$. Lastly, looking at the negative branch we see $p=\frac{-2r+\sigma^2 - 2r+\sigma^2}{2\sigma^2}=\frac{-4r}{2\sigma^2}=\frac{-2r}{\sigma^2}$. Thus, as computed above, the two values of $p$ that make $u(x,t)$ a solution to the above PDE are $p=1$ and $p=\frac{-2r}{\sigma^2}$.
+
+3. The function
+\begin{align}
+u(x,t) &= e^{At}\sin\left(\ln(x)+\left(\frac{1}{2}\sigma^2-r\right)t\right)
+\end{align}
+is a solution of (1) for some constant $A$. Determine $A$. **Show all of your work.**
+
+To find the possible values of $A$ that make $u(x,t)$ a solution to the above PDE, we must take the corresponding derivatives of $u(x,t)$ and plug them into the above PDE and solve for $A$. These derivatives are more involved than the last part so we will show the derivations step-by-step. First of we will compute $u_t(x,t)$.
+\begin{align*}
+u_t(x,t) &= Ae^{At}\sin\left(\ln(x)+\left(\frac{1}{2}\sigma^2-r\right)t\right)+e^{At}\cos\left(\ln(x)+\left(\frac{1}{2}\sigma^2-r\right)t\right)\cdot\left(\frac{1}{2}\sigma^2-r\right) \\ 
+&= Ae^{At}\sin\left(\ln(x)+\left(\frac{1}{2}\sigma^2-r\right)t\right)+\left(\frac{1}{2}\sigma^2-r\right)e^{At}\cos\left(\ln(x)+\left(\frac{1}{2}\sigma^2-r\right)t\right)
+\end{align*}
+As shown above, $u_t(x,t)=Ae^{At}\sin\left(\ln(x)+\left(\frac{1}{2}\sigma^2-r\right)t\right)+\left(\frac{1}{2}\sigma^2-r\right)e^{At}\cos\left(\ln(x)+\left(\frac{1}{2}\sigma^2-r\right)t\right)$ Next we will compute $u_x(x,t)$.
+\begin{align*}
+u_x(x,t) &= e^{At}\cos\left(\ln(x)+\left(\frac{1}{2}\sigma^2-r\right)t\right) \cdot \frac{1}{x} \\
+&= \frac{1}{x}e^{At}\cos\left(\ln(x)+\left(\frac{1}{2}\sigma^2-r\right)t\right)
+\end{align*}
+As shown above, $u_x(x,t)=\frac{1}{x}e^{At}\cos\left(\ln(x)+\left(\frac{1}{2}\sigma^2-r\right)t\right)$. Lastly, we will compute $u_{xx}(x,t)$.
+\begin{align*}
+u_{xx}(x,t) &= \frac{-e^{At}}{x^2} \cos\left(\ln(x)+\left(\frac{1}{2}\sigma^2-r\right)t\right) + \frac{e^{At}}{x}\sin\left(\ln(x)+\left(\frac{1}{2}\sigma^2-r\right)t\right)\cdot\frac{-1}{x} \\
+&= \frac{-e^{At}}{x^2}\left(\cos\left(\ln(x)+\left(\frac{1}{2}\sigma^2-r\right)t\right)+ \sin\left(\ln(x)+\left(\frac{1}{2}\sigma^2-r\right)t\right)\right)
+\end{align*}
+As shown above, $u_{xx}(x,t)=\frac{-e^{At}}{x^2}\left(\cos\left(\ln(x)+\left(\frac{1}{2}\sigma^2-r\right)t\right)+ \sin\left(\ln(x)+\left(\frac{1}{2}\sigma^2-r\right)t\right)\right)$. In order to make the below work less messy, and since it has no impact on the final answer, we will let $B = \ln(x)+\left(\frac{1}{2}\sigma^2-r\right)t$. Now we will plug in these derivatives into the PDE
+\begin{align*}
+0 &=Ae^{At}\sin(B)+\left(\frac{1}{2}\sigma^2-r\right)e^{At}\cos(B)-\frac{1}{2}\sigma^2x^2\frac{e^{At}}{x^2}(\cos(B)+\sin(B))+rx\frac{e^{At}}{x}\cos(B)-re^{At}\sin(B) \\
+&= e^{At}\left(A\sin(B)+\frac{\sigma^2}{2}\cos(B)-r\cos(B)-\frac{\sigma^2}{2}\cos(B)-\frac{\sigma^2}{2}\sin(B)+r\cos(b)-r\sin(B)\right) \\
+&= e^{At}\left(A\sin(B)-\frac{\sigma^2}{2}\sin(B)-r\sin(B)\right) \\
+&= (A-\frac{\sigma^2}{2}-r)\sin(B) \quad \text{(Since $e^{At} \neq 0$)} \\
+&= A-\frac{\sigma^2}{2}-r
+\end{align*}
+Thus as shown above, the value of $A$ that makes $u(x,t) = e^{At}\sin\left(\ln(x)+\left(\frac{1}{2}\sigma^2-r\right)t\right)$ a solution to the above PDE is $A=r+\frac{\sigma^2}{2}$.
+
+4. Is
+\begin{align*}
+u(x,t) &= 1000000x\left(\pi+x^{-1-\frac{2r}{\sigma^2}}\right)-r\sigma e^{\left(r+\frac{1}{2}\sigma^2\right)t}\sin\left(\ln(x)+\left(\frac{1}{2}\sigma^2-r\right)t\right)
+\end{align*}
+a solution of (1)? Provide a brief justification without directly substituting $u(x,t)$ into (1). (This justification can just be a sentence or two.)
+
+First off, notice that the above equation can be rewritten as $u(x,t) = 1000000\pi x+1000000x^{\left(-\frac{2r}{\sigma^2}\right)}-r\sigma e^{\left(r+\frac{1}{2}\sigma^2\right)t}\sin\left(\ln(x)+\left(\frac{1}{2}\sigma^2-r\right)t\right)$. Again, notice that $x$, $x^{\left(-\frac{2r}{\sigma^2}\right)}$, and $e^{\left(r+\frac{1}{2}\sigma^2\right)t}\sin\left(\ln(x)+\left(\frac{1}{2}\sigma^2-r\right)t\right)$ are all solutions that we found in parts b and c. Furthermore,  in part a we found out that this PDE is linear and homogeneous, thus it must have a superposition principle. Since $u(x,t)$ above is just a linear combination of these solutions, $u(x,t) = 1000000x\left(\pi+x^{-1-\frac{2r}{\sigma^2}}\right)-r\sigma e^{\left(r+\frac{1}{2}\sigma^2\right)t}\sin\left(\ln(x)+\left(\frac{1}{2}\sigma^2-r\right)t\right)$ is a solution of (1) by the superposition principle.

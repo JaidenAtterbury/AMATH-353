@@ -1,0 +1,366 @@
+---
+title: "AMATH 353 Homework 4"
+author: "Jaiden Atterbury"
+date: "2023-07-16"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+*Note:* In problems involving the calculation of dispersion relations, we will use replacements to make calculations easier. Assuming the PDE is linear, homogeneous, and autonomous, then the following replacements can be made: $u_t=-i\omega$, $u_x=ik$, and $u=1$. For any PDE's that have higher order or mixed partial derivative terms, the above replacement rules can be applied for as many $x$ and $t$ derivatives that appear in that term.
+
+# Component Skills Practice
+
+**Exercise 1. Skill 3.1.**
+
+Consider the sinusoidal wavetrain
+\begin{align*}
+u(x,t) &= -5e^{i(3x-2t-\pi+4i)}
+\end{align*}
+where $i=\sqrt{-1}$.
+
+  a. What is the wavelength, phase shift, and phase velocity of $u(x,t)$? $\\$ *Hint:* The phase shift can't be a complex number.
+  
+Since the phase shift can't be a complex number, in order to find the wavelength, phase shift, and phase velocity of $u(x,t)=-5e^{i(3x-2t-\pi+4i)}$, we must do some algebraic manipulations to get the sinusoidal wavetrain into "general form." With that said, general form is defined as $u(x,t)=Ae^{i(kx-\omega t + \phi)}$, where $A$ is the amplitude, $k$ is the wave number, $\lambda=\frac{2\pi}{|k|}$ is the wavelength, $\omega$ is the angular frequency, $T=\frac{2\pi}{|Re(\omega)|}$ is the period, $c_p=\frac{\omega}{k}$ is the phase velocity, and $\phi$ is the phase shift. We will begin these algebraic manipulations below.
+\begin{align*}
+u(x,t) &= -5e^{i(3x-2t-\pi+4i)} \\
+&= -5e^{3xi-2ti-\pi i-4} \\
+&= -5e^{3xi-2ti-\pi i}e^{-4} \\
+&= \frac{-5}{e^4}e^{3xi-2ti-\pi i} \\
+&= \frac{-5}{e^4}e^{i(3x-2t-\pi)}
+\end{align*}
+Hence our sinusoidal wavetrain can be rewritten as $u(x,t)=\frac{-5}{e^4}e^{i(3x-2t-\pi)}$. Thus we can see that the angular frequency is $\omega=2$, the wavenumber is $k=3$ which implies that the wavelength is $\lambda=\frac{2\pi}{|3|}=\frac{2\pi}{3}$, the phase shift is $\phi=-\pi$, and lastly the phase velocity is $c_p=\frac{2}{3}$.
+
+  b. What is the maximum value of $Re(u(x,t))$? Is this related to any of the physical parameters we talked about in class?
+  
+In order to find the maximum value of $Re(u(x,t))$, we must first compute an expression for $Re(u(x,t))$. We can do this by using Euler's formula which states $e^{i\theta}=\cos(\theta)+i\sin(\theta)$, where $i=\sqrt{-1}$. Thus in our case $\frac{-5}{e^4}e^{i(3x-2t-\pi)}=\frac{-5}{e^4}\cos(3x-2t-\pi)-\frac{5i}{e^4}\sin(3x-2t-\pi)$. Hence the real part of this equations is $Re(u(x,t))=\frac{-5}{e^4}\cos(3x-2t-\pi)$. Furthermore using the trigonometric identity that states $\cos(x-\pi)=-\cos(x)$, our equation simplifies to $Re(u(x,t))=\frac{5}{e^4}\cos(3x-2t)$.
+
+Based on what we went over in class, this is the real part of a sinusoidal wavetrain. Sinusoidal wavetrains take their maximum values at the absolute value of their amplitude, hence the maximum value of $Re(u(x,t))$ is its amplitude, which is $A=\frac{5}{e^4}$. However, we will not end this part of the problem here and instead show that this is in fact the maximum value of the function, using derivatives. Since $Re(u(x,t))$ is a traveling wave, we know that $t$ translates the graph of the function to the right or left, hence it will play no role in what the maximum value of the function is. Therefore, we will treat it as a constant in our calculations. The first thing we will do is take the first derivative of $Re(u(x,t))$ with respect to $x$, which is simply $\frac{\partial}{\partial x}\left(\frac{5}{e^4}\cos(3x-2t)\right)=\frac{-15}{e^4}\sin(3x-2t)$. Now we will use this to find the critical points of $Re(u(x,t))$, which is the value of $x$ in which the derivative of the real part of $u(x,t)$ equals zero.
+\begin{align*}
+0 &= \frac{-15}{e^4}\sin(3x-2t) \\
+0 &= \sin(3x-2t) \\
+\sin^{-1}(0) &= 3x-2t \\
+k\pi &= 3x-2t \quad \text{where $k \in 	\mathbb{Z} $} \\
+\bar{x} &= \frac{2t+k\pi}{3}
+\end{align*}
+To show that this critical point is a local maximum we will run the second derivative test (single variable for simplicity and since we are assuming $t$ is a constant). The second derivative of $Re(u(x,t))$ is $\frac{\partial}{\partial x}\left(\frac{-15}{e^4}\sin(3x-2t)\right)=\frac{-45}{e^4}\cos(3x-2t)$. We need $\frac{-45}{e^4}\cos(3x-2t)$ evaluated at the critical point to be less than zero in order to ensure that our point is in fact a maximum. With that said, we can see that the second derivative of the real part of $u(x,t)$ evaluated at the critical point $\bar{x}$ is $\frac{-45}{e^4}\cos(k\pi)$. Hence we need $\cos(k\pi) > 0$, thus $k$ must be an even integer. For simplicity, if we choose $k=0$, we obtain the critical point $\bar{x}=\frac{2t}{3}$. Plugging this value into $Re(u(x,t))$ we obtain the maximum values which is $\frac{5}{e^4}\cos(2t-2t)=\frac{5}{e^4}\cos(0)=\frac{5}{e^4}$, which is in fact the value of the amplitude as explained above.
+
+  c. What is the period of $u(x,t)$
+  
+As defined above, the period of $u(x,t)$ is $T=\frac{2\pi}{|Re(\omega)|}$. In our case, the period of our sinusoidal wavetrain is $T=\frac{2\pi}{|Re(2)|}=\pi$.
+
+**Exercise 2. Skills 3.2-3.4.**
+
+Determine the dispersion relation for each of the following PDE's. Then, determine whether the PDE is dissipative, unstable, dispersive, or none of the above. You may use replacement rules to determine the dispersion relations.
+
+  a. $u_t+cu_x=\nu u_{xx}$, \quad \text{where $c \in \mathbb{R}$ and $\nu < 0$}
+  
+We will start by determining the dispersion relation $\omega(k)$ for this PDE.
+\begin{align*}
+u_t+cu_x &= \nu u_{xx} \\
+-i\omega + ick &= \nu(ik)^2 \\
+-i\omega + ick &= -\nu k^2 \\
+i\omega &= ick + \nu k^2 \\
+\omega &= ck-i\nu k^2
+\end{align*}
+Hence the dispersion relation is $\omega(k)=ck-i\nu k^2$ which implies that the real part of $\omega(k)$ is $\omega_{R}(k)=ck$ and the imaginary part of $\omega(k)$ is $\omega_{I}(k)=-\nu k^2$. Furthermore, since $\nu < 0 \implies -\nu > 0$ and $k^2 > 0$, then $\omega_{I}(k)=-\nu k^2 > 0 \: \forall k \neq 0$. Therefore, the PDE is unstable.
+
+  b. $u_t+cu_x=\nu u_{xx}$, \quad \text{where $c \in \mathbb{R}$ and $\nu > 0$}
+
+We will start by determining the dispersion relation $\omega(k)$ for this PDE.
+\begin{align*}
+u_t+cu_x &= \nu u_{xx} \\
+-i\omega + ick &= \nu(ik)^2 \\
+-i\omega + ick &= -\nu k^2 \\
+i\omega &= ick + \nu k^2 \\
+\omega &= ck-i\nu k^2
+\end{align*}
+Hence the dispersion relation is $\omega(k)=ck-i\nu k^2$ which implies that the real part of $\omega(k)$ is $\omega_{R}(k)=ck$ and the imaginary part of $\omega(k)$ is $\omega_{I}(k)=-\nu k^2$. Furthermore, since $\nu > 0 \implies -\nu < 0$ and $k^2 > 0$, then $\omega_{I}(k)=-\nu k^2 < 0 \: \forall k \neq 0$. Therefore, the PDE is dissipative.
+
+  c. $u_{ttt}-u_{xxx}=0$
+
+We will start by determining the dispersion relation $\omega(k)$ for this PDE.
+\begin{align*}
+u_{ttt}-u_{xxx} &= 0 \\
+(-i\omega)^3 - (ik)^3 &= 0 \\
+(-i)^3 \omega^3 - i^3 k^3 &= 0 \\
+i\omega^3 + ik^3 &= 0 \\
+\omega^3 + k^3 &= 0 \\
+\omega^3 &= -k^3 \\
+\omega &= \sqrt[3]{-k^3} \\
+\omega &= -k
+\end{align*}
+Hence the dispersion relation is $\omega(k)=-k$ which implies that the real part of $\omega(k)$ is $\omega_{R}(k)=-k$ and the imaginary part of $\omega(k)$ is $\omega_{I}(k)=0$. Furthermore, since the phase velocity $c_p(k)=\frac{\omega(k)}{k}=\frac{-k}{k}=-1$ is a constant it is evident that this PDE is neither unstable, dissipative, or dispersive, and is thus none of the above.
+
+  d. $u_{xt}+iu_{t}=u_{x}$, \quad \text{where $i=\sqrt{-1}$}
+  
+We will start by determining the dispersion relation $\omega(k)$ for this PDE. 
+\begin{align*}
+u_{xt}+iu_{t} &= u_{x} \\
+(-i\omega)(ik)+i(-i\omega) &= ik \\
+-i^2\omega k -i^2 \omega &= ik \\
+\omega k + \omega &= ik \\
+\omega (k+1) &= ik \\
+\omega &= \frac{ik}{k+1}
+\end{align*}
+Hence the dispersion relation is $\omega(k)=\frac{ik}{k+1}$ which implies that the real part of $\omega(k)$ is $\omega_{R}(k)=0$ and the imaginary part of $\omega(k)$ is $\omega_{I}(k)=\frac{k}{k+1}$. If $k<-1$, then $\frac{k}{k+1} > 0$, if $-1<k<0$, then $\frac{k}{k+1} < 0$, and if $k>0$, then $\frac{k}{k+1} > 0$. Thus it is evident that this PDE is unstable.
+
+  e. $u_{xxtt}-2x_{xt}+u=0$
+  
+We will start by determining the dispersion relation $\omega(k)$ for this PDE. 
+\begin{align*}
+u_{xxtt}-2x_{xt}+u &= 0 \\
+(ik)^2(-i\omega)^2-2(ik)(-i\omega)+1 &= 0 \\
+i^2 k^2 (-i)^2 \omega^2 + 2i^2 k\omega + 1 &= 0 \\
+k^2 \omega^2 - 2k\omega + 1 &= 0
+\end{align*}
+Using the quadratic formula in terms of $\omega$, we can write a closed form expression for $\omega(k)$.
+\begin{align*}
+\omega &= \frac{2k \pm \sqrt{(-2k)^2 - 4(k^2)(1)}}{2k^2} \\
+&= \frac{2k \pm \sqrt{4k^2 - 4k^2}}{2k^2} \\
+&= \frac{2k}{2k^2} \\
+&= \frac{1}{k}
+\end{align*}
+Hence the dispersion relation is $\omega(k)=\frac{1}{k}$ which implies that the real part of $\omega(k)$ is $\omega_{R}(k)=\frac{1}{k}$ and the imaginary part of $\omega(k)$ is $\omega_{I}(k)=0$. Furthermore, the phase velocity $c_p=\frac{\omega(k)}{k}=\frac{\frac{1}{k}}{k}=\frac{1}{k^2}$ which is not a constant. Therefore the above PDE is dispersive.
+
+**Exercise 3. Skill 3.2.**
+
+Construct PDE’s with each of the following dispersion relations. Your PDE’s are allowed to have complex coefficients but must be **linear**, **homogeneous**, and **autonomous**. (Otherwise, your PDE’s would not have dispersion relations!) Show how you went from the dispersion relation to your PDE via replacement rules.
+
+  a. $\omega = -k^5$
+  
+Below we will construct a linear, homogeneous, and autonomous PDE that has the above dispersion relation.
+\begin{align*}
+\omega &= -k^5 \\
+\omega &= i^2k^5 \\
+i^3 \omega &= i^5 k^5 \\
+-i\omega &= (ik)^5 \\
+u_t &= u_{xxxxx}
+\end{align*}
+Hence the PDE with the above dispersion relation is $u_t = u_{xxxxx}$.
+
+  b. $\omega = k^2 - ik^4$
+  
+Below we will construct a linear, homogeneous, and autonomous PDE that has the above dispersion relation.
+\begin{align*}
+\omega &= k^2 - ik^4 \\
+i^3 \omega &= i^3 k^2 - i^4 k^4 \\
+-i\omega &= i (ik)^2 - (ik)^4 \\
+u_t &= iu_{xx} - u_{xxxx}
+\end{align*}
+Hence the PDE with the above dispersion relation is $u_t = iu_{xx} - u_{xxxx}$.
+
+  c. $\omega^2 = \frac{k}{k^3 + 1}$
+
+Below we will construct a linear, homogeneous, and autonomous PDE that has the above dispersion relation.
+\begin{align*}
+\omega^2 &= \frac{k}{k^3 + 1} \\
+\omega^2 (k^3+1) &= k \\
+\omega^2 k^3 + \omega^2 &= k \\
+(-i)^2 (i)^3 \omega^2 k^3 + (-i)^2 (i)^3 \omega^2 &= (-i)^2 (i)^3 k \\
+(-i\omega)^2 (ik)^3 - i (-i\omega)^2 &= ik \\
+u_{ttxxx} - iu_{tt} &= u_x
+\end{align*}
+Hence the PDE with the above dispersion relation is $u_{ttxxx} - iu_{tt} = u_x$.
+
+**Exercise 4. Skill 3.5.**
+
+Suppose ripples in an infinitely long, infinitely thin lake governed by
+\begin{align*}
+u_t-2u_{xxt}+3u_x &= 0.
+\end{align*}
+
+  a. What are the phase velocities of sinusoidal solutions to this PDE? Your answer will be a function of the wavenumber.
+  
+Since the phase velocity is calculated as $c_p=\frac{\omega(k)}{k}$, we will first need to calculate the dispersion relation of the above PDE through the use of replacement rules.
+\begin{align*}
+u_t-2u_{xxt}+3u_x &= 0 \\
+-i\omega - 2(ik)^2 (-i\omega) + 3ik &= 0 \\
+-i\omega + 2i^3 k^2 \omega + 3ik &= 0 \\
+-\omega + 2i^2 k^2 \omega + 3k &= 0 \\
+-\omega - 2k^2 \omega + 3k &= 0 \\
+\omega + 2k^2 \omega &= 3k \\
+\omega (1 + 2k^2) &= 3k \\
+\omega &= \frac{3k}{1+2k^2}
+\end{align*}
+Thus the dispersion relation of the above PDE is $\omega(k) = \frac{3k}{1+2k^2}$, and hence the phase velocities of sinusoidal solutions to this PDE take the from $c_p = \frac{\frac{3k}{1+2k^2}}{k} = \frac{3}{1+2k^2}$.
+
+  b. What are the group velocities of sinusoidal solutions to this PDE? Your answer will be a function of the wavenumber. 
+  
+The group velocity is calculated as $c_g(k) = \frac{d}{dk}(\omega(k))$, hence all we need to do to find an expression for the group velocity is to take the first derivative of our dispersion relation with respect to $k$. Below we will compute this derivative.
+\begin{align*}
+c_g(k) &= \frac{d}{dk}(\omega(k)) \\
+&= \frac{d}{dk}\left(\frac{3k}{1+2k^2}\right) \\
+&= \frac{\frac{d}{dk}(3k)(1+2k^2)-(3k)\frac{d}{dk}(1+2k^2)}{(1+2k^2)^2} \\
+&= \frac{3(1+2k^2)-3k(4k)}{(1+2k^2)^2} \\
+&= \frac{3+6k^2 - 12k^2}{(1+2k^2)^2} \\
+&= \frac{3 - 6k^2}{(1+2k^2)^2}
+\end{align*}
+Thus the group velocities of sinusoidal solutions to this PDE take the form $c_g(k)=\frac{3 - 6k^2}{(1+2k^2)^2}$.
+  
+  c. Suppose sinusoidal ripples with wavenumber $k=1$ are generated somewhere in the lake. Between two observers, one situated at $x \to -\infty$ and the other situated at $x \to \infty$, which will feel the ripples first?
+  
+If we suppose sinusoidal ripples with wavenumber $k=1$ are generated somewhere in the lake, it follows that the group velocity is $c_g(1)=\frac{3 - 6}{(1+2)^2} = \frac{-3}{9} = \frac{-1}{3}$. Furthermore, since the group velocity is the velocity of energy propagation, this question is asking only about the sign of the group velocity. In particular, since the sign of the group velocity is negative, the wave groups will travel to the left, which implies that the energy propagates to the left. Hence, the observer at $x \to -\infty$ will feel the ripples first.
+
+**Exercise 5. Skill 3.6.**
+
+Perform small-amplitude linearization on each of the following PDE's. Then, obtain dispersion relations of your linearized PDE's.
+
+  a. $u_t = u^3 u_x - u_{xxx}$
+  
+The first step in performing a small-amplitude linearization on the above PDE is to assume that $u(x,t)=\epsilon q(x,t)$, and then substitute $u=\epsilon q$ into the above PDE.
+\begin{align*}
+(\epsilon q)_t &= (\epsilon q)^3 (\epsilon q)_x - (\epsilon q)_{xxx} \\
+\epsilon q_t &= \epsilon^3 q^3 \epsilon q_x - \epsilon q_{xxx} \\
+\epsilon q_t &= \epsilon^4 q^3 q_x - \epsilon q_{xxx}
+\end{align*}
+Hence our new PDE is $\epsilon q_t = \epsilon^4 q^3 q_x - \epsilon q_{xxx}$. The second step of the linearization process is to divide by $\epsilon$ across the whole PDE to preserve our linear terms before performing step 3, hence our PDE becomes $q_t = \epsilon^3 q^3 q_x - q_{xxx}$. The third step of small-amplitude linearization is to take the limit as $\epsilon \to 0$, this calculation is done below.
+\begin{align*}
+q_t &= \lim_{\epsilon \to 0} \epsilon^3 q^3 q_x - q_{xxx} \\
+q_t &= -q_{xxx} \\
+q_t + q_{xxx} &= 0 
+\end{align*}
+As can be seen above, the small-amplitude linearization of the above PDE is $q_t + q_{xxx} = 0$. We will now obtain its dispersion relation using the same substitution rules as before.
+\begin{align*}
+q_t + q_{xxx} &= 0 \\
+-i\omega + (ik)^3 &= 0 \\
+-i\omega + i^3 k^3 &= 0 \\
+i\omega  &= i^3 k^3 \\
+\omega &= i^2 k^3 \\
+\omega &= -k^3 
+\end{align*}
+Thus as computed above, the dispersion relation of the linearized PDE is $\omega(k)=-k^3$.
+
+  b. $e^{u_{tt}} - 1 = \frac{u}{1+u^2_x}$
+
+The first step in performing a small-amplitude linearization on the above PDE is to assume that $u(x,t)=\epsilon q(x,t)$, and then substitute $u=\epsilon q$ into the above PDE.
+\begin{align*}
+e^{(\epsilon q)_{tt}} - 1 &= \frac{\epsilon q}{1 + ((\epsilon q)_x)^2} \\
+e^{\epsilon q_{tt}} - 1 &= \frac{\epsilon q}{1 + (\epsilon q_x)^2} \\
+e^{\epsilon q_{tt}} - 1 &= \frac{\epsilon q}{1 + \epsilon^2 q^2_x}
+\end{align*}
+Hence our new PDE is $e^{\epsilon q_{tt}} - 1 = \frac{\epsilon q}{1 + \epsilon^2 q^2_x}$. The second step of the linearization process is to divide by $\epsilon$ across the whole PDE to preserve our linear terms before performing step 3, hence our PDE becomes $\frac{e^{\epsilon q_{tt}} - 1}{\epsilon} = \frac{q}{1 + \epsilon^2 q^2_x}$. The third step of small-amplitude linearization is to take the limit as $\epsilon \to 0$, this calculation is done below.
+\begin{align*}
+\lim_{\epsilon \to 0} \frac{e^{\epsilon q_{tt}} - 1}{\epsilon} &= \lim_{\epsilon \to 0} \frac{q}{1 + \epsilon^2 q^2_x} \\
+\frac{0}{0} &= q \\
+\lim_{\epsilon \to 0} \frac{q_{tt} e^{\epsilon q_{tt}}}{1} &= q \quad \text{L'Hopitals Rule} \\
+q_{tt} &= q
+\end{align*}
+As can be seen above, the small-amplitude linearization of the above PDE is $q_{tt} = q$. We will now obtain its dispersion relation using the same substitution rules as before.
+\begin{align*}
+q_{tt} &= q \\
+(-i\omega)^2 &= 1 \\
+(-i)^2 \omega^2 &= 1 \\
+-\omega^2 &= 1 \\
+\omega^2 &= -1 \\
+\omega &= \pm \sqrt{-1} \\
+\omega &= \pm i
+\end{align*}
+Thus as computed above, the dispersion relation of the linearized PDE is $\omega(k)=\pm i$.
+
+  c. $\tanh(u_{xxx}) - u = \frac{e^{u_t}-1}{u^2+1}$
+
+The first step in performing a small-amplitude linearization on the above PDE is to assume that $u(x,t)=\epsilon q(x,t)$, and then substitute $u=\epsilon q$ into the above PDE.
+\begin{align*}
+\tanh((\epsilon q)_{xxx}) - \epsilon q &= \frac{e^{(\epsilon q)_t} - 1}{(\epsilon q)^2 + 1} \\
+\tanh(\epsilon q_{xxx}) - \epsilon q &= \frac{e^{\epsilon q_t} - 1}{\epsilon^2 q^2 + 1}
+\end{align*}
+Hence our new PDE is $\tanh(\epsilon q_{xxx}) - \epsilon q = \frac{e^{\epsilon q_t}-1}{\epsilon^2 q^2 + 1}$. The second step of the linearization process is to divide by $\epsilon$ across the whole PDE to preserve our linear terms before performing step 3, hence our PDE becomes $\frac{\tanh(\epsilon q_{xxx})}{\epsilon} - q = \frac{e^{\epsilon q_t}-1}{\epsilon^3 q^2 + \epsilon}$. The third step of small-amplitude linearization is to take the limit as $\epsilon \to 0$, this calculation is done below.
+\begin{align*}
+\lim_{\epsilon \to 0} \frac{\tanh(\epsilon q_{xxx})}{\epsilon} - q &= \lim_{\epsilon \to 0} \frac{e^{\epsilon q_{t}}-1}{\epsilon^3 q^2 + \epsilon} \\
+\frac{0}{0} - q &= \frac{0}{0} \\
+\lim_{\epsilon \to 0} \frac{q_{xxx}sech^2(\epsilon q_{xxx})}{1} - q &= \lim_{\epsilon \to 0} \frac{q_t e^{\epsilon q_t}}{3\epsilon^2 q^2 + 1} \quad \text{L'Hopitals Rule} \\
+q_{xxx} - q &= q_t
+\end{align*}
+As can be seen above, the small-amplitude linearization of the above PDE is $q_{xxx} - q = q_t$. We will now obtain its dispersion relation using the same substitution rules as before.
+\begin{align*}
+q_{xxx} - q &= q_t \\
+(ik)^3 - 1 &= -i\omega \\
+i^3 k^3 - 1 &= -i\omega \\
+i\omega &= 1 - i^3 k^3 \\
+\omega &= -i - i^2 k^3 \\
+\omega &= k^3 - i \\
+\end{align*}
+Thus as computed above, the dispersion relation of the linearized PDE is $\omega(k)=k^3 - i$.
+
+# Multi-Step Problem
+
+Consider the Kawahara equation
+\begin{align}
+u_t &= u_{xxx} + \beta u_{5x} + \sigma (u^2)_x,
+\end{align}
+where $\beta$ and $\sigma$ are positive constants. This equation models shallow water waves with surface tension.
+
+(**S3.6**) Perform small-amplitude linearization on (1). Show that you obtain the linear Kawahara equation:
+\begin{align}
+q_t &= q_{xxx} + \beta q_{5x}.
+\end{align}
+
+The first step in performing a small-amplitude linearization on the above PDE is to assume that $u(x,t)=\epsilon q(x,t)$, and then substitute $u=\epsilon q$ into the above PDE.
+\begin{align*}
+(\epsilon q)_t &= (\epsilon q)_{xxx} + \beta (\epsilon q)_{xxxxx} + \sigma ((\epsilon q)_x)^2 \\
+\epsilon q_t &= \epsilon q_{xxx} + \beta \epsilon q_{xxxxx} + \sigma (\epsilon q_x)^2 \\
+\epsilon q_t &= \epsilon q_{xxx} + \beta \epsilon q_{xxxxx} + \sigma \epsilon^2 q^2_x
+\end{align*}
+Hence our new PDE is $\epsilon q_t = \epsilon q_{xxx} + \beta \epsilon q_{xxxxx} + \sigma \epsilon^2 q^2_x$. The second step of the linearization process is to divide by $\epsilon$ across the whole PDE to preserve our linear terms before performing step 3, hence our PDE becomes $q_t = q_{xxx} + \beta q_{xxxxx} + \sigma \epsilon q^2_x$. The third step of small-amplitude linearization is to take the limit as $\epsilon \to 0$, this calculation is done below.
+\begin{align*}
+q_t &= q_{xxx} + \beta q_{xxxxx} + \lim_{\epsilon \to 0} \sigma \epsilon q^2_x  \\
+q_t &= q_{xxx} + \beta q_{xxxxx}
+\end{align*}
+As can be seen above, the small-amplitude linearization of the above PDE is $q_t = q_{xxx} + \beta q_{xxxxx}$, which is the equation we were looking to find.
+
+(**S3.2-3.4**) Obtain the dispersion relation of (2). For short time, is (1) dissipative, unstable, or dispersive?
+
+We will now obtain the dispersion relation of linearized Kawahara equation using the same substitution rules as before.
+\begin{align*}
+q_t &= q_{xxx} + \beta q_{xxxxx} \\
+-i\omega &= (ik)^3 + \beta (ik)^5 \\
+-i\omega &= i^3 k^3 + \beta i^5 k^5 \\
+-i\omega &= -i k^3 + \beta i k^5 \\
+\omega &= k^3 - \beta k^5
+\end{align*}
+Hence the dispersion relation is $\omega(k)=k^3 - \beta k^5$ which implies that the real part of $\omega(k)$ is $\omega_{R}(k)=k^3 - \beta k^5$ and the imaginary part of $\omega(k)$ is $\omega_{I}(k)=0$. Furthermore, the phase velocity $c_p = \frac{\omega(k)}{k} = \frac{k^3-\beta k^5}{k}=k^2-\beta k^4$ which is not a constant. Therefore the above PDE is dispersive.
+
+(**S3.2**) What is the maximum possible phase velocity of a sinusoidal wavetrain solution of (2)?
+
+As computed above, the phase velocity is $c_p(k) = k^2-\beta k^4$. In order to find the maximum possible phase velocity, we will take the first derivative of the phase velocity function with respect to k, find the critical points $\hat{k}$, find which of these points is the maximum using the second derivative test, and lastly plug in this value of $k$ into the phase velocity function. 
+
+We will start by finding the first derivative of $c_p(k)$, which we see is $\frac{d}{dk}(c_p(k)) = \frac{d}{dk} (k^2-\beta k^4)=2k-4\beta k^3$. In order to find the critical points we must find where $\frac{d}{dk}(c_p(k)) = 0$. This occurs when $2k-4\beta k^3=0$, which implies that $k=0$ or $2-4\beta k^2=0$. The latter terms simplifies to $k=\pm \sqrt{\frac{1}{2\beta}}$. Hence we can see that the critical points are $\hat{k}_1 = -\sqrt{\frac{1}{2\beta}}$, $\hat{k}_2 = 0$, and $\hat{k}_3 = \sqrt{\frac{1}{2\beta}}$.
+
+We will now calculate the second derivative of $c_p(k)$ with respect to k, which we see is $\frac{d^2}{dk^2}(c_p(k)) = \frac{d}{dk} (2k-4\beta k^3)=2-12\beta k^2$. Plugging in our three critical points we can see that $c_p(\hat{k}_1) = c_p(-\sqrt{\frac{1}{2\beta}}) = -4$, $c_p(\hat{k}_2) = c_p(0) = 2$, $c_p(\hat{k}_3) = c_p(\sqrt{\frac{1}{2\beta}}) = -4$. Hence $0$ is a minimum and $\pm \sqrt{\frac{1}{2\beta}}$ are maximums.
+
+Plugging these maximizing values of $k$ into the original phase velocity equation we see that $c_p\left(\pm \sqrt{\frac{1}{2\beta}}\right) = \left(\pm \sqrt{\frac{1}{2\beta}} \right)^2 \left(1-\beta \left(\pm \sqrt{\frac{1}{2\beta}}\right)^2 \right) = \frac{1}{4\beta}$. Therefore, the maximum possible phase velocity of a sinusoidal wavetrain solution of (2) is $c_p = \frac{1}{4\beta}$.
+
+(**S3.5**) What is the maximum possible group velocity of a sinusoidal wavetrain solution of (2)?
+
+As mentioned previously, the group velocity is the derivative of the dispersion relation with respect to k. Thus, $c_g(k) = \frac{d}{dk}(\omega(k)) = \frac{d}{dk}(k^3 - \beta k^5) = 3k^2 - 5\beta k^4$. In order to find the maximum possible group velocity, we will take the first derivative of the group velocity function with respect to k, find the critical points $\hat{k}$, find which of these points is the maximum using the second derivative test, and lastly plug in this value of $k$ into the group velocity function. 
+
+We will start by finding the first derivative of $c_g(k)$, which we see is $\frac{d}{dk}(c_g(k)) = \frac{d}{dk} (3k^2 - 5\beta k^4) = 6k - 20\beta k^3$. In order to find the critical points we must find where $\frac{d}{dk}(c_g(k)) = 0$. This occurs when $6k - 20\beta k^3 = 0$, which implies that $k = 0$ or $6 - 20\beta k^2 = 0$. The latter terms simplifies to $k = \pm \sqrt{\frac{3}{10\beta}}$. Hence we can see that the critical points are $\hat{k}_1 = -\sqrt{\frac{3}{10\beta}}$, $\hat{k}_2 = 0$, and $\hat{k}_3 = \sqrt{\frac{3}{10\beta}}$.
+
+We will now calculate the second derivative of $c_g(k)$ with respect to k, which we see is $\frac{d^2}{dk^2}(c_g(k)) = \frac{d}{dk} (6k - 20\beta k^3) = 6 - 60\beta k^2$. Plugging in our three critical points we can see that $c_g(\hat{k}_1) = c_p(-\sqrt{\frac{3}{10\beta}}) = -12$, $c_g(\hat{k}_2) = c_g(0) = 2$, $c_g(\hat{k}_3) = c_g(\sqrt{\frac{3}{10\beta}}) = -12$. Hence $0$ is a minimum and $\pm \sqrt{\frac{3}{10\beta}}$ are maximums.
+
+Plugging these maximizing values of $k$ into the original group velocity equation we see that $c_g\left(\pm \sqrt{\frac{3}{10\beta}} \right) = 3\left(\pm \sqrt{\frac{3}{10\beta}} \right)^2 - 5\beta \left(\pm \sqrt{\frac{3}{10\beta}}\right)^4 = \frac{9}{10\beta} - \frac{45\beta}{100\beta^2} = \frac{9}{10\beta} - \frac{9}{20\beta} = \frac{9}{20\beta}$. Therefore, the maximum possible group velocity of a sinusoidal wavetrain solution of (2) is $c_g = \frac{9}{20\beta}$.
+
+(**S3.1,S3.5**) Determine the period of the sinusoidal wavetrain solution of (2) whose phase and group velocities are equal. This question was borrowed from Ryan Creedon’s 2021 version of the class.
+
+To determine the period of the sinusoidal wavetrain solution of (2) whose phase and group velocities are equal, we must determine the value of $k$ in which the phase and group velocities are equal, plug this value of $k$ into the dispersion relation to obtain $\omega$, then lastly plug in $\omega$ into the equation for $T$ to obtain the period. We will start by finding the value of $k$ where these two velocities are equal to each other.
+\begin{align*}
+c_p(k) &= c_g(k) \\
+k^2 - \beta k^4 &= 3k^2 - 5\beta k^4 \\
+4\beta k^4 &= 2k^2 \\
+2\beta k^2 &= 1 \\
+k^2 &= \frac{1}{2\beta} \\
+k &= \pm \sqrt{\frac{1}{2\beta}}
+\end{align*}
+Hence the values of $k$ in which the two velocities are equal is $k = \pm \sqrt{\frac{1}{2\beta}}$. Technically, $k = 0$ is also one such value in which these two velocities are equal, however we won't consider this value as it makes the period undefined since $\omega(0) = 0 \implies T = \frac{2\pi}{0}$. Now that we have our values of $k$, we will plug them into the dispersion relation to find $\omega$.
+\begin{align*}
+\omega\left(\pm \sqrt{\frac{1}{2\beta}} \right) &= \left(\pm \sqrt{\frac{1}{2\beta}} \right)^3 - \beta \left(\pm \sqrt{\frac{1}{2\beta}} \right)^5 \\
+&= \left(\pm \sqrt{\frac{1}{2\beta}} \right)^3 \left(1 - \beta \left(\left(\pm \sqrt{\frac{1}{2\beta}} \right)^3 \right)^2 \right) \\
+&= \pm \frac{1}{2\beta} \sqrt{\frac{1}{2\beta}} \left(1 - \beta \frac{1}{2\beta} \right) \\
+&= \pm \frac{1}{2\beta} \sqrt{\frac{1}{2\beta}} \left(1 - \frac{1}{2} \right) \\
+&= \pm \frac{1}{2\beta} \sqrt{\frac{1}{2\beta}} \frac{1}{2} \\
+&= \pm \frac{1}{4\beta} \sqrt{\frac{1}{2\beta}}
+\end{align*}
+Hence $\omega = \pm \frac{1}{4\beta} \sqrt{\frac{1}{2\beta}}$. We will now plug this value of $\omega$ into the expression for the period of $T$. Hence we see $T = \frac{2\pi}{|Re(\omega)|} = \frac{2\pi}{|\pm \frac{1}{4\beta} \sqrt{\frac{1}{2\beta}}|} = \frac{2\pi}{\frac{1}{4\beta} \sqrt{\frac{1}{2\beta}}} = 8\pi\beta\sqrt{2\beta}$. Therefore the period of the sinusoidal wavetrain solution of (2) whose phase and group velocities are equal is $T = 8\pi\beta\sqrt{2\beta}$.

@@ -1,0 +1,284 @@
+---
+title: "AMATH 353 Final Quiz"
+author: "Jaiden Atterbury"
+date: "2023-08-17"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Note: In this quiz, I briefly collaborated with Kai Poffenbarger. In this collaboration we mainly compared answers to see if what we were getting for our solutions were similar.
+
+# Component Skills
+
+1. Consider the PDE
+\begin{align*}
+u_t+x^2u_x&=-2ux
+\end{align*}
+
+  (i) Write the PDE in the form $u_t+\phi(u,x,t)_x=f(u,x,t)$ where $f=0$.
+
+Writing $u_t+x^2u_x=-2ux$ in the form $u_t+\phi(u,x,t)_x=f(u,x,t)$ where $f=0$, we obtain
+\begin{align*}
+u_t+x^2u_x&=-2ux \\
+u_t+x^2u_x+2ux&=0
+\end{align*}
+Since $(x^2u)_x=x^2\frac{d}{dx}u+\frac{d}{dx}x^2u=x^2u_x+2xu$, we can see that
+\begin{align*}
+u_t+(x^2u)_x&=0 
+\end{align*}
+Hence, the PDE in the required form is $u_t+(x^2u)_x=0$ with $\phi(u,x,t)=x^2u$ and $f(u,x,t)=0$.
+
+  (ii) Classify this conservation law: is it linear, semi-linear, or non-linear?
+  
+Since the PDE $u_t+x^2u_x=-2ux$ is already in the form $u_t+c(u,x,t)u_x=g(x,t,u)$ with $c(x,t,u)=x^2$ and $g(x,t,u)=-2ux$, we can see that our conservation law is semi-linear. Our conservation law is semi-linear since $c$ doesn't depend on $u$ but $g$ does depend on $u$.
+
+  (iii) Determine the form of the characteristics of this equation, and make a sketch of them for $x_0=-3,-2,-1,0,1,2,3$.
+  
+We will start off by determining the form of the characteristics for this equation. To do so, we will solve the following IVP
+\begin{align*}
+\begin{cases}
+\frac{dx}{dt}=x^2 \\
+x(0)=x_0
+\end{cases}
+\end{align*}
+We will first solve the ODE as show below
+\begin{align*}
+\frac{dx}{dt}=x^2 \\
+\int\frac{dx}{x^2}=\int dt+C \\
+\frac{-1}{x}&=t+C
+\end{align*}
+We will now apply the initial condition
+\begin{align*}
+x(0)&=x_0 \\
+&\implies\frac{-1}{x_0}=0+C \\
+&\implies C=\frac{-1}{x_0}
+\end{align*}
+Hence our characteristics take the form $x(t;x_0)=\frac{-1}{t-1/x_0}=\frac{x_0}{1-x+0t}$.
+
+We will now sketch these characteristics for the following values of $x_0$: $x_0=-3,-2,-1,0,1,2,3$. This is done below.
+
+```{r echo=F, out.width = "90%", fig.align = "center"}
+knitr::include_graphics("quiz5plot1.png")
+```
+
+2. Consider the conservation law
+\begin{align*}
+u_t+(-sech^2(t)u)_x&=-u
+\end{align*}
+
+  (i) Determine the form of the characteristics of this equation, and make a sketch of them for $x_0=-3,-2,-1,0,1,2,3$.
+  
+Before we start with solving the associated IVP, we must write the conservation law in the form $u_t+c(u,x,t)u_x=g(u,x,t)$. This is done below
+\begin{align*}
+u_t+(-sech^2(t)u)_x&=-u \\
+u_t-sech^2(t)\frac{d}{dx}u-\frac{d}{dx}sech^2(t)u&=-u \\
+u_t-sech^2(t)u_x=-u
+\end{align*}
+Hence we can see $c(x,t)=-sech^2(t)$ and $g(u,x,t)=-u$. We will now determine the form of the characteristics for this equation. To do so, we will solve the following IVP
+\begin{align*}
+\begin{cases}
+\frac{dx}{dt}=-sech^2(t) \\
+x(0)=x_0
+\end{cases}
+\end{align*}
+We will first solve the ODE as show below
+\begin{align*}
+\frac{dx}{dt}&=-sech^2(t) \\
+\int dx&=\int -sech^2(t)dt+C \\
+x&=-\tanh(t)+C
+\end{align*}
+We will now apply the initial condition
+\begin{align*}
+x(0)&=x_0 \\
+&\implies x_0=-\tanh(0)+C \\
+&\implies C=x_0
+\end{align*}
+Hence our characteristics take the form $x(t;x_0)=-\tanh(t)+x_0$.
+
+We will now sketch these characteristics for the following values of $x_0$: $x_0=-3,-2,-1,0,1,2,3$. This is done below.
+
+```{r echo=F, out.width = "90%", fig.align = "center"}
+knitr::include_graphics("quiz5plot2.png")
+```
+
+  (ii) Determine the value of $u$ along these characteristics to find a solution dependent on $x_0$.
+  
+  To find the value of $u$ along these characteristics to find a solution dependent on $x_0$, we must solve $\frac{du(x(t:x_0),t)}{dt}=-u(x(t:x_0),t)$. This ODE is solved below
+\begin{align*}
+\frac{du(x(t:x_0),t)}{dt} &= -u(x(t:x_0),t) \\
+\int\frac{du(x(t:x_0),t)}{u(x(t:x_0)} &= -\int dt+I(x_0) \\
+\ln|u(x(t:x_0),t)| &= -t+I(x_0) \\
+|u(x(t:x_0),t)| &= e^{I(x_0)}e^{-t} \\
+u(x(t:x_0),t) &= \pm e^{I(x_0)}e^{-t} \\
+u(x(t:x_0),t) &= h(x_0)e^{-t} \quad \text{(Where $h(x_0)=\pm e^{I(x_0)}$)}
+\end{align*}
+Thus as calculated above, the value of $u$ along these characteristics is $u(x(t:x_0),t)=h(x_0)e^{-t}$.
+
+  (iii) Eliminate the dependence of $x_0$ in your solution in order to find an explicit solution $u(x,t)$ for a general initial condition $u(x,0)=f(x)$.
+  
+Applying the initial condition, we see that $f(x_0)=u(x_0,0)=u(x(0;x_0),0)=h(x_0)$, hence we can rewrite our expression for $u$ as $u(x(t:x_0),t)=f(x_0)e^{-t}$. To eliminate the dependence of $x_0$, we must solve for $x_0$ in our expression for the characteristics found in part (i). $x(t;x_0)=-\tanh(t)+x_0\implies x_0=x(t;x_0)+\tanh(t)$. Plugging this in for $x_0$ in $u$ and dropping the functional dependence, we obtain $u(x,t)=f(x+\tanh(t))e^{-t}$.
+
+3. **Component Skills 6.1-6.2: Seasonal Migration of Orca Whales.** This problem taken from Ryan Creedon's 2021 class.
+
+  (i) Let $u(x,t)$ represent the population density of orca whales in the Pacific Ocean as a function of latitude $x$ and time $t$. Suppose the whales migrate seasonally according to
+\begin{align}
+u_t + c_0 \cos\left(\frac{2\pi}{T} t\right) u_{x} &= 0,
+\end{align}
+where $c_0>0$ represents the maximum speed of migration and $T>0$ controls the period of the migration. **Express (1) as a conservation law of the form** $u_t + \phi_x = 0$**. Is this conservation law linear, semi-linear, or nonlinear?**
+
+Writing $u_t+x^2u_x=-2ux$ in the form $u_t+\phi(u,x,t)_x=f(u,x,t)$ where $f=0$, we obtain
+\begin{align*}
+u_t + c_0 \cos\left(\frac{2\pi}{T} t\right) u_{x} &= 0 \\
+u_t + \left(c_0 \cos\left(\frac{2\pi}{T} t\right)u\right)_{x} &= 0
+\end{align*}
+Hence, the PDE in the required form is $u_t + \left(c_0 \cos\left(\frac{2\pi}{T} t\right)u\right)_{x} = 0$ with $\phi(u,x,t)=c_0 \cos\left(\frac{2\pi}{T} t\right)u$ and $f(u,x,t)=0$.
+
+Since the PDE $u_t + c_0 \cos\left(\frac{2\pi}{T} t\right) u_{x} = 0$ is already in the form $u_t+c(u,x,t)u_x=g(x,t,u)$ with $c(x,t,u)=c_0 \cos\left(\frac{2\pi}{T} t\right)$ and $g(x,t,u)=0$, we can see that our conservation law is linear. Our conservation law is linear since $c$ and $g$ both don't depend on $u$.
+
+  (ii) Let $c_0 = \pi/2$ and $T=4$. **Plot characteristics of (2) for** $x_0 = -2, -1, 0, 1,$ **and** $2$ (You will want to use plotting software for this.)
+
+We will start off by determining the form of the characteristics for this equation. To do so, we will solve the following IVP
+\begin{align*}
+\begin{cases}
+\frac{dx}{dt}=c_0\cos\left(\frac{2\pi}{T} t\right) \\
+x(0)=x_0
+\end{cases}
+\end{align*}
+We will first solve the ODE as show below
+\begin{align*}
+\frac{dx}{dt}&=c_0\cos\left(\frac{2\pi}{T} t\right) \\
+\int dx&=\int c_0\cos\left(\frac{2\pi}{T} t\right)dt+C \\
+x &= \frac{c_0T}{2\pi}\sin\left(\frac{2\pi}{T} t\right)+C
+\end{align*}
+We will now apply the initial condition
+\begin{align*}
+x(0)&=x_0 \\
+&\implies x_0 = \frac{c_0T}{2\pi}\sin(0)+C \\
+&\implies C = x_0
+\end{align*}
+Hence our characteristics take the form $x(t;x_0)=\frac{c_0T}{2\pi}\sin\left(\frac{2\pi}{T} t\right)+x_0$. In particular, when $c_0 = \pi/2$ and $T=4$, the characteristics take the form $x(t;x_0)=\sin\left(\frac{\pi}{2}t\right)+x_0$
+
+We will now sketch these characteristics for the following values of $x_0$: $x_0=-2,-1,0,1,2$. This is done below.
+
+```{r echo=F, out.width = "90%", fig.align = "center"}
+knitr::include_graphics("quiz5plot3.png")
+```
+
+  (iii) Suppose the initial population density of the orcas is
+\begin{align}
+u(x,0) &= Msech(kx),
+\end{align}
+where $M>0$ is the maximum initial population density and $k>0$ controls the spread of the population density about this maximum value. **Solve the PDE (2) subject to the initial condition (3).**
+
+To solve this PDE subject to the initial conditions as described above, we will solve the following IVP
+\begin{align*}
+\begin{cases}
+\frac{du(x(t:x_0),t)}{dt}=0 \\
+u(x_0,0)=Msech(kx_0)
+\end{cases}
+\end{align*}
+We can solve the ODE simply using direct integration, doing so we obtain $\frac{du(x(t:x_0),t)}{dt}=0\implies u(x(t;x_0),t)=I(x_0)$. Applying our initial condition we obtain $Msech(kx_0)=u(x_0,0)=u(x(0;x_0),0)=I(x_0)$. Rewriting $u(x(t;x_0),t)$ we obtain $u(x(t;x_0),t)=Msech(kx_0)$. To eliminate the dependence of $x_0$, we must solve for $x_0$ in our expression for the characteristics found in part (ii), which we found as $x(t;x_0)=\frac{c_0T}{2\pi}\sin\left(\frac{2\pi}{T} t\right)+x_0 \implies x_0=x(t;x_0)-\frac{c_0T}{2\pi}\sin\left(\frac{2\pi}{T} t\right)$. Plugging this in for $x_0$ in $u$ and dropping the functional dependence, we obtain our solution $u(x,t)=Msech\left(k\left(x-\frac{c_0T}{2\pi}\sin\left(\frac{2\pi}{T} t\right)\right)\right)$.
+
+  (iv) Let $c_0 = \pi/2$, $T=4$, $M = 5$, and $k=2$. **Create snapshot plots of your solution to part (c) at** $t=0,1,2,$ **and** $3$. (You will want to use plotting software for this.).
+
+If we let $c_0 = \pi/2$, $T=4$, $M = 5$, and $k=2$, our solution from (iii) becomes $u(x,t)=5sech\left(2\left(x-\sin\left(\frac{\pi}{2}t\right)\right)\right)$. We will now create snapshot plots of this solution for $t=0,1,2,$ and $3$.
+
+```{r echo=F, out.width = "90%", fig.align = "center"}
+knitr::include_graphics("quiz5plot4.png")
+```
+
+**Note:** The snapshot plots at $t=0$ and $t=2$ overlap.
+
+  (v) In addition to seasonal migration, suppose the orca population is slowly declining due to effects of climate change. Equation (2) is modified to incorporate this effect:
+\begin{align}
+u_t + c_0 \cos\left(\frac{2\pi}{T} t \right) u_x &= -\sigma u,
+\end{align}
+where $\sigma >0$ controls the rate of decline of the population. **Solve the PDE (4) subject to the initial condition (3)**
+
+To solve this PDE subject to the initial conditions as described in part (iii), we will solve the following IVP
+\begin{align*}
+\begin{cases}
+\frac{du(x(t:x_0),t)}{dt}=-\sigma u(x(t:x_0),t) \\
+u(x_0,0)=Msech(kx_0)
+\end{cases}
+\end{align*}
+We will start by solving this ODE as shown below
+\begin{align*}
+\frac{du(x(t:x_0),t)}{dt} &= -\sigma u(x(t:x_0),t) \\
+\int\frac{du(x(t:x_0),t)}{u(x(t:x_0)} &= -\sigma\int dt+I(x_0) \\
+\ln|u(x(t:x_0),t)| &= -\sigma t+I(x_0) \\
+|u(x(t:x_0),t)| &= e^{I(x_0)}e^{-\sigma t} \\
+u(x(t:x_0),t) &= \pm e^{I(x_0)}e^{-\sigma t} \\
+u(x(t:x_0),t) &= h(x_0)e^{-\sigma t} \quad \text{(Where $h(x_0)=\pm e^{I(x_0)}$)}
+\end{align*}
+Applying our initial condition we obtain $Msech(kx_0)=u(x_0,0)=u(x(0;x_0),0)=h(x_0)$. Rewriting $u(x(t;x_0),t)$ we obtain $u(x(t;x_0),t)=Msech(kx_0)e^{-\sigma t}$. To eliminate the dependence of $x_0$, we must solve for $x_0$ in our expression for the characteristics found in part (ii), which we found as $x(t;x_0)=\frac{c_0T}{2\pi}\sin\left(\frac{2\pi}{T} t\right)+x_0 \implies x_0=x(t;x_0)-\frac{c_0T}{2\pi}\sin\left(\frac{2\pi}{T} t\right)$. Plugging this in for $x_0$ in $u$ and dropping the functional dependence, we obtain our solution $u(x,t)=Msech\left(k\left(x-\frac{c_0T}{2\pi}\sin\left(\frac{2\pi}{T} t\right)\right)\right)e^{-\sigma t}$.
+
+4. This problem taken from Ryan Creedon's 2021 class. Consider the following initial value problem of the modified inviscid Burger's (MIB) equation:
+\begin{equation}
+\begin{aligned}
+u_t + u^pu_{x} &= 0, \\
+u(x,0) &= \begin{cases} U & x\leq 0 \\ 0 & x>0 \end{cases},
+\end{aligned}
+\end{equation}
+where $p \geq 1$ and $U>0$. (Notice MIB reduces to the inviscid Burger's equation when $p=1$.)
+
+  a. **Write the PDE as a conservation law of the form $u_t + \phi_x = 0$. Is this a linear, semi-linear, or nonlinear conservation law?**
+
+Writing $u_t + u^pu_{x} = 0$ in the form $u_t+\phi(u,x,t)_x=f(u,x,t)$ where $f=0$, we obtain
+\begin{align*}
+u_t + u^pu_{x} &= 0 \\
+u_t + \left(\frac{u^{p+1}}{p+1}\right)_x &= 0
+\end{align*}
+Hence, the PDE in the required form is $u_t + \left(\frac{u^{p+1}}{p+1}\right)_x = 0$ with $\phi(u,x,t)=\frac{u^{p+1}}{p+1}$ and $f(u,x,t)=0$.
+
+Since the PDE $u_t + u^pu_{x} = 0$ is already in the form $u_t+c(u,x,t)u_x=g(x,t,u)$ with $c(x,t,u)=u^p$ and $g(x,t,u)=0$, we can see that our conservation law is non-linear. Our conservation law is non-linear since $c$ depends on $u$.
+
+  b. Compute the **breaking time** and **breaking location** of (4). You may compute the breaking time either via using a sequence of functions which approximates our initial condition or through looking at the sign of $c(f(u))$ to the left and the right of our initial discontinuity.
+
+Since $f(x)=u(x,0)=\begin{cases} U & x\leq 0 \\ 0 & x>0 \end{cases}$, it follows that the value of $cf(u)$ from the left of our initial discontinuity is $cf(0^-)=U$. Similarly, the value of $cf(u)$ from the right of our initial discontinuity is $cf(0^+)=0$. Since $cf(0^-)>cf(0^+)$, it follows that we have a gradient catastrophe/shock immediately, hence $t_b=0$ and $x_b=0$.
+
+  c. According to the Rankine-Hugoniot condition, **what is the velocity of the shock wave modeled by (4)?** (Your answer will be a function of $U$ and $p$.)
+  
+As shown in part (a), $\phi = \frac{u^{p+1}}{p+1}$. Furthermore, according to the Rankine-Hugoniot condition, the velocity of the shock wave modeled by (4) is given by $\frac{dx_s}{dt}=\frac{\phi(u^+)-\phi(u^-)}{u^+-u^-}$. In our case $u^-=U$ and $u^+=0$, thus the velocity is given by the following $\frac{dx_s}{dt}=\frac{\phi(U)-\phi(0)}{U-0}=\frac{\frac{U^{p+1}}{p+1}}{U}=\frac{U^p}{p+1}$.
+  
+  d. Using your results from part (c), **what is the trajectory of the shock wave?**
+  
+Using the results from part (c), we can obtain the trajectory of the shock wave by solving the ODE: $\frac{dx_s}{dt}=\frac{U^p}{p+1}$. This ODE is solved below
+\begin{align*}
+\frac{dx_s}{dt} &= \frac{U^p}{p+1} \\
+\int dx_s &= \int \frac{U^p}{p+1}dt + C \\
+x_s(t) &= \frac{U^p}{p+1}t + C
+\end{align*}
+This ODE is paired with the appropriate initial condition $x_s(t_b)=x_b\implies x_s(0)=0$ to from an IVP. Applying this initial condition we obtain $x_s(0)=0=C$. Hence the trajectory of the shock wave is given by $x_s(t)=\frac{U^p}{p+1}t$.
+
+  e. Using your results from part (c), **what is the velocity of the shock wave in the limit as** $p \rightarrow \infty$ when $0 < U \leq 1$?
+
+To find the velocity of the shock wave in the limit as $p \rightarrow \infty$ when $0 < U \leq 1$, we will find $\lim_{p\to\infty}\frac{dx_s}{dt}$ for two cases, (i) $0 < U < 1$, and (ii) $U=1$. For case (i) we can see that $\lim_{p\to\infty}\frac{dx_s}{dt}=\lim_{p\to\infty}\frac{U^P}{p+1}$, since $0<U<1$ it follows that $\lim_{p\to\infty}\frac{U^P}{p+1}=\frac{0^+}{\infty+1}=\frac{0}{\infty}=0$. For case (ii) we can see that $\lim_{p\to\infty}\frac{dx_s}{dt}=\lim_{p\to\infty}\frac{1}{p+1}=\frac{1}{\infty+1}=\frac{1}{\infty}=0$. Combining these two cases we can say that $\frac{dx_s}{dt}=0$ as $p\to\infty$ for $0<U\leq 1$.
+  
+  f. If $U>\sqrt{e} \approx 1.64872$, it can be shown that the slowest traveling shock wave of (c) corresponds to $p=1$. (You do not need to prove this fact.) If instead $1<U<\sqrt{e}$, then there exists a $p > 1$ that minimizes the velocity of the shock wave computed in part (c). **What is this** $p$ **value?**
+$\textit{Hint}:$ $z^r = e^{r\ln(z)}.$
+
+To find the value of $p$ that minimizes $\frac{dx_s}{dt}$, we will take the derivative of the velocity of the shock wave with respect to $p$. This calculation is done below
+\begin{align*}
+\frac{d}{dp}\left(\frac{dx_s}{dt}\right) &= \frac{(p+1)\ln(U)U^p-U^P}{(p+1)^2} \\
+&= \frac{(p\ln(U)+\ln(U))U^p-U^P}{(p+1)^2} \\
+&= \frac{(p\ln(U)+\ln(U)-1)U^p}{(p+1)^2}
+\end{align*}
+Setting this expression equal to zero and solving for $p$ we see that $\frac{(p\ln(U)+\ln(U)-1)U^p}{(p+1)^2}=0\implies (p\ln(U)+\ln(U)-1)U^p=0$. Since when solving for $p$, $U^p$ can't equal to zero, thus we see
+\begin{align*}
+p\ln(U)+\ln(U)-1 &= 0 \\
+p\ln(U)+\ln(U) &= 1 \\
+(p+1)\ln(U) &= 1 \\
+p+1 &= \frac{1}{\ln(U)} \\
+p &= \frac{1}{\ln(U)} - 1
+\end{align*}
+Thus as found above our one critical point is $p = \frac{1}{\ln(U)} - 1$. Instead of proceeding with the second derivative test, which would be tedious in this case, we will show the plot of $\frac{dx_s}{dt}$ versus $p$ for $1<U<\sqrt{e}$ and see that this value is in fact a minimum for all $U$ in this range. (Plot inspired by Kai Poffenbarger.)
+
+```{r echo=F, out.width = "90%", fig.align = "center"}
+knitr::include_graphics("quiz5plot5.png")
+```
+
+Hence, the value of $p$ that minimizes the shock wave velocity is $p = \frac{1}{\ln(U)} - 1$.
